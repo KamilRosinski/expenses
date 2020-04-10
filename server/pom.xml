@@ -11,7 +11,7 @@
 		<relativePath/>
 	</parent>
 
-	<groupId>snake</groupId>
+	<groupId>expenses</groupId>
 	<artifactId>expenses-server</artifactId>
 	<version>0.1</version>
 

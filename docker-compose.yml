@@ -5,3 +5,11 @@ services:
   server:
     build: server
     container_name: expenses-server
+
+  webapp:
+    build: webapp
+    container_name: expenses-webapp
+    ports:
+      - 80:80
+    depends_on:
+      - server
