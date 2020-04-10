@@ -3,5 +3,5 @@ version: '3'
 services:
 
   server:
-    build: expenses-server
-    container_name: server
+    build: server
+    container_name: expenses-server
