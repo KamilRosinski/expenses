@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/expense")
 public class ExpenseController {
 
-	@GetMapping("/all")
+	@GetMapping("/months")
 	public List<MonthOverviewDTO> getEvolutions() {
 		return Arrays.asList(
 				new MonthOverviewDTO(YearMonth.of(2020, 1), Integer.valueOf(100000), Integer.valueOf(210000)),
