@@ -2,17 +2,13 @@
     <thead>
         <tr>
             <th>Month</th>
-            <th>Income</th>
-            <th>Outcome</th>
             <th>Balance</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let month of months$ | async">
             <td>{{month.yearMonth | date: 'MMM yyyy'}}</td>
-            <td>{{month.income}}</td>
-            <td>{{month.outcome}}</td>
-            <td>{{month.income - month.outcome}}</td>
+            <td>{{month.balance}}</td>
         </tr>
     </tbody>
 </table>

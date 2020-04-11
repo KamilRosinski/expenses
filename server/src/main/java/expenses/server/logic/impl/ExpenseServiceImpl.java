@@ -1,23 +1,33 @@
 package expenses.server.logic.impl;
 
 import expenses.server.logic.ExpenseService;
+import expenses.server.persistence.repository.ExpenseRepository;
 import expenses.server.rest.dto.MonthOverviewDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.YearMonth;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-//@Transactional
+@Transactional
+@RequiredArgsConstructor
 public class ExpenseServiceImpl implements ExpenseService {
+
+	private final ExpenseRepository expenseRepository;
 
 	@Override
 	public List<MonthOverviewDTO> getMonths() {
-		return Arrays.asList(
-				new MonthOverviewDTO(YearMonth.of(2020, 1), Integer.valueOf(100000), Integer.valueOf(210000)),
-				new MonthOverviewDTO(YearMonth.of(2020, 2), Integer.valueOf(120000), Integer.valueOf(90000))
-		);
+		return expenseRepository.selectMonths().stream()
+				.map(obj -> {
+					final Integer year = (Integer) obj[0];
+					final Integer month = (Integer) obj[1];
+					final Long balance = (Long) obj[2];
+					return new MonthOverviewDTO(YearMonth.of(year.intValue(), month.intValue()), balance);
+				})
+				.collect(Collectors.toList());
 	}
 
 }
