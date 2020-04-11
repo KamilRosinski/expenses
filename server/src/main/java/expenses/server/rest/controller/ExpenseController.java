@@ -1,4 +1,4 @@
-package expenses.server.rest.controllers;
+package expenses.server.rest.controller;
 
 import expenses.server.logic.ExpenseService;
 import expenses.server.rest.dto.MonthOverviewDTO;
