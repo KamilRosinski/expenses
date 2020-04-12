@@ -20,7 +20,8 @@ export class ExpenseService {
                 [year, month] = value.yearMonth.split('-');
                 return {
                     yearMonth: new Date(year, month - 1),
-                    balance: value.balance
+                    income: value.income,
+                    outcome: value.outcome
                 }
             }))
         );

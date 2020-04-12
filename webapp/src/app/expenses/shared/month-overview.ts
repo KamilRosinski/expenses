@@ -1,4 +1,5 @@
 export interface MonthOverview {
     readonly yearMonth: Date,
-    readonly balance: number;
+    readonly income: number;
+    readonly outcome: number;
 }

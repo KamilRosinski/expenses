@@ -10,6 +10,7 @@ import java.time.YearMonth;
 public class MonthOverviewDTO {
 
 	private final YearMonth yearMonth;
-	private final Long balance;
+	private final Long income;
+	private final Long outcome;
 
 }

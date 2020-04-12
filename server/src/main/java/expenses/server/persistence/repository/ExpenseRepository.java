@@ -5,10 +5,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ExpenseRepository extends CrudRepository<ExpenseEntity, Long> {
 
-	@Query("SELECT YEAR(e.date) AS y, MONTH(e.date) AS m, SUM(e.value) FROM ExpenseEntity AS e GROUP BY y, m ORDER BY y, m DESC")
-	List<Object[]> selectMonths();
+	@Query("SELECT NEW MAP(" +
+				"YEAR(ee.date) AS year, " +
+				"MONTH(ee.date) AS month, " +
+				"SUM(CASE WHEN ee.value > 0 THEN ee.value ELSE 0 END) AS income, " +
+				"SUM(CASE WHEN ee.value < 0 THEN ee.value ELSE 0 END) AS outcome) " +
+			"FROM ExpenseEntity AS ee " +
+			"GROUP BY year, month " +
+			"ORDER BY year, month DESC")
+	List<Map<String, Object>> getIncomeAndOutcomeGroupedByMonth();
 
 }
