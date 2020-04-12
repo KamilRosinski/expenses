@@ -3,11 +3,13 @@ import {CommonModule} from '@angular/common';
 
 import {ExpensesRoutingModule} from './expenses-routing.module';
 import {MonthListComponent} from './components/month-list/month-list.component';
+import {MonthComponent} from './components/month/month.component';
 
 
 @NgModule({
     declarations: [
-        MonthListComponent
+        MonthListComponent,
+        MonthComponent
     ],
     imports: [
         CommonModule,

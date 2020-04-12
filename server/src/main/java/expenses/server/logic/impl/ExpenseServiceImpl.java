@@ -1,7 +1,9 @@
 package expenses.server.logic.impl;
 
 import expenses.server.logic.ExpenseService;
+import expenses.server.persistence.entity.ExpenseEntity;
 import expenses.server.persistence.repository.ExpenseRepository;
+import expenses.server.rest.dto.ExpenseDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,13 @@ public class ExpenseServiceImpl implements ExpenseService {
 						(Long) map.get("income"),
 						(Long) map.get("outcome")
 				))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ExpenseDTO> getExpensesByMonth(final YearMonth yearMonth) {
+		return expenseRepository.getExpensesByMonth(yearMonth.getYear(), yearMonth.getMonthValue()).stream()
+				.map(ExpenseEntity::map2dto)
 				.collect(Collectors.toList());
 	}
 

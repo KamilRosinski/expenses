@@ -1,5 +1,6 @@
 package expenses.server.persistence.entity;
 
+import expenses.server.rest.dto.ExpenseDTO;
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -28,5 +29,9 @@ public class ExpenseEntity {
 
 	@Column(name = "VALUE", nullable = false)
 	private Integer value;
+
+	public ExpenseDTO map2dto() {
+		return new ExpenseDTO(id, date, description, value);
+	}
 
 }

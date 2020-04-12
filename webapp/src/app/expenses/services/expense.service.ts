@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {MonthOverview} from '../shared/month-overview';
 import {map} from 'rxjs/operators';
+import {Expense} from '../shared/expense';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,10 @@ export class ExpenseService {
                 }
             }))
         );
+    }
+
+    getExpensesByMonth(year: number, month: number): Observable<Expense[]> {
+        return this.http.get<Expense[]>(`/api/expense/year/${year}/month/${month + 1}`);
     }
 
 }

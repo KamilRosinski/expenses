@@ -19,4 +19,7 @@ public interface ExpenseRepository extends CrudRepository<ExpenseEntity, Long> {
 			"ORDER BY year, month DESC")
 	List<Map<String, Object>> getIncomeAndOutcomeGroupedByMonth();
 
+	@Query("FROM ExpenseEntity AS ee WHERE YEAR(ee.date) = :year AND MONTH(ee.date) = :month ORDER BY ee.date DESC")
+	List<ExpenseEntity> getExpensesByMonth(final int year, final int month);
+
 }
