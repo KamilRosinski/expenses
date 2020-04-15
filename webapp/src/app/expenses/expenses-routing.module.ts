@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MonthListComponent} from './components/month-list/month-list.component';
-import {MonthComponent} from './components/month/month.component';
+import {ExpenseListComponent} from './components/month/expense-list.component';
 
 const routes: Routes = [
-    {path: '', component: MonthListComponent},
-    {path: 'year/:year/month/:month', component: MonthComponent}
+    {path: '', component: ExpenseListComponent},
+    {path: 'overview', component: MonthListComponent}
 ];
 
 @NgModule({

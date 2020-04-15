@@ -5,8 +5,8 @@ import expenses.server.rest.dto.ExpenseDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.YearMonth;
@@ -19,14 +19,14 @@ public class ExpenseController {
 
 	private final ExpenseService expenseService;
 
-	@GetMapping("/months")
+	@GetMapping("/month-overview")
 	public List<MonthOverviewDTO> getMonths() {
 		return expenseService.getMonths();
 	}
 
-	@GetMapping("/year/{year}/month/{month}")
-	public List<ExpenseDTO> getExpensesByMonth(@PathVariable final String year, @PathVariable final String month) {
-		return expenseService.getExpensesByMonth(YearMonth.of(Integer.valueOf(year).intValue(), Integer.valueOf(month).intValue()));
+	@GetMapping
+	public List<ExpenseDTO> getExpensesByMonth(@RequestParam final Integer year, @RequestParam final Integer month) {
+		return expenseService.getExpensesByMonth(YearMonth.of(year.intValue(), month.intValue()));
 	}
 
 }

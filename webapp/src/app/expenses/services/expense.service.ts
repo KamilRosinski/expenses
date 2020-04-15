@@ -10,26 +10,27 @@ import {Expense} from '../shared/expense';
 })
 export class ExpenseService {
 
+    private static readonly URL: string = '/api/expense';
+
     constructor(private readonly http: HttpClient) {
     }
 
     getMonths(): Observable<MonthOverview[]> {
-        return this.http.get('/api/expense/months').pipe(
-            map((response: any[]) => response.map((value: any) => {
-                let year: number;
-                let month: number;
-                [year, month] = value.yearMonth.split('-');
-                return {
-                    yearMonth: new Date(year, month - 1),
-                    income: value.income,
-                    outcome: value.outcome
-                }
-            }))
+        return this.http.get(`${ExpenseService.URL}/month-overview`).pipe(
+            map((response: any[]) => response.map((value: any) => ({
+                ...value,
+                yearMonth: new Date(value.yearMonth),
+            })))
         );
     }
 
-    getExpensesByMonth(year: number, month: number): Observable<Expense[]> {
-        return this.http.get<Expense[]>(`/api/expense/year/${year}/month/${month + 1}`);
+    getExpensesByYearAndMonth(date: Date): Observable<Expense[]> {
+        return this.http.get<Expense[]>(ExpenseService.URL, {
+            params: {
+                year: `${date.getFullYear()}`,
+                month: `${date.getMonth() + 1}`
+            }
+        });
     }
 
 }

@@ -10,7 +10,8 @@
     <tbody>
         <tr *ngFor="let month of months$ | async">
             <td>
-                <a [routerLink]="['year', month.yearMonth.getFullYear(), 'month', month.yearMonth.getMonth()]">
+                <a [routerLink]="'/expenses'"
+                   [queryParams]="{year: month.yearMonth.getFullYear(), month: month.yearMonth.getMonth() + 1}">
                     {{month.yearMonth | date: 'MM.yyyy'}}
                 </a>
             </td>
