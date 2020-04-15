@@ -23,11 +23,13 @@ public class ExpenseServiceImpl implements ExpenseService {
 	@Override
 	public List<MonthOverviewDTO> getMonths() {
 		return this.expenseRepository.getIncomeAndOutcomeGroupedByMonth().stream()
-				.map(map -> new MonthOverviewDTO(
-						YearMonth.of(((Integer) map.get("year")).intValue(), ((Integer) map.get("month")).intValue()),
-						(Long) map.get("income"),
-						(Long) map.get("outcome")
-				))
+				.map(params -> {
+					final Integer year = (Integer) params.get("year");
+					final Integer month = (Integer) params.get("month");
+					final Long income = (Long) params.get("income");
+					final Long outcome = (Long) params.get("outcome");
+					return new MonthOverviewDTO(YearMonth.of(year.intValue(), month.intValue()), income, outcome);
+				})
 				.collect(Collectors.toList());
 	}
 
