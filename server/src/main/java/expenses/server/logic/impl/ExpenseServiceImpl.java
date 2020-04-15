@@ -40,4 +40,9 @@ public class ExpenseServiceImpl implements ExpenseService {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public void deleteExpenseById(final Long expenseId) {
+		expenseRepository.deleteById(expenseId);
+	}
+
 }

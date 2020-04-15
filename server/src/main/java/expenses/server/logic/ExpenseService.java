@@ -10,5 +10,6 @@ public interface ExpenseService {
 
 	List<MonthOverviewDTO> getMonths();
 	List<ExpenseDTO> getExpensesByMonth(YearMonth yearMonth);
+	void deleteExpenseById(Long expenseId);
 
 }

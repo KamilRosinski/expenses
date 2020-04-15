@@ -24,13 +24,17 @@ export class ExpenseService {
         );
     }
 
-    getExpensesByYearAndMonth(date: Date): Observable<Expense[]> {
+    getExpensesByYearAndMonth(year: number, month: number): Observable<Expense[]> {
         return this.http.get<Expense[]>(ExpenseService.URL, {
             params: {
-                year: `${date.getFullYear()}`,
-                month: `${date.getMonth() + 1}`
+                year: `${year}`,
+                month: `${month}`
             }
         });
+    }
+
+    deleteExpenseById(expenseId: number): Observable<void> {
+        return this.http.delete<void>(`${ExpenseService.URL}/${expenseId}`);
     }
 
 }

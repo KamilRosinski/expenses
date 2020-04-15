@@ -1,5 +1,5 @@
 <div>
-    <h1>{{date$ | async | date: 'MM.yyyy'}}</h1>
+    <h1>{{date | date: 'MM.yyyy'}}</h1>
     <table>
         <thead>
             <tr>
@@ -9,10 +9,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let expense of expenses$ | async">
+            <tr *ngFor="let expense of expenses">
                 <td>{{expense.date | date: 'dd.MM.yyyy'}}</td>
                 <td>{{expense.description}}</td>
                 <td>{{expense.value}}</td>
+                <td><button (click)="deleteExpense(expense.id)">delete</button></td>
             </tr>
         </tbody>
     </table>

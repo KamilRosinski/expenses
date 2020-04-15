@@ -3,7 +3,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ExpenseService} from '../../services/expense.service';
 import {Observable} from 'rxjs';
 import {Expense} from '../../shared/expense';
-import {concatMap, map} from 'rxjs/operators';
+import {concatMap, map, tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-month',
@@ -12,19 +12,24 @@ import {concatMap, map} from 'rxjs/operators';
 })
 export class ExpenseListComponent implements OnInit {
 
-    date$: Observable<Date>;
-    expenses$: Observable<Expense[]>;
+    date: Date;
+    expenses: Expense[] = [];
 
     constructor(private readonly activatedRoute: ActivatedRoute,
                 private readonly expenseService: ExpenseService) {
     }
 
-    ngOnInit() {
-        this.date$ = this.activatedRoute.queryParamMap.pipe(
-            map((params: ParamMap) => new Date(`${params.get('year')}-${params.get('month')}`))
-        );
-        this.expenses$ = this.date$.pipe(
-            concatMap((date: Date) => this.expenseService.getExpensesByYearAndMonth(date))
+    ngOnInit(): void {
+        this.activatedRoute.queryParamMap.pipe(
+            map((params: ParamMap) => ({year: +params.get('year'), month: +params.get('month')})),
+            tap((date: {year: number, month: number}) => this.date = new Date(`${date.year}-${date.month}`)),
+            concatMap((date: {year: number, month: number}) => this.expenseService.getExpensesByYearAndMonth(date.year, date.month))
+        ).subscribe((expenses: Expense[]) => this.expenses.push(...expenses));
+    }
+
+    deleteExpense(id: number): void {
+        this.expenseService.deleteExpenseById(id).subscribe(
+            _ => this.expenses = this.expenses.filter((expense: Expense) => expense.id !== id)
         );
     }
 

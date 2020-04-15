@@ -4,7 +4,9 @@ import expenses.server.logic.ExpenseService;
 import expenses.server.rest.dto.ExpenseDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +27,13 @@ public class ExpenseController {
 	}
 
 	@GetMapping
-	public List<ExpenseDTO> getExpensesByMonth(@RequestParam final Integer year, @RequestParam final Integer month) {
-		return expenseService.getExpensesByMonth(YearMonth.of(year.intValue(), month.intValue()));
+	public List<ExpenseDTO> getExpensesByYearAndMonth(@RequestParam final int year, @RequestParam final int month) {
+		return expenseService.getExpensesByMonth(YearMonth.of(year, month));
+	}
+
+	@DeleteMapping("/{expenseId}")
+	public void deleteExpenseById(@PathVariable final Long expenseId) {
+		expenseService.deleteExpenseById(expenseId);
 	}
 
 }
