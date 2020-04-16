@@ -2,14 +2,14 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {ExpensesRoutingModule} from './expenses-routing.module';
-import {MonthListComponent} from './components/month-list/month-list.component';
-import {ExpenseListComponent} from './components/month/expense-list.component';
+import {AccountingPeriodListComponent} from './components/accounting-period-list/accounting-period-list.component';
+import {AccountingPeriodComponent} from './components/accounting-period/accounting-period.component';
 
 
 @NgModule({
     declarations: [
-        MonthListComponent,
-        ExpenseListComponent
+        AccountingPeriodListComponent,
+        AccountingPeriodComponent
     ],
     imports: [
         CommonModule,

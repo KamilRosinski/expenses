@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MonthListComponent } from './month-list.component';
+import { AccountingPeriodComponent } from './accounting-period.component';
 
-describe('MonthListComponent', () => {
-  let component: MonthListComponent;
-  let fixture: ComponentFixture<MonthListComponent>;
+describe('AccountingPeriodComponent', () => {
+  let component: AccountingPeriodComponent;
+  let fixture: ComponentFixture<AccountingPeriodComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MonthListComponent ]
+      declarations: [ AccountingPeriodComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MonthListComponent);
+    fixture = TestBed.createComponent(AccountingPeriodComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
