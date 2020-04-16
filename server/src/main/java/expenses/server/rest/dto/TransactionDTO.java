@@ -1,23 +1,20 @@
 package expenses.server.rest.dto;
 
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
-import java.time.LocalDate;
-
-@Data
 @AllArgsConstructor
+@Getter
 public class TransactionDTO {
 
-	private Long id;
+	private final Long id;
 
-	private LocalDate date;
+	private final Integer day;
 
-	private String description;
+	private final String description;
 
-	private Long value;
+	private final Long value;
 
-	private TransactionCategoryDTO category;
+	private final TransactionCategoryDTO category;
 
 }

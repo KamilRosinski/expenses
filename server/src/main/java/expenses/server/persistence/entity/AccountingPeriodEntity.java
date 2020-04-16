@@ -2,6 +2,7 @@ package expenses.server.persistence.entity;
 
 import expenses.server.rest.dto.AccountingPeriodDTO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,12 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import java.sql.Date;
+import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "ACCOUNTING_PERIOD")
+@NoArgsConstructor
 @Getter
 public class AccountingPeriodEntity {
 
@@ -27,24 +30,30 @@ public class AccountingPeriodEntity {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "START_DATE", nullable = false)
-	private Date startDate;
+	@Column(name = "YEAR", nullable = false)
+	private Integer year;
 
-	@Column(name = "DURATION", nullable = false)
-	private Long duration;
+	@Column(name = "MONTH", nullable = false)
+	private Integer month;
 
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ACCOUNTING_PERIOD_ID")
-	@OrderBy("DATE_OFFSET DESC")
-	private List<TransactionEntity> transactions;
+	@OrderBy("DAY DESC")
+	private List<TransactionEntity> transactions = new ArrayList<>();
+
+	public AccountingPeriodEntity(final Integer year, final Integer month) {
+		this.year = year;
+		this.month = month;
+	}
 
 	public AccountingPeriodDTO mapToDto() {
+		final YearMonth yearMonth = YearMonth.of(year.intValue(), month.intValue());
 		return new AccountingPeriodDTO(
 				id,
-				startDate.toLocalDate(),
-				startDate.toLocalDate().plusDays(duration.longValue()),
+				yearMonth,
+				Integer.valueOf(yearMonth.lengthOfMonth()),
 				transactions.stream()
-						.map(transaction -> transaction.mapToDto(startDate))
+						.map(TransactionEntity::mapToDto)
 						.collect(Collectors.toList())
 		);
 	}

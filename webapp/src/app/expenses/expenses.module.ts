@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {ExpensesRoutingModule} from './expenses-routing.module';
 import {AccountingPeriodListComponent} from './components/accounting-period-list/accounting-period-list.component';
 import {AccountingPeriodComponent} from './components/accounting-period/accounting-period.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {AccountingPeriodComponent} from './components/accounting-period/accounti
     imports: [
         CommonModule,
         ExpensesRoutingModule,
+        ReactiveFormsModule
     ]
 })
 export class ExpensesModule {

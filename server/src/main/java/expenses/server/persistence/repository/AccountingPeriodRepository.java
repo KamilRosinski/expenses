@@ -11,14 +11,14 @@ public interface AccountingPeriodRepository extends CrudRepository<AccountingPer
 
 	@Query("SELECT NEW MAP(" +
 				"ap.id AS id, " +
-				"ap.startDate AS startDate, " +
-				"ap.duration AS duration, " +
+				"ap.year AS year, " +
+				"ap.month AS month, " +
 				"SUM(CASE WHEN t.value > 0 THEN t.value ELSE 0 END) AS income, " +
 				"SUM(CASE WHEN t.value < 0 THEN t.value ELSE 0 END) AS outcome) " +
 			"FROM AccountingPeriodEntity AS ap " +
-			"JOIN ap.transactions AS t " +
+			"LEFT JOIN ap.transactions AS t " +
 			"GROUP BY ap " +
-			"ORDER BY ap.startDate DESC")
+			"ORDER BY year DESC, month DESC")
 	List<Map<String, Object>> getIncomeAndOutcome();
 
 }

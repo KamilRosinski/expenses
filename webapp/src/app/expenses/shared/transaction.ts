@@ -1,9 +1,9 @@
 import {TransactionCategory} from './transaction-category';
 
 export interface Transaction {
-    id: number;
-    date: string;
-    description: string;
-    value: number;
-    category: TransactionCategory;
+    readonly id: number;
+    readonly day: number;
+    readonly description?: string;
+    readonly value: number;
+    readonly category: TransactionCategory;
 }

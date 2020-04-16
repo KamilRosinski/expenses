@@ -17,7 +17,7 @@ export class AccountingPeriodComponent implements OnInit {
                 private readonly activatedRoute: ActivatedRoute) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.activatedRoute.paramMap.pipe(
             concatMap((params: ParamMap) => this.accountingPeriodService.getById(+params.get('id')))
         ).subscribe(

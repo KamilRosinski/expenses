@@ -22,4 +22,8 @@ export class AccountingPeriodService {
         return this.http.get<AccountingPeriod>(`${AccountingPeriodService.URL}/${id}`);
     }
 
+    createForMonth(year: number, month: number): Observable<AccountingPeriod> {
+        return this.http.post<AccountingPeriod>(AccountingPeriodService.URL, {year, month});
+    }
+
 }

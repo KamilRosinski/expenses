@@ -1,8 +1,7 @@
 import {Transaction} from './transaction';
 
 export interface AccountingPeriod {
-    id: number;
-    startDate: string;
-    endDate: string;
-    transactions: Transaction[];
+    readonly id: number;
+    readonly yearMonth: string;
+    readonly transactions: Transaction[];
 }

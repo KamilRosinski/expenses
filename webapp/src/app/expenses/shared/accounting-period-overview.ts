@@ -1,7 +1,6 @@
 export interface AccountingPeriodOverview {
     readonly id: number;
-    readonly startDate: string;
-    readonly endDate: number;
+    readonly yearMonth: string;
     readonly income: number;
     readonly outcome: number;
 }

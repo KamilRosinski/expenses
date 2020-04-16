@@ -5,10 +5,10 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class TransactionCategoryDTO {
+public class CreateAccountingPeriodForYearMonthDTO {
 
-	private final Long id;
+	private final Integer year;
 
-	private final String name;
+	private final Integer month;
 
 }

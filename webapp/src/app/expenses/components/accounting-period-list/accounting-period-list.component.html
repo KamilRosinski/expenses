@@ -1,22 +1,39 @@
-<table *ngIf="accountingPeriodOverviews">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Income</th>
-            <th>Outcome</th>
-            <th>Balance</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let overview of accountingPeriodOverviews">
-            <td>
-                <a [routerLink]="['accounting-period', overview.id]">
-                    {{overview.startDate | date: 'dd.MM.yyyy'}} - {{overview.endDate | date: 'dd.MM.yyyy'}}
-                </a>
-            </td>
-            <td>{{overview.income}}</td>
-            <td>{{overview.outcome}}</td>
-            <td>{{overview.income + overview.outcome}}</td>
-        </tr>
-    </tbody>
-</table>
+<div>
+    <button *ngIf="!createAccountingPeriodForm" (click)="showCreateAccountingPeriodForm()">Add accounting period</button>
+    <form *ngIf="createAccountingPeriodForm" [formGroup]="createAccountingPeriodForm" (ngSubmit)="createAccountingPeriod()">
+        <div>
+            <label for="month-input">Month</label>
+            <input id="month-input" type="number" formControlName="month">
+        </div>
+        <div>
+            <label for="year-input">Year</label>
+            <input id="year-input" type="number" formControlName="year">
+        </div>
+        <div>
+            <button type="button" (click)="hideCreateAccountingPeriodForm()">Cancel</button>
+            <button [disabled]="!createAccountingPeriodForm.valid">Create</button>
+        </div>
+    </form>
+    <table *ngIf="accountingPeriodOverviews">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Income</th>
+                <th>Outcome</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let overview of accountingPeriodOverviews">
+                <td>
+                    <a [routerLink]="['accounting-period', overview.id]">
+                        {{overview.yearMonth | date: 'MM.yyyy'}}
+                    </a>
+                </td>
+                <td>{{overview.income}}</td>
+                <td>{{overview.outcome}}</td>
+                <td>{{overview.income + overview.outcome}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

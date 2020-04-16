@@ -1,21 +1,21 @@
 package expenses.server.rest.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
-@Data
 @AllArgsConstructor
+@Getter
 public class AccountingPeriodDTO {
 
-	private Long id;
+	private final Long id;
 
-	private LocalDate startDate;
+	private final YearMonth yearMonth;
 
-	private LocalDate endDate;
+	private final Integer length;
 
-	private List<TransactionDTO> transactions;
+	private final List<TransactionDTO> transactions;
 
 }

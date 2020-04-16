@@ -1,5 +1,5 @@
 <div *ngIf="accountingPeriod">
-    <h1>{{accountingPeriod.startDate | date: 'dd.MM.yyyy'}} - {{accountingPeriod.endDate | date: 'dd.MM.yyyy'}}</h1>
+    <h1>{{accountingPeriod.yearMonth | date: 'MM.yyyy'}}</h1>
     <table>
         <thead>
             <tr>
@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let transaction of accountingPeriod.transactions">
-                <td>{{transaction.date | date: 'dd.MM.yyyy'}}</td>
+                <td>{{transaction.day | number: '2.0-0'}}</td>
                 <td>{{transaction.category.name}}</td>
                 <td>{{transaction.description}}</td>
                 <td>{{transaction.value}}</td>

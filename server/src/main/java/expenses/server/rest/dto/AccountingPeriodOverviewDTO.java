@@ -1,19 +1,17 @@
 package expenses.server.rest.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 public class AccountingPeriodOverviewDTO {
 
 	private final Long id;
 
-	private final LocalDate startDate;
-
-	private final LocalDate endDate;
+	private final YearMonth yearMonth;
 
 	private final Long income;
 
