@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AccountingPeriodOverview} from '../shared/accounting-period-overview';
 import {AccountingPeriod} from '../shared/accounting-period';
+import {YearMonth} from '../shared/year-month';
 
 @Injectable({
     providedIn: 'root'
@@ -22,8 +23,8 @@ export class AccountingPeriodService {
         return this.http.get<AccountingPeriod>(`${AccountingPeriodService.URL}/${id}`);
     }
 
-    createForMonth(year: number, month: number): Observable<AccountingPeriod> {
-        return this.http.post<AccountingPeriod>(AccountingPeriodService.URL, {year, month});
+    createForMonth(yearMonth: YearMonth): Observable<AccountingPeriod> {
+        return this.http.post<AccountingPeriod>(AccountingPeriodService.URL, yearMonth);
     }
 
 }
