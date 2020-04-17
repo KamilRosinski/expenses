@@ -13,6 +13,8 @@ public class AccountingPeriodOverviewDTO {
 
 	private final YearMonth yearMonth;
 
+	private final Long transactionCount;
+
 	private final Long income;
 
 	private final Long outcome;

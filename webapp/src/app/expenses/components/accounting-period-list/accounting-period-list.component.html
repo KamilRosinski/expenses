@@ -5,6 +5,7 @@
         <thead>
             <tr>
                 <th>Month</th>
+                <th>Number of transactions</th>
                 <th>Income</th>
                 <th>Outcome</th>
                 <th>Balance</th>
@@ -17,6 +18,7 @@
                         {{overview.yearMonth | date: 'MM.yyyy'}}
                     </a>
                 </td>
+                <td>{{overview.transactionCount}}</td>
                 <td>{{overview.income}}</td>
                 <td>{{overview.outcome}}</td>
                 <td>{{overview.income + overview.outcome}}</td>

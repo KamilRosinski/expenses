@@ -32,9 +32,10 @@ public class AccountingPeriodServiceImpl implements AccountingPeriodService {
 							((Integer) columns.get("year")).intValue(),
 							((Integer) columns.get("month")).intValue()
 					);
+					final Long transactionCount = (Long) columns.get("transactionCount");
 					final Long income = (Long) columns.get("income");
 					final Long outcome = (Long) columns.get("outcome");
-					return new AccountingPeriodOverviewDTO(id, yearMonth, income, outcome);
+					return new AccountingPeriodOverviewDTO(id, yearMonth, transactionCount, income, outcome);
 				})
 				.collect(Collectors.toList());
 	}

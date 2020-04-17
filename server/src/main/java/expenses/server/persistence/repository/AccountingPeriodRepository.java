@@ -13,6 +13,7 @@ public interface AccountingPeriodRepository extends CrudRepository<AccountingPer
 				"ap.id AS id, " +
 				"ap.year AS year, " +
 				"ap.month AS month, " +
+				"COUNT(t) AS transactionCount, " +
 				"SUM(CASE WHEN t.value > 0 THEN t.value ELSE 0 END) AS income, " +
 				"SUM(CASE WHEN t.value < 0 THEN t.value ELSE 0 END) AS outcome) " +
 			"FROM AccountingPeriodEntity AS ap " +
