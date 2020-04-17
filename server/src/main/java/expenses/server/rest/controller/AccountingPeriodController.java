@@ -3,8 +3,8 @@ package expenses.server.rest.controller;
 import expenses.server.logic.AccountingPeriodService;
 import expenses.server.rest.dto.AccountingPeriodDTO;
 import expenses.server.rest.dto.AccountingPeriodOverviewDTO;
-import expenses.server.rest.dto.CreateAccountingPeriodForYearMonthDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +33,8 @@ public class AccountingPeriodController {
 	}
 
 	@PostMapping()
-	public AccountingPeriodDTO createAccountingPeriodForYearMonth(@RequestBody final CreateAccountingPeriodForYearMonthDTO createDTO) {
-		return accountingPeriodService.createForYearMonth(YearMonth.of(createDTO.getYear().intValue(), createDTO.getMonth().intValue()));
+	public AccountingPeriodDTO createAccountingPeriodForYearMonth(@RequestBody final String yearMonth) {
+		return accountingPeriodService.createForYearMonth(YearMonth.parse(yearMonth));
 	}
 
 }

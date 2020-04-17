@@ -4,7 +4,6 @@ import {AccountingPeriodOverview} from '../../shared/accounting-period-overview'
 import {AccountingPeriod} from '../../shared/accounting-period';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
-import {YearMonth} from '../../shared/year-month';
 
 @Component({
     selector: 'app-accounting-period-list',
@@ -15,13 +14,8 @@ export class AccountingPeriodListComponent implements OnInit {
 
     accountingPeriodOverviews: AccountingPeriodOverview[] = [];
 
-    get accountingPeriodYearMonths(): YearMonth[] {
-        return this.accountingPeriodOverviews.map((ap: AccountingPeriodOverview) => {
-            let year: number;
-            let month: number;
-            [year, month] = ap.yearMonth.split('-').map((s: string) => +s);
-            return {year, month};
-        });
+    get accountingPeriodYearMonths(): string[] {
+        return this.accountingPeriodOverviews.map((ap: AccountingPeriodOverview) => ap.yearMonth);
     }
 
     constructor(private readonly accountingPeriodService: AccountingPeriodService,
@@ -34,11 +28,12 @@ export class AccountingPeriodListComponent implements OnInit {
         );
     }
 
-    createAccountingPeriod(yearMonth: YearMonth): void {
+    createAccountingPeriod(yearMonth: string): void {
         this.accountingPeriodService.createForMonth(yearMonth).pipe(
             map((accountingPeriod: AccountingPeriod) => accountingPeriod.id)
         ).subscribe(
             (id: number) => this.router.navigateByUrl(`expenses/accounting-period/${id}`).then()
+
         );
     }
 

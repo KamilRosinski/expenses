@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {YearMonth} from '../../shared/year-month';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 @Component({
     selector: 'app-create-accounting-period',
@@ -11,9 +10,9 @@ export class CreateAccountingPeriodComponent {
 
     apForm: FormGroup = null;
 
-    @Input() otherAccountingPeriodYearMonths: YearMonth[];
+    @Input() otherAccountingPeriodYearMonths: string[];
 
-    @Output() readonly createAccountingPeriod: EventEmitter<YearMonth> = new EventEmitter<YearMonth>();
+    @Output() readonly createAccountingPeriod: EventEmitter<string> = new EventEmitter<string>();
 
     get year(): AbstractControl {
         return this.apForm.get('year');
@@ -29,8 +28,8 @@ export class CreateAccountingPeriodComponent {
     showForm(): void {
         const now = new Date();
         this.apForm = this.formBuilder.group({
-            year: [now.getFullYear(), [Validators.required, CreateAccountingPeriodComponent.validateYear]],
-            month: [now.getMonth() + 1, [Validators.required, CreateAccountingPeriodComponent.validateMonth]]
+            year: [now.getFullYear(), [CreateAccountingPeriodComponent.validateYear]],
+            month: [now.getMonth() + 1, [CreateAccountingPeriodComponent.validateMonth]]
         }, {
             validators: this.createYearMonthValidator()
         });
@@ -47,10 +46,15 @@ export class CreateAccountingPeriodComponent {
     }
 
     private createYearMonthValidator(): ValidatorFn {
-        return (control: FormGroup): ValidationErrors | null =>
-            this.otherAccountingPeriodYearMonths.some((yearMonth: YearMonth) =>
-                yearMonth.year === +control.value.year && yearMonth.month === +control.value.month
-            ) ? {alreadyExists: true} : null;
+        return (control: FormGroup): ValidationErrors | null => {
+            const yearMonth: string = this.otherAccountingPeriodYearMonths.find((yearMonth: string) => {
+                let year: number;
+                let month: number;
+                [year, month] = yearMonth.split('-').map((s: string) => +s);
+                return year === +control.value.year && month === +control.value.month;
+            });
+            return yearMonth ? {alreadyExists: yearMonth} : null;
+        }
 
     }
 
@@ -59,10 +63,9 @@ export class CreateAccountingPeriodComponent {
     }
 
     submit(): void {
-        this.createAccountingPeriod.emit({
-            year: +this.apForm.value.year,
-            month: +this.apForm.value.month
-        });
+        this.createAccountingPeriod.emit(
+            `${("0000" + this.apForm.value.year).slice(-4)}-${("00" + this.apForm.value.month).slice(-2)}`
+        );
     }
 
 }

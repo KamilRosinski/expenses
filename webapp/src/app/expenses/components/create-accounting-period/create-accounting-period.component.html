@@ -11,7 +11,9 @@
             <input id="year-input" type="number" formControlName="year">
             <p *ngIf="year.errors?.invalidYear">Invalid year.</p>
         </div>
-        <p *ngIf="apForm.errors?.alreadyExists">Accounting period already exists.</p>
+        <p *ngIf="apForm.errors?.alreadyExists">
+            Accounting period {{apForm.errors.alreadyExists | date: 'MM.yyy'}} already exists.
+        </p>
         <div>
             <button type="button" (click)="hideForm()">Cancel</button>
             <button [disabled]="!apForm.valid">Create</button>
