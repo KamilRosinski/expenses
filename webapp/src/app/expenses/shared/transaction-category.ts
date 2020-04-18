@@ -1,4 +1,4 @@
 export interface TransactionCategory {
-    readonly id: number;
+    readonly id: number | null;
     readonly name: string;
 }

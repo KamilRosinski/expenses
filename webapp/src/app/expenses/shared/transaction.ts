@@ -1,7 +1,7 @@
 import {TransactionCategory} from './transaction-category';
 
 export interface Transaction {
-    readonly id: number;
+    readonly id: number | null;
     readonly day: number;
     readonly description?: string;
     readonly value: number;

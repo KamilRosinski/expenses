@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+        <label for="day-select">Day</label>
+        <select id="day-select" formControlName="day">
+            <option *ngFor="let day of days" [ngValue]="day">{{day | number: '2.0-0'}}</option>
+        </select>
+    </div>
+    <div>
+        <label for="category-select">Category</label>
+        <select id="category-select" formControlName="category">
+            <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+            <option [ngValue]="'new'">Create new</option>
+        </select>
+    </div>
+    <div *ngIf="category.value === 'new'">
+        <label for="new-category-input">New category</label>
+        <input id="new-category-input" type="text" formControlName="newCategory">
+        <p *ngIf="form.errors?.categoryNameEmpty">Category name must not be empty.</p>
+        <p *ngIf="form.errors?.categoryAlreadyExists">Category "{{form.errors.categoryAlreadyExists}}" already exists</p>
+    </div>
+    <div>
+        <label for="description-input">Description</label>
+        <input id="description-input" type="text" formControlName="description">
+    </div>
+    <div>
+        <label for="value-input">Value</label>
+        <input id="value-input" type="number" formControlName="value">
+    </div>
+    <div>
+        <button type="button" (click)="cancel()">Cancel</button>
+        <button [disabled]="!form.valid">Create transaction</button>
+    </div>
+</form>

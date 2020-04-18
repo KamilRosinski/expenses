@@ -1,5 +1,11 @@
 <div *ngIf="accountingPeriod">
     <h1>{{accountingPeriod.yearMonth | date: 'MM.yyyy'}}</h1>
+    <button *ngIf="!createTransactionFormVisible" (click)="createTransactionFormVisible = true">Create new transaction</button>
+    <app-create-transaction *ngIf="createTransactionFormVisible"
+                            [accountingPeriodLength]="accountingPeriod.length"
+                            (transactionCreated)="createTransaction($event)"
+                            (cancelled)="createTransactionFormVisible = false">
+    </app-create-transaction>
     <table>
         <thead>
             <tr>

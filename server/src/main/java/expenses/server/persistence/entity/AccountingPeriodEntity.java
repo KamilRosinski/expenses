@@ -37,10 +37,13 @@ public class AccountingPeriodEntity {
 	@Column(name = "MONTH", nullable = false)
 	private Integer month;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ACCOUNTING_PERIOD_ID")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "accountingPeriod")
 	@OrderBy("DAY DESC")
 	private List<TransactionEntity> transactions = new ArrayList<>();
+
+	public AccountingPeriodEntity(final Long id) {
+		this.id = id;
+	}
 
 	public AccountingPeriodEntity(final Integer year, final Integer month) {
 		this.year = year;
