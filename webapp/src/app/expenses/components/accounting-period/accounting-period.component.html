@@ -1,5 +1,6 @@
 <div *ngIf="accountingPeriod">
     <h1>{{accountingPeriod.yearMonth | date: 'MM.yyyy'}}</h1>
+    <a routerLink="/expenses">Back to accounting periods</a>
     <button *ngIf="!createTransactionFormVisible" (click)="createTransactionFormVisible = true">Create new transaction</button>
     <app-create-transaction *ngIf="createTransactionFormVisible"
                             [accountingPeriodLength]="accountingPeriod.length"
