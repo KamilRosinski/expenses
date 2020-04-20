@@ -5,16 +5,12 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class TransactionDTO {
+public class PredictionDTO {
 
 	private final Long id;
 
-	private final Integer day;
-
-	private final String description;
-
 	private final Long value;
 
-	private final SubCategoryDTO subCategory;
+	private final CategoryDTO category;
 
 }

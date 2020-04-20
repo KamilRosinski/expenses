@@ -1,5 +1,6 @@
 package expenses.server.persistence.entity;
 
+import expenses.server.rest.dto.TransactionCreateDTO;
 import expenses.server.rest.dto.TransactionDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,26 +36,23 @@ public class TransactionEntity {
 	private Long value;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ACCOUNTING_PERIOD_ID")
-	private AccountingPeriodEntity accountingPeriod;
+	@JoinColumn(name = "MONTH_ID")
+	private MonthEntity month;
 
-	// ran into this issue:
-	// https://stackoverflow.com/questions/40247030/detached-entity-passed-to-persist-in-spring-data/40250646
-	// so no cascade added
 	@ManyToOne
-	@JoinColumn(name = "TRANSACTION_CATEGORY_ID")
-	private TransactionCategoryEntity category;
+	@JoinColumn(name = "SUB_CATEGORY_ID")
+	private SubCategoryEntity subCategory;
 
-	public TransactionEntity(final Integer day, final String description, final Long value, final Long accountingPeriodId, final TransactionCategoryEntity category) {
-		this.day = day;
-		this.description = description;
-		this.value = value;
-		this.accountingPeriod = new AccountingPeriodEntity(accountingPeriodId);
-		this.category = category;
+	public TransactionEntity(final TransactionCreateDTO dto) {
+		day = dto.getDay();
+		description = dto.getDescription();
+		value = dto.getValue();
+		month = new MonthEntity(dto.getMonthId());
+		subCategory = new SubCategoryEntity(dto.getCategory());
 	}
 
 	public TransactionDTO mapToDto() {
-		return new TransactionDTO(id, day, description, value, category.mapToDto());
+		return new TransactionDTO(id, day, description, value, subCategory.mapToDto());
 	}
 
 }

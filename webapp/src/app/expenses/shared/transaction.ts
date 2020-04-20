@@ -1,9 +1,9 @@
-import {TransactionCategory} from './transaction-category';
+import {SubCategory} from './sub-category';
 
 export interface Transaction {
-    readonly id: number | null;
+    readonly id: number;
     readonly day: number;
     readonly description?: string;
     readonly value: number;
-    readonly category: TransactionCategory;
+    readonly subCategory: SubCategory;
 }

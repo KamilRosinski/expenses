@@ -1,0 +1,26 @@
+<div>
+    <table *ngIf="monthOverviews">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Number of transactions</th>
+                <th>Income</th>
+                <th>Outcome</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let monthOverview of monthOverviews">
+                <td>
+                    <a [routerLink]="['month', monthOverview.id]">
+                        {{monthOverview.yearMonth | date: 'MM.yyyy'}}
+                    </a>
+                </td>
+                <td>{{monthOverview.transactionCount}}</td>
+                <td>{{monthOverview.income}}</td>
+                <td>{{monthOverview.outcome}}</td>
+                <td>{{monthOverview.income + monthOverview.outcome}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

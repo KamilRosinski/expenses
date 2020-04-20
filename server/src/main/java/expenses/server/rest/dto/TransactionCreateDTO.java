@@ -5,9 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class TransactionDTO {
-
-	private final Long id;
+public class TransactionCreateDTO {
 
 	private final Integer day;
 
@@ -15,6 +13,8 @@ public class TransactionDTO {
 
 	private final Long value;
 
-	private final SubCategoryDTO subCategory;
+	private final Long monthId;
+
+	private final SubCategoryDTO category;
 
 }

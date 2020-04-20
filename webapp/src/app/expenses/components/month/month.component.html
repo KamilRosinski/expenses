@@ -1,0 +1,24 @@
+<div *ngIf="month">
+    <h1>{{month.yearMonth | date: 'MM.yyyy'}}</h1>
+    <a routerLink="/expenses">Back to accounting periods</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Sub-category</th>
+                <th>Description</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of month.transactions">
+                <td>{{month.yearMonth + '-' + transaction.day | date: 'dd.MM.yyyy'}}</td>
+                <td>{{transaction.subCategory.category.name}}</td>
+                <td>{{transaction.subCategory.name}}</td>
+                <td>{{transaction.description}}</td>
+                <td>{{transaction.value}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

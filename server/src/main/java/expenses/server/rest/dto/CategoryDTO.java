@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class TransactionCategoryDTO {
+public class CategoryDTO {
 
 	private final Long id;
 

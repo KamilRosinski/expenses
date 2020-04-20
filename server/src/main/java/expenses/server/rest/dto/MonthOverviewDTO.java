@@ -7,7 +7,7 @@ import java.time.YearMonth;
 
 @AllArgsConstructor
 @Getter
-public class AccountingPeriodOverviewDTO {
+public class MonthOverviewDTO {
 
 	private final Long id;
 

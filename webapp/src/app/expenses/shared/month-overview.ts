@@ -1,4 +1,4 @@
-export interface AccountingPeriodOverview {
+export interface MonthOverview {
     readonly id: number;
     readonly yearMonth: string;
     readonly transactionCount: number;

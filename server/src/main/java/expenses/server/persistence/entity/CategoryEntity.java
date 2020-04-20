@@ -1,7 +1,6 @@
 package expenses.server.persistence.entity;
 
-import expenses.server.rest.dto.TransactionCategoryDTO;
-import lombok.AllArgsConstructor;
+import expenses.server.rest.dto.CategoryDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,14 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "TRANSACTION_CATEGORY")
+@Table(name = "CATEGORY")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-public class TransactionCategoryEntity {
+public class CategoryEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +29,17 @@ public class TransactionCategoryEntity {
 	@Column(name = "NAME", unique = true, nullable = false)
 	private String name;
 
-	public TransactionCategoryEntity(final String name) {
-		this.name = name;
+	@OneToMany(mappedBy = "category")
+	@OrderBy("NAME ASC")
+	private List<SubCategoryEntity> subCategories = new ArrayList<>();
+
+	public CategoryEntity(final CategoryDTO dto) {
+		id = dto.getId();
+		name = dto.getName();
 	}
 
-	public TransactionCategoryDTO mapToDto() {
-		return new TransactionCategoryDTO(id, name);
+	public CategoryDTO mapToDto() {
+		return new CategoryDTO(id, name);
 	}
 
 }

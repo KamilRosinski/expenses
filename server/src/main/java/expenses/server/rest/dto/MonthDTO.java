@@ -8,7 +8,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter
-public class AccountingPeriodDTO {
+public class MonthDTO {
 
 	private final Long id;
 
@@ -17,5 +17,7 @@ public class AccountingPeriodDTO {
 	private final Integer length;
 
 	private final List<TransactionDTO> transactions;
+
+	private final List<PredictionDTO> predictions;
 
 }

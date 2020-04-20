@@ -1,16 +1,14 @@
 package expenses.server.persistence.entity;
 
-import expenses.server.rest.dto.AccountingPeriodDTO;
+import expenses.server.rest.dto.MonthDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -21,10 +19,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "ACCOUNTING_PERIOD", uniqueConstraints = @UniqueConstraint(columnNames = {"YEAR", "MONTH"}))
+@Table(name = "MONTH", uniqueConstraints = @UniqueConstraint(columnNames = {"YEAR", "MONTH"}))
 @NoArgsConstructor
 @Getter
-public class AccountingPeriodEntity {
+public class MonthEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,27 +35,33 @@ public class AccountingPeriodEntity {
 	@Column(name = "MONTH", nullable = false)
 	private Integer month;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "accountingPeriod")
+	@OneToMany(mappedBy = "month")
 	@OrderBy("DAY DESC")
 	private List<TransactionEntity> transactions = new ArrayList<>();
 
-	public AccountingPeriodEntity(final Long id) {
+	@OneToMany(mappedBy = "month")
+	private List<PredictionEntity> predictions = new ArrayList<>();
+
+	public MonthEntity(final Long id) {
 		this.id = id;
 	}
 
-	public AccountingPeriodEntity(final Integer year, final Integer month) {
+	public MonthEntity(final Integer year, final Integer month) {
 		this.year = year;
 		this.month = month;
 	}
 
-	public AccountingPeriodDTO mapToDto() {
+	public MonthDTO mapToDto() {
 		final YearMonth yearMonth = YearMonth.of(year.intValue(), month.intValue());
-		return new AccountingPeriodDTO(
+		return new MonthDTO(
 				id,
 				yearMonth,
 				Integer.valueOf(yearMonth.lengthOfMonth()),
 				transactions.stream()
 						.map(TransactionEntity::mapToDto)
+						.collect(Collectors.toList()),
+				predictions.stream()
+						.map(PredictionEntity::mapToDTO)
 						.collect(Collectors.toList())
 		);
 	}
