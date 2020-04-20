@@ -3,6 +3,7 @@ import {ExpensesService} from '../../services/expenses.service';
 import {Month} from '../../shared/month';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {concatMap} from 'rxjs/operators';
+import {Transaction} from '../../shared/transaction';
 
 @Component({
     selector: 'app-month',
@@ -23,6 +24,13 @@ export class MonthComponent implements OnInit {
         ).subscribe(
             (month: Month) => this.month = month
         );
+    }
+
+    transactionsValueByCategoryId(categoryId: number): number {
+        return  this.month.transactions
+            .filter((transaction: Transaction) => transaction.subCategory.category.id === categoryId)
+            .map((transaction: Transaction) => transaction.value)
+            .reduce((result: number, value: number) => result + value);
     }
 
 }

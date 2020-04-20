@@ -30,7 +30,7 @@ public class CategoryEntity {
 	private String name;
 
 	@OneToMany(mappedBy = "category")
-	@OrderBy("NAME ASC")
+	@OrderBy("name")
 	private List<SubCategoryEntity> subCategories = new ArrayList<>();
 
 	public CategoryEntity(final CategoryDTO dto) {

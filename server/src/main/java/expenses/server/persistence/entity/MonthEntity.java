@@ -36,10 +36,11 @@ public class MonthEntity {
 	private Integer month;
 
 	@OneToMany(mappedBy = "month")
-	@OrderBy("DAY DESC")
+	@OrderBy("day DESC")
 	private List<TransactionEntity> transactions = new ArrayList<>();
 
 	@OneToMany(mappedBy = "month")
+	@OrderBy("category")
 	private List<PredictionEntity> predictions = new ArrayList<>();
 
 	public MonthEntity(final Long id) {

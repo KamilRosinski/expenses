@@ -29,7 +29,7 @@ public class SubCategoryEntity {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CATEGORY_ID")
 	private CategoryEntity category;
 

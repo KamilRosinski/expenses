@@ -4,6 +4,7 @@ import expenses.server.rest.dto.PredictionDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class PredictionEntity {
 	@Column(name = "VALUE", nullable = false)
 	private Long value;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MONTH_ID")
 	private MonthEntity month;
 
