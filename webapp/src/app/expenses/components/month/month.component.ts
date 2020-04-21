@@ -26,11 +26,9 @@ export class MonthComponent implements OnInit {
         );
     }
 
-    transactionsValueByCategoryId(categoryId: number): number {
+    transactionsByCategory(categoryId: number): Transaction[] {
         return  this.month.transactions
             .filter((transaction: Transaction) => transaction.subCategory.category.id === categoryId)
-            .map((transaction: Transaction) => transaction.value)
-            .reduce((result: number, value: number) => result + value);
     }
 
 }

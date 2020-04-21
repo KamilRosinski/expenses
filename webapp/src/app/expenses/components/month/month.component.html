@@ -8,7 +8,7 @@
                 <tr>
                     <th>Date</th>
                     <th>Category</th>
-                    <th>Sub-category</th>
+                    <th>Subcategory</th>
                     <th>Description</th>
                     <th>Value</th>
                 </tr>
@@ -34,12 +34,10 @@
                     <th>Actual value</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let prediction of month.predictions">
-                    <td>{{prediction.category.name}}</td>
-                    <td>{{prediction.value}}</td>
-                    <td>{{transactionsValueByCategoryId(prediction.category.id)}}</td>
-                </tr>
+            <tbody app-prediction-row
+                  *ngFor="let prediction of month.predictions"
+                  [prediction]="prediction"
+                  [transactions]="transactionsByCategory(prediction.category.id)">
             </tbody>
         </table>
     </div>

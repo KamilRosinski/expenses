@@ -1,0 +1,28 @@
+<ng-container>
+     <tr>
+        <td>{{prediction.category.name}}</td>
+        <td>{{prediction.value}}</td>
+        <td>{{transactionsSum}}</td>
+         <td><button (click)="toggleShowTransactions()">{{showTransactions ? 'hide details' : 'show details'}}</button></td>
+    </tr>
+    <tr id="transactions" *ngIf="showTransactions">
+        <td colspan="4">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subcategory</th>
+                        <th>Description</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of transactions">
+                        <td>{{transaction.subCategory.name}}</td>
+                        <td>{{transaction.description}}</td>
+                        <td>{{transaction.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</ng-container>
