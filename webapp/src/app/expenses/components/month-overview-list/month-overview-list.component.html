@@ -12,7 +12,8 @@
         <tbody>
             <tr *ngFor="let monthOverview of monthOverviews">
                 <td>
-                    <a [routerLink]="['month', monthOverview.id]">
+                    <a [routerLink]="['month', monthOverview.id]"
+                       [queryParams]="{tab: 'transactions'}">
                         {{monthOverview.yearMonth | date: 'MM.yyyy'}}
                     </a>
                 </td>
