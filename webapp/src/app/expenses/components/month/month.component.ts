@@ -3,7 +3,6 @@ import {ExpensesService} from '../../services/expenses.service';
 import {Month} from '../../shared/month';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {concatMap, map} from 'rxjs/operators';
-import {Transaction} from '../../shared/transaction';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -35,11 +34,6 @@ export class MonthComponent implements OnInit {
 
         this.transactionsTab$ = currentTab$.pipe(map((currentTab: string) => currentTab === 'transactions'));
         this.predictionsTab$ = currentTab$.pipe(map((currentTab: string) => currentTab === 'predictions'));
-    }
-
-    transactionsByCategory(categoryId: number): Transaction[] {
-        return  this.month.transactions
-            .filter((transaction: Transaction) => transaction.subCategory.category.id === categoryId)
     }
 
 }

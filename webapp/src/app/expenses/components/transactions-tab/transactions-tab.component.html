@@ -1,0 +1,23 @@
+<div>
+    <h2>Transactions</h2>
+    <table *ngIf="month.transactions?.length > 0">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Description</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of month.transactions">
+                <td>{{month.yearMonth + '-' + transaction.day | date: 'dd.MM.yyyy'}}</td>
+                <td>{{transaction.subCategory.category.name}}</td>
+                <td>{{transaction.subCategory.name}}</td>
+                <td>{{transaction.description}}</td>
+                <td>{{transaction.value}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

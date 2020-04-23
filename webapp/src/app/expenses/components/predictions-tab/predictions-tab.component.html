@@ -1,0 +1,17 @@
+<div>
+    <h2>Predictions</h2>
+    <table *ngIf="month.predictions?.length > 0">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Predicted value</th>
+                <th>Actual value</th>
+            </tr>
+        </thead>
+        <tbody app-prediction-row
+               *ngFor="let prediction of month.predictions"
+               [prediction]="prediction"
+               [transactions]="filterTransactionsByCategory(prediction.category.id)">
+        </tbody>
+    </table>
+</div>

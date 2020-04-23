@@ -3,48 +3,16 @@
     <div>
         <a [routerLink]="'/expenses'">Back to accounting periods</a>
     </div>
-    <div id="tab-links">
-        <a [routerLink]="" [queryParams]="{tab: 'transactions'}" [class.tab-active]="transactionsTab$ | async">Transactions</a>
-        <a [routerLink]="" [queryParams]="{tab: 'predictions'}" [class.tab-active]="predictionsTab$ | async">Predictions</a>
+    <div class="tab-links">
+        <a class="tab-link" [routerLink]="" [queryParams]="{tab: 'transactions'}" [class.active]="transactionsTab$ | async">Transactions</a>
+        <a class="tab-link" [routerLink]="" [queryParams]="{tab: 'predictions'}" [class.active]="predictionsTab$ | async">Predictions</a>
     </div>
-    <div *ngIf="transactionsTab$ | async">
-        <h2>Transactions</h2>
-        <table *ngIf="month.transactions?.length > 0">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Subcategory</th>
-                    <th>Description</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let transaction of month.transactions">
-                    <td>{{month.yearMonth + '-' + transaction.day | date: 'dd.MM.yyyy'}}</td>
-                    <td>{{transaction.subCategory.category.name}}</td>
-                    <td>{{transaction.subCategory.name}}</td>
-                    <td>{{transaction.description}}</td>
-                    <td>{{transaction.value}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="tab-content"
+         *ngIf="transactionsTab$ | async">
+        <app-transactions-tab [month]="month"></app-transactions-tab>
     </div>
-    <div *ngIf="predictionsTab$ | async">
-        <h2>Predictions</h2>
-        <table *ngIf="month.predictions?.length > 0">
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Predicted value</th>
-                    <th>Actual value</th>
-                </tr>
-            </thead>
-            <tbody app-prediction-row
-                  *ngFor="let prediction of month.predictions"
-                  [prediction]="prediction"
-                  [transactions]="transactionsByCategory(prediction.category.id)">
-            </tbody>
-        </table>
+    <div class="tab-content"
+         *ngIf="predictionsTab$ | async">
+        <app-predictions-tab [month]="month"></app-predictions-tab>
     </div>
 </div>
