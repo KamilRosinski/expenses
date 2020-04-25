@@ -13,7 +13,7 @@ export class PredictionsTabComponent {
 
   filterTransactionsByCategory(categoryId: number): Transaction[] {
     return  this.month.transactions
-        .filter((transaction: Transaction) => transaction.subCategory.category.id === categoryId)
+        .filter((transaction: Transaction) => transaction.subcategory.category.id === categoryId)
   }
 
 }

@@ -1,12 +1,12 @@
 package expenses.server.persistence.entity;
 
-import expenses.server.rest.dto.SubCategoryDTO;
+import expenses.server.rest.dto.SubcategoryDTO;
+import expenses.server.rest.dto.SubcategoryWithCategoryDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,10 +16,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "SUB_CATEGORY", uniqueConstraints = @UniqueConstraint(columnNames = {"NAME", "CATEGORY_ID"}))
+@Table(name = "SUBCATEGORY", uniqueConstraints = @UniqueConstraint(columnNames = {"NAME", "CATEGORY_ID"}))
 @NoArgsConstructor
 @Getter
-public class SubCategoryEntity {
+public class SubcategoryEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,18 +29,22 @@ public class SubCategoryEntity {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "CATEGORY_ID")
 	private CategoryEntity category;
 
-	public SubCategoryEntity(final SubCategoryDTO dto) {
+	public SubcategoryEntity(final SubcategoryWithCategoryDTO dto) {
 		id = dto.getId();
 		name = dto.getName();
 		category = new CategoryEntity(dto.getCategory());
 	}
 
-	public SubCategoryDTO mapToDto() {
-		return new SubCategoryDTO(id, name, category.mapToDto());
+	public SubcategoryWithCategoryDTO mapToDtoWithCategory() {
+		return new SubcategoryWithCategoryDTO(id, name, category.mapToDto());
+	}
+
+	public SubcategoryDTO mapToDto() {
+		return new SubcategoryDTO(id, name);
 	}
 
 }

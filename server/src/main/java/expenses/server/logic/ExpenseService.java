@@ -1,6 +1,6 @@
 package expenses.server.logic;
 
-import expenses.server.rest.dto.SubCategoryDTO;
+import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
 import expenses.server.rest.dto.TransactionCreateDTO;
@@ -19,6 +19,6 @@ public interface ExpenseService {
 
 	TransactionDTO createTransaction(TransactionCreateDTO transactionCreate);
 
-	List<SubCategoryDTO> getCategories();
+	List<CategoryWithSubcategoriesDTO> getCategoriesWithSubcategories();
 
 }

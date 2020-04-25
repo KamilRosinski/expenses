@@ -1,6 +1,7 @@
 package expenses.server.rest.controller;
 
 import expenses.server.logic.ExpenseService;
+import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
 import expenses.server.rest.dto.TransactionCreateDTO;
@@ -41,6 +42,11 @@ public class ExpenseController {
 	@PostMapping("/transaction")
 	public TransactionDTO createTransaction(@RequestBody final TransactionCreateDTO transactionCreate) {
 		return expenseService.createTransaction(transactionCreate);
+	}
+
+	@GetMapping("/category")
+	public List<CategoryWithSubcategoriesDTO> getCategoriesWithSubcategories() {
+		return expenseService.getCategoriesWithSubcategories();
 	}
 
 }

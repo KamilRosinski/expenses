@@ -15,6 +15,6 @@ public class TransactionDTO {
 
 	private final Long value;
 
-	private final SubCategoryDTO subCategory;
+	private final SubcategoryWithCategoryDTO subcategory;
 
 }

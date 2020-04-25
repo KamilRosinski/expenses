@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class SubCategoryDTO {
+public class SubcategoryWithCategoryDTO {
 
 	private final Long id;
 

@@ -1,13 +1,13 @@
 package expenses.server.logic.impl;
 
 import expenses.server.logic.ExpenseService;
-import expenses.server.persistence.entity.SubCategoryEntity;
+import expenses.server.persistence.entity.CategoryEntity;
 import expenses.server.persistence.entity.MonthEntity;
 import expenses.server.persistence.entity.TransactionEntity;
-import expenses.server.persistence.repository.SubCategoryRepository;
+import expenses.server.persistence.repository.CategoryRepository;
 import expenses.server.persistence.repository.MonthRepository;
 import expenses.server.persistence.repository.TransactionRepository;
-import expenses.server.rest.dto.SubCategoryDTO;
+import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
 import expenses.server.rest.dto.TransactionCreateDTO;
@@ -20,7 +20,6 @@ import java.time.YearMonth;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
@@ -31,7 +30,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	private final TransactionRepository transactionRepository;
 
-	private final SubCategoryRepository subCategoryRepository;
+	private final CategoryRepository categoryRepository;
 
 	@Override
 	public List<MonthOverviewDTO> getMonthOverviews() {
@@ -70,9 +69,9 @@ public class ExpenseServiceImpl implements ExpenseService {
 	}
 
 	@Override
-	public List<SubCategoryDTO> getCategories() {
-		return StreamSupport.stream(subCategoryRepository.findAll().spliterator(), false)
-				.map(SubCategoryEntity::mapToDto)
+	public List<CategoryWithSubcategoriesDTO> getCategoriesWithSubcategories() {
+		return categoryRepository.getAllCategories().stream()
+				.map(CategoryEntity::mapToDtoWithSubcategories)
 				.collect(Collectors.toList());
 	}
 

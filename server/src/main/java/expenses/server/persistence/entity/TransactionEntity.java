@@ -40,19 +40,19 @@ public class TransactionEntity {
 	private MonthEntity month;
 
 	@ManyToOne
-	@JoinColumn(name = "SUB_CATEGORY_ID")
-	private SubCategoryEntity subCategory;
+	@JoinColumn(name = "SUBCATEGORY_ID")
+	private SubcategoryEntity subcategory;
 
 	public TransactionEntity(final TransactionCreateDTO dto) {
 		day = dto.getDay();
 		description = dto.getDescription();
 		value = dto.getValue();
 		month = new MonthEntity(dto.getMonthId());
-		subCategory = new SubCategoryEntity(dto.getCategory());
+		subcategory = new SubcategoryEntity(dto.getSubcategory());
 	}
 
 	public TransactionDTO mapToDto() {
-		return new TransactionDTO(id, day, description, value, subCategory.mapToDto());
+		return new TransactionDTO(id, day, description, value, subcategory.mapToDtoWithCategory());
 	}
 
 }

@@ -15,6 +15,6 @@ public class TransactionCreateDTO {
 
 	private final Long monthId;
 
-	private final SubCategoryDTO category;
+	private final SubcategoryWithCategoryDTO subcategory;
 
 }
