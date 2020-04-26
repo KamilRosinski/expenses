@@ -1,6 +1,8 @@
 package expenses.server.persistence.entity;
 
 import expenses.server.rest.dto.PredictionDTO;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,8 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "PREDICTION", uniqueConstraints = @UniqueConstraint(columnNames = {"MONTH_ID", "CATEGORY_ID"}))
+@NoArgsConstructor
+@Getter
 public class PredictionEntity {
 
 	@Id
