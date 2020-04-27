@@ -1,6 +1,5 @@
 package expenses.server.persistence.entity;
 
-import expenses.server.rest.dto.TransactionCreateDTO;
 import expenses.server.rest.dto.TransactionDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,11 +42,12 @@ public class TransactionEntity {
 	@JoinColumn(name = "SUBCATEGORY_ID")
 	private SubcategoryEntity subcategory;
 
-	public TransactionEntity(final TransactionCreateDTO dto) {
+	public TransactionEntity(final TransactionDTO dto, final MonthEntity month) {
+		id = dto.getId();
 		day = dto.getDay();
 		description = dto.getDescription();
 		value = dto.getValue();
-		month = new MonthEntity(dto.getMonthId());
+		this.month = month;
 		subcategory = new SubcategoryEntity(dto.getSubcategory());
 	}
 

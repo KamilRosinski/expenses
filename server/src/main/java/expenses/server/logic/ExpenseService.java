@@ -3,7 +3,6 @@ package expenses.server.logic;
 import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
-import expenses.server.rest.dto.TransactionCreateDTO;
 import expenses.server.rest.dto.TransactionDTO;
 
 import java.time.YearMonth;
@@ -17,8 +16,7 @@ public interface ExpenseService {
 
 	MonthDTO createMonth(YearMonth yearMonth);
 
-	TransactionDTO createTransaction(TransactionCreateDTO transactionCreate);
-
 	List<CategoryWithSubcategoriesDTO> getCategoriesWithSubcategories();
 
+	TransactionDTO createTransaction(Long monthId, TransactionDTO transaction);
 }

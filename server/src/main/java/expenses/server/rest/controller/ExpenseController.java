@@ -4,7 +4,6 @@ import expenses.server.logic.ExpenseService;
 import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
-import expenses.server.rest.dto.TransactionCreateDTO;
 import expenses.server.rest.dto.TransactionDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,9 +38,9 @@ public class ExpenseController {
 		return expenseService.createMonth(YearMonth.parse(yearMonth));
 	}
 
-	@PostMapping("/transaction")
-	public TransactionDTO createTransaction(@RequestBody final TransactionCreateDTO transactionCreate) {
-		return expenseService.createTransaction(transactionCreate);
+	@PostMapping("month/{monthId}/transaction")
+	public TransactionDTO createTransaction(@PathVariable final Long monthId, @RequestBody final TransactionDTO transaction) {
+		return expenseService.createTransaction(monthId, transaction);
 	}
 
 	@GetMapping("/category")

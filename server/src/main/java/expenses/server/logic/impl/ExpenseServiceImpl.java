@@ -10,7 +10,6 @@ import expenses.server.persistence.repository.TransactionRepository;
 import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
-import expenses.server.rest.dto.TransactionCreateDTO;
 import expenses.server.rest.dto.TransactionDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -64,15 +63,16 @@ public class ExpenseServiceImpl implements ExpenseService {
 	}
 
 	@Override
-	public TransactionDTO createTransaction(final TransactionCreateDTO dto) {
-		return transactionRepository.save(new TransactionEntity(dto)).mapToDto();
-	}
-
-	@Override
 	public List<CategoryWithSubcategoriesDTO> getCategoriesWithSubcategories() {
 		return categoryRepository.getAllCategories().stream()
 				.map(CategoryEntity::mapToDtoWithSubcategories)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public TransactionDTO createTransaction(final Long monthId, final TransactionDTO transaction) {
+		final MonthEntity month = monthRepository.getOne(monthId);
+		return transactionRepository.save(new TransactionEntity(transaction, month)).mapToDto();
 	}
 
 }

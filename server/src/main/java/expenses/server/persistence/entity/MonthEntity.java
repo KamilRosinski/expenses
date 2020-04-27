@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,10 +43,6 @@ public class MonthEntity {
 	@OneToMany(mappedBy = "month")
 	private List<PredictionEntity> predictions = new ArrayList<>();
 
-	public MonthEntity(final Long id) {
-		this.id = id;
-	}
-
 	public MonthEntity(final Integer year, final Integer month) {
 		this.year = year;
 		this.month = month;
@@ -62,6 +59,7 @@ public class MonthEntity {
 						.collect(Collectors.toList()),
 				predictions.stream()
 						.map(PredictionEntity::mapToDTO)
+						.sorted(Comparator.comparing(prediction -> prediction.getCategory().getName()))
 						.collect(Collectors.toList())
 		);
 	}
