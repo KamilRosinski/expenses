@@ -1,5 +1,12 @@
 <div>
     <h2>Transactions</h2>
+    <div *ngIf="createFormVisible; then showForm else hideForm"></div>
+    <ng-template #showForm>
+        <app-transaction-create (cancel)="createFormVisible = false"></app-transaction-create>
+    </ng-template>
+    <ng-template #hideForm>
+        <button (click)="createFormVisible = true">Create new transaction</button>
+    </ng-template>
     <table *ngIf="month.transactions?.length > 0">
         <thead>
             <tr>

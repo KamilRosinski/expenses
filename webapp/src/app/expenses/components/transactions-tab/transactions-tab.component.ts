@@ -10,4 +10,6 @@ export class TransactionsTabComponent {
 
     @Input() month: Month;
 
+    createFormVisible: boolean = false;
+
 }

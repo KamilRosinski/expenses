@@ -8,6 +8,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {PredictionRowComponent} from './components/prediction-row/prediction-row.component';
 import {TransactionsTabComponent} from './components/transactions-tab/transactions-tab.component';
 import {PredictionsTabComponent} from './components/predictions-tab/predictions-tab.component';
+import {TransactionCreateComponent} from './components/transaction-create/transaction-create.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {PredictionsTabComponent} from './components/predictions-tab/predictions-
         MonthComponent,
         PredictionRowComponent,
         TransactionsTabComponent,
-        PredictionsTabComponent
+        PredictionsTabComponent,
+        TransactionCreateComponent
     ],
     imports: [
         CommonModule,
