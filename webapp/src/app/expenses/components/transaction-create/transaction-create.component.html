@@ -1,1 +1,4 @@
-<button (click)="onCancel()">Cancel</button>
+<div>
+    <div>Available categories: {{categories$ | async | json}}</div>
+    <button (click)="onCancel()">Cancel</button>
+</div>
