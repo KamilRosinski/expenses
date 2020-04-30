@@ -1,4 +1,10 @@
-<div>
-    <div>Available categories: {{categories$ | async | json}}</div>
-    <button (click)="onCancel()">Cancel</button>
-</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="category-input">Category</label>
+        <select id="category-input" [formControl]="categoryInput">
+            <option *ngFor="let category of categories$ | async" [ngValue]="category">{{category.name}}</option>
+        </select>
+    </div>
+    <button type="button" (click)="onCancel()">Cancel</button>
+    <button [disabled]="!form.valid">Create</button>
+</form>
