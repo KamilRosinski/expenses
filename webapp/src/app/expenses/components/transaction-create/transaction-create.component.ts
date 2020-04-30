@@ -16,8 +16,12 @@ export class TransactionCreateComponent implements OnInit {
 
     @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
 
-    get categoryInput(): AbstractControl {
+    get categoryControl(): AbstractControl {
         return this.form.get('category');
+    }
+
+    get subcategoryControl(): AbstractControl {
+        return this.form.get('subcategory');
     }
 
     constructor(private readonly expensesService: ExpensesService,
@@ -27,7 +31,11 @@ export class TransactionCreateComponent implements OnInit {
     ngOnInit(): void {
         this.categories$ = this.expensesService.getCategoriesWithSubcategories();
         this.form = this.formBuilder.group({
-            category: ['', [Validators.required]]
+            category: [undefined, [Validators.required]],
+            subcategory: [undefined, [Validators.required]]
+        });
+        this.categoryControl.valueChanges.subscribe(_ => {
+            this.subcategoryControl.setValue(null);
         });
     }
 

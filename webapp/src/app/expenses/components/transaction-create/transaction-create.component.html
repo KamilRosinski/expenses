@@ -1,10 +1,17 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
         <label for="category-input">Category</label>
-        <select id="category-input" [formControl]="categoryInput">
+        <select id="category-input" [formControlName]="'category'">
             <option *ngFor="let category of categories$ | async" [ngValue]="category">{{category.name}}</option>
+        </select>
+    </div>
+    <div *ngIf="categoryControl.value">
+        <label for="subcategory-input">Subcategory</label>
+        <select id="subcategory-input" [formControlName]="'subcategory'">
+            <option *ngFor="let subcategory of categoryControl.value.subcategories" [ngValue]="subcategory">{{subcategory.name}}</option>
         </select>
     </div>
     <button type="button" (click)="onCancel()">Cancel</button>
     <button [disabled]="!form.valid">Create</button>
+    <p>{{form.value | json}}</p>
 </form>
