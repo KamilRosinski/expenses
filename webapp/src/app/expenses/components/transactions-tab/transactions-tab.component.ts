@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Month} from '../../shared/month';
+import {Transaction} from '../../shared/transaction';
 
 @Component({
     selector: 'app-transactions-tab',
@@ -10,6 +11,13 @@ export class TransactionsTabComponent {
 
     @Input() month: Month;
 
+    @Output() createTransaction: EventEmitter<Transaction> = new EventEmitter<Transaction>();
+
     createFormVisible: boolean = false;
+
+    addTransaction(transaction: Transaction): void {
+        this.createTransaction.emit(transaction);
+        this.createFormVisible = false;
+    }
 
 }

@@ -5,6 +5,6 @@ export interface Month {
     readonly id: number;
     readonly yearMonth: string;
     readonly length: number;
-    readonly transactions: Transaction[];
+    transactions: Transaction[];
     readonly predictions: Prediction[];
 }

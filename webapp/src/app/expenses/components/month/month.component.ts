@@ -4,6 +4,7 @@ import {Month} from '../../shared/month';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {concatMap, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {Transaction} from '../../shared/transaction';
 
 @Component({
     selector: 'app-month',
@@ -34,6 +35,16 @@ export class MonthComponent implements OnInit {
 
         this.transactionsTab$ = currentTab$.pipe(map((currentTab: string) => currentTab === 'transactions'));
         this.predictionsTab$ = currentTab$.pipe(map((currentTab: string) => currentTab === 'predictions'));
+    }
+
+    createTransaction(transaction: Transaction): void {
+        this.expensesService.createTransaction(this.month.id, transaction).subscribe(
+            (transaction: Transaction) => {
+                this.month.transactions = [...this.month.transactions, transaction].sort(
+                    (t1: Transaction, t2: Transaction) => t2.day - t1.day
+                );
+            }
+        );
     }
 
 }
