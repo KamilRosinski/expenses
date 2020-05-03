@@ -20,8 +20,7 @@ public interface MonthRepository extends JpaRepository<MonthEntity, Long> {
 				"SUM(CASE WHEN t.value < 0 THEN t.value ELSE 0 END) AS outcome) " +
 			"FROM MonthEntity AS m " +
 			"LEFT JOIN m.transactions AS t " +
-			"GROUP BY m " +
-			"ORDER BY year DESC, month DESC")
+			"GROUP BY m ")
 	List<Map<String, Object>> getOverviews();
 
 }

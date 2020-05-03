@@ -1,6 +1,7 @@
 export interface MonthOverview {
     readonly id: number;
-    readonly yearMonth: string;
+    readonly year: number;
+    readonly month: number;
     readonly transactionCount: number;
     readonly income: number;
     readonly outcome: number;

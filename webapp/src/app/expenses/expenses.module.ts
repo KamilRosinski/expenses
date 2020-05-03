@@ -9,6 +9,9 @@ import {PredictionRowComponent} from './components/prediction-row/prediction-row
 import {TransactionsTabComponent} from './components/transactions-tab/transactions-tab.component';
 import {PredictionsTabComponent} from './components/predictions-tab/predictions-tab.component';
 import {TransactionCreateComponent} from './components/transaction-create/transaction-create.component';
+import {TransactionsSortPipe} from './pipes/transactions-sort.pipe';
+import {PredictionsSortPipe} from './pipes/predictions-sort.pipe';
+import {MonthOverviewsSortPipe} from './pipes/month-overviews-sort.pipe';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import {TransactionCreateComponent} from './components/transaction-create/transa
         PredictionRowComponent,
         TransactionsTabComponent,
         PredictionsTabComponent,
-        TransactionCreateComponent
+        TransactionCreateComponent,
+        TransactionsSortPipe,
+        PredictionsSortPipe,
+        MonthOverviewsSortPipe
     ],
     imports: [
         CommonModule,

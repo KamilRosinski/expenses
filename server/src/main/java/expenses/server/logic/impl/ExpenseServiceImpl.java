@@ -36,14 +36,12 @@ public class ExpenseServiceImpl implements ExpenseService {
 		return monthRepository.getOverviews().stream()
 				.map(columns -> {
 					final Long id = (Long) columns.get("id");
-					final YearMonth yearMonth = YearMonth.of(
-							((Integer) columns.get("year")).intValue(),
-							((Integer) columns.get("month")).intValue()
-					);
+					final Integer year = (Integer) columns.get("year");
+					final Integer month = (Integer) columns.get("month");
 					final Long transactionCount = (Long) columns.get("transactionCount");
 					final Long income = (Long) columns.get("income");
 					final Long outcome = (Long) columns.get("outcome");
-					return new MonthOverviewDTO(id, yearMonth, transactionCount, income, outcome);
+					return new MonthOverviewDTO(id, year, month, transactionCount, income, outcome);
 				})
 				.collect(Collectors.toList());
 	}

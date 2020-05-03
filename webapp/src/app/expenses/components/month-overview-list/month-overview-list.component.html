@@ -10,11 +10,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let monthOverview of monthOverviews">
+            <tr *ngFor="let monthOverview of monthOverviews | monthOverviewsSort">
                 <td>
                     <a [routerLink]="['month', monthOverview.id]"
                        [queryParams]="{tab: 'transactions'}">
-                        {{monthOverview.yearMonth | date: 'MM.yyyy'}}
+                        {{monthOverview.year + '-' + monthOverview.month | date: 'MM.yyyy'}}
                     </a>
                 </td>
                 <td>{{monthOverview.transactionCount}}</td>

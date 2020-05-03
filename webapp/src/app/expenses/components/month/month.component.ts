@@ -39,11 +39,7 @@ export class MonthComponent implements OnInit {
 
     createTransaction(transaction: Transaction): void {
         this.expensesService.createTransaction(this.month.id, transaction).subscribe(
-            (transaction: Transaction) => {
-                this.month.transactions = [...this.month.transactions, transaction].sort(
-                    (t1: Transaction, t2: Transaction) => t2.day - t1.day
-                );
-            }
+            (transaction: Transaction) => this.month.transactions = [...this.month.transactions, transaction]
         );
     }
 

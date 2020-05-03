@@ -3,7 +3,6 @@ package expenses.server.rest.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.time.YearMonth;
 import java.util.List;
 
 @AllArgsConstructor
@@ -12,7 +11,9 @@ public class MonthDTO {
 
 	private final Long id;
 
-	private final YearMonth yearMonth;
+	private final Integer year;
+
+	private final Integer month;
 
 	private final Integer length;
 
