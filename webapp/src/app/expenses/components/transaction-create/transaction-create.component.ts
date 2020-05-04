@@ -48,8 +48,8 @@ export class TransactionCreateComponent implements OnInit {
         this.categories$ = this.expensesService.getCategoriesWithSubcategories();
         this.form = this.formBuilder.group({
             day: [null, [Validators.required]],
-            category: [null, [Validators.required]],
-            subcategory: [null, [Validators.required]],
+            category: ['', [Validators.required]],
+            subcategory: ['', [Validators.required]],
             description: [null, []],
             value: [null, [Validators.required, Validators.pattern(/^[0-9]+([.,][0-9]{1,2})?$/)]]
         });

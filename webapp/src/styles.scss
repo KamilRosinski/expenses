@@ -6,3 +6,12 @@
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
 }
+
+.validation-msg {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.input-invalid {
+  border: 1px solid red;
+}

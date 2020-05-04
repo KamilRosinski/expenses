@@ -4,8 +4,8 @@ import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
 import expenses.server.rest.dto.TransactionDTO;
+import expenses.server.rest.dto.YearMonthDTO;
 
-import java.time.YearMonth;
 import java.util.List;
 
 public interface ExpenseService {
@@ -14,7 +14,7 @@ public interface ExpenseService {
 
 	MonthDTO getMonthById(Long id);
 
-	MonthDTO createMonth(YearMonth yearMonth);
+	MonthDTO createMonth(YearMonthDTO yearMonth);
 
 	List<CategoryWithSubcategoriesDTO> getCategoriesWithSubcategories();
 

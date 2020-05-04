@@ -11,11 +11,11 @@ import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
 import expenses.server.rest.dto.TransactionDTO;
+import expenses.server.rest.dto.YearMonthDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.YearMonth;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -54,9 +54,9 @@ public class ExpenseServiceImpl implements ExpenseService {
 	}
 
 	@Override
-	public MonthDTO createMonth(final YearMonth yearMonth) {
+	public MonthDTO createMonth(final YearMonthDTO yearMonth) {
 		return monthRepository
-				.save(new MonthEntity(Integer.valueOf(yearMonth.getYear()), Integer.valueOf(yearMonth.getMonthValue())))
+				.save(new MonthEntity(yearMonth.getYear(), yearMonth.getMonth()))
 				.mapToDto();
 	}
 

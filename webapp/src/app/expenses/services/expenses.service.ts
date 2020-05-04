@@ -30,4 +30,7 @@ export class ExpensesService {
         return this.http.post<Transaction>(`/api/month/${monthId}/transaction`, transaction);
     }
 
+    createMonth(year: number, month: number): Observable<Month> {
+        return this.http.post<Month>('/api/month', {year, month});
+    }
 }

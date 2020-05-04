@@ -11,6 +11,8 @@ export class MonthOverviewListComponent implements OnInit {
 
     monthOverviews: MonthOverview[] = [];
 
+    createFormVisible: boolean = false;
+
     constructor(private readonly expensesService: ExpensesService) {
     }
 
