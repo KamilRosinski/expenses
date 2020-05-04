@@ -1,21 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
         <label for="day-input">Day</label>
-        <select id="day-input" [formControlName]="'day'">
+        <select id="day-input" [formControlName]="'day'" [class.invalid]="(dayControl.touched || dayControl.dirty) && dayControl.errors">
             <option *ngFor="let day of days" [ngValue]="day">{{day}}</option>
         </select>
+        <p class="validation-msg" *ngIf="(dayControl.touched || dayControl.dirty) && dayControl.errors?.required">Day must not be empty.</p>
     </div>
     <div>
         <label for="category-input">Category</label>
-        <select id="category-input" [formControlName]="'category'">
+        <select id="category-input" [formControlName]="'category'" [class.invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors">
             <option *ngFor="let category of categories$ | async" [ngValue]="category">{{category.name}}</option>
         </select>
+        <p class="validation-msg" *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.required">Category must not be empty.</p>
     </div>
     <div>
         <label for="subcategory-input">Subcategory</label>
-        <select id="subcategory-input" [formControlName]="'subcategory'">
+        <select id="subcategory-input" [formControlName]="'subcategory'" [class.invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.errors">
             <option *ngFor="let subcategory of categoryControl.value?.subcategories" [ngValue]="subcategory">{{subcategory.name}}</option>
         </select>
+        <p class="validation-msg" *ngIf="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.errors?.required">Subcategory must not be empty.</p>
     </div>
     <div>
         <label for="description-input">Description (optional)</label>
@@ -23,8 +26,11 @@
     </div>
     <div>
         <label for="value-input">Value</label>
-        <input id="value-input" type="number" [formControlName]="'value'">
+        <input id="value-input" type="text" [formControlName]="'value'" [class.invalid]="(valueControl.touched || valueControl.dirty) && valueControl.errors">
     </div>
+        <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.pattern">
+            Value {{valueControl.errors.pattern.actualValue}} does not match following pattern {{valueControl.errors.pattern.requiredPattern}}.
+        </p>
     <button type="button" (click)="onCancel()">Cancel</button>
     <button [disabled]="!form.valid">Create</button>
 </form>

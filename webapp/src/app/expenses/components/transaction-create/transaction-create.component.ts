@@ -24,12 +24,20 @@ export class TransactionCreateComponent implements OnInit {
         return Array.from(Array(this.monthLength).keys()).map((day: number) => day + 1);
     }
 
+    get dayControl(): AbstractControl {
+        return this.form.get('day');
+    }
+
     get categoryControl(): AbstractControl {
         return this.form.get('category');
     }
 
     get subcategoryControl(): AbstractControl {
         return this.form.get('subcategory');
+    }
+
+    get valueControl(): AbstractControl {
+        return this.form.get('value');
     }
 
     constructor(private readonly expensesService: ExpensesService,
@@ -43,7 +51,7 @@ export class TransactionCreateComponent implements OnInit {
             category: [null, [Validators.required]],
             subcategory: [null, [Validators.required]],
             description: [null, []],
-            value: [null, [Validators.required]]
+            value: [null, [Validators.required, Validators.pattern(/^[0-9]+([.,][0-9]{1,2})?$/)]]
         });
         this.subcategoryControl.disable();
         this.categoryControl.valueChanges.subscribe((value: CategoryWithSubcategories) => {
@@ -73,7 +81,7 @@ export class TransactionCreateComponent implements OnInit {
                 }
             },
             description: this.form.value.description,
-            value: this.form.value.value
+            value: +this.form.value.value.replace(',', '.') * 100
         });
     }
 
