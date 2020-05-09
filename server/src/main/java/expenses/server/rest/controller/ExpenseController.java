@@ -4,6 +4,7 @@ import expenses.server.logic.ExpenseService;
 import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
+import expenses.server.rest.dto.PredictionDTO;
 import expenses.server.rest.dto.TransactionDTO;
 import expenses.server.rest.dto.YearMonthDTO;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,11 @@ public class ExpenseController {
 	@PostMapping("/month/{monthId}/transaction")
 	public TransactionDTO createTransaction(@PathVariable final Long monthId, @RequestBody final TransactionDTO transaction) {
 		return expenseService.createTransaction(monthId, transaction);
+	}
+
+	@PostMapping("/month/{monthId}/prediction")
+	public PredictionDTO createPrediction(@PathVariable final Long monthId, @RequestBody final PredictionDTO prediction) {
+		return expenseService.createPrediction(monthId, prediction);
 	}
 
 	@GetMapping("/category")

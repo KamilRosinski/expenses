@@ -42,13 +42,13 @@ public class TransactionEntity {
 	@JoinColumn(name = "SUBCATEGORY_ID")
 	private SubcategoryEntity subcategory;
 
-	public TransactionEntity(final TransactionDTO dto, final MonthEntity month) {
-		id = dto.getId();
-		day = dto.getDay();
-		description = dto.getDescription();
-		value = dto.getValue();
+	public TransactionEntity(final TransactionDTO transaction, final MonthEntity month) {
+		id = transaction.getId();
+		day = transaction.getDay();
+		description = transaction.getDescription();
+		value = transaction.getValue();
+		subcategory = new SubcategoryEntity(transaction.getSubcategory());
 		this.month = month;
-		subcategory = new SubcategoryEntity(dto.getSubcategory());
 	}
 
 	public TransactionDTO mapToDto() {

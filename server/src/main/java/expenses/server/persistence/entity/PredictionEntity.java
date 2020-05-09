@@ -37,6 +37,13 @@ public class PredictionEntity {
 	@JoinColumn(name = "CATEGORY_ID")
 	private CategoryEntity category;
 
+	public PredictionEntity(final PredictionDTO prediction, final MonthEntity month) {
+		id = prediction.getId();
+		value = prediction.getValue();
+		category = new CategoryEntity(prediction.getCategory());
+		this.month = month;
+	}
+
 	public PredictionDTO mapToDTO() {
 		return new PredictionDTO(id, value, category.mapToDto());
 	}

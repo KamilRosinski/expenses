@@ -3,13 +3,16 @@ package expenses.server.logic.impl;
 import expenses.server.logic.ExpenseService;
 import expenses.server.persistence.entity.CategoryEntity;
 import expenses.server.persistence.entity.MonthEntity;
+import expenses.server.persistence.entity.PredictionEntity;
 import expenses.server.persistence.entity.TransactionEntity;
 import expenses.server.persistence.repository.CategoryRepository;
 import expenses.server.persistence.repository.MonthRepository;
+import expenses.server.persistence.repository.PredictionRepository;
 import expenses.server.persistence.repository.TransactionRepository;
 import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
+import expenses.server.rest.dto.PredictionDTO;
 import expenses.server.rest.dto.TransactionDTO;
 import expenses.server.rest.dto.YearMonthDTO;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +29,8 @@ import java.util.stream.Collectors;
 public class ExpenseServiceImpl implements ExpenseService {
 
 	private final MonthRepository monthRepository;
-
 	private final TransactionRepository transactionRepository;
-
+	private final PredictionRepository predictionRepository;
 	private final CategoryRepository categoryRepository;
 
 	@Override
@@ -71,6 +73,12 @@ public class ExpenseServiceImpl implements ExpenseService {
 	public TransactionDTO createTransaction(final Long monthId, final TransactionDTO transaction) {
 		final MonthEntity month = monthRepository.getOne(monthId);
 		return transactionRepository.save(new TransactionEntity(transaction, month)).mapToDto();
+	}
+
+	@Override
+	public PredictionDTO createPrediction(final Long monthId, final PredictionDTO prediction) {
+		final MonthEntity month = monthRepository.getOne(monthId);
+		return predictionRepository.save(new PredictionEntity(prediction, month)).mapToDTO();
 	}
 
 }
