@@ -11,6 +11,8 @@ export class PredictionsTabComponent {
 
     @Input() month: Month;
 
+    createFormVisible: boolean = false;
+
   filterTransactionsByCategory(categoryId: number): Transaction[] {
     return  this.month.transactions
         .filter((transaction: Transaction) => transaction.subcategory.category.id === categoryId)

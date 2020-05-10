@@ -13,6 +13,7 @@ import {TransactionsSortPipe} from './pipes/transactions-sort.pipe';
 import {PredictionsSortPipe} from './pipes/predictions-sort.pipe';
 import {MonthOverviewsSortPipe} from './pipes/month-overviews-sort.pipe';
 import {MonthCreateComponent} from './components/month-create/month-create.component';
+import {PredictionCreateComponent} from './components/prediction-create/prediction-create.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {MonthCreateComponent} from './components/month-create/month-create.compo
         TransactionsSortPipe,
         PredictionsSortPipe,
         MonthOverviewsSortPipe,
-        MonthCreateComponent
+        MonthCreateComponent,
+        PredictionCreateComponent
     ],
     imports: [
         CommonModule,

@@ -1,7 +1,11 @@
 <div>
-    <div>
-        <button>Create new prediction</button>
-    </div>
+    <div *ngIf="createFormVisible; then showForm else hideForm"></div>
+    <ng-template #showForm>
+        <app-prediction-create (cancel)="createFormVisible = false"></app-prediction-create>
+    </ng-template>
+    <ng-template #hideForm>
+        <button (click)="createFormVisible = true">Create new prediction</button>
+    </ng-template>
     <table *ngIf="month.predictions?.length > 0">
         <thead>
             <tr>
