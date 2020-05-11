@@ -51,7 +51,7 @@ export class TransactionCreateComponent implements OnInit {
             category: ['', [Validators.required]],
             subcategory: ['', [Validators.required]],
             description: [null, []],
-            value: [null, [Validators.required, Validators.pattern(/^[0-9]+([.,][0-9]{1,2})?$/)]]
+            value: [null, [Validators.required, Validators.pattern(/^[+-]?[0-9]+([.,][0-9]{1,2})?$/)]]
         });
         this.subcategoryControl.disable();
         this.categoryControl.valueChanges.subscribe((value: CategoryWithSubcategories) => {
