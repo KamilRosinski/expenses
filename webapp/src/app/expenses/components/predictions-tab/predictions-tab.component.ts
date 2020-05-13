@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Month} from '../../shared/month';
 import {Transaction} from '../../shared/transaction';
+import {Prediction} from '../../shared/prediction';
 
 @Component({
     selector: 'app-predictions-tab',
@@ -13,9 +14,12 @@ export class PredictionsTabComponent {
 
     createFormVisible: boolean = false;
 
-  filterTransactionsByCategory(categoryId: number): Transaction[] {
-    return  this.month.transactions
-        .filter((transaction: Transaction) => transaction.subcategory.category.id === categoryId)
-  }
+    filterTransactionsByCategory(categoryId: number): Transaction[] {
+        return this.month.transactions
+            .filter((transaction: Transaction) => transaction.subcategory.category.id === categoryId)
+    }
+
+    addPrediction(prediction: Prediction): void {
+    }
 
 }

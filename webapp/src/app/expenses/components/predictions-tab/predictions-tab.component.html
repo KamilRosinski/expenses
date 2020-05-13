@@ -1,7 +1,7 @@
 <div>
     <div *ngIf="createFormVisible; then showForm else hideForm"></div>
     <ng-template #showForm>
-        <app-prediction-create (cancel)="createFormVisible = false"></app-prediction-create>
+        <app-prediction-create (submit)="addPrediction(undefined)" (cancel)="createFormVisible = false"></app-prediction-create>
     </ng-template>
     <ng-template #hideForm>
         <button (click)="createFormVisible = true">Create new prediction</button>
