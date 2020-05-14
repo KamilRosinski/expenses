@@ -1,6 +1,7 @@
 package expenses.server.rest.controller;
 
 import expenses.server.logic.ExpenseService;
+import expenses.server.rest.dto.CategoryDTO;
 import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
@@ -45,6 +46,11 @@ public class ExpenseController {
 	}
 
 	@GetMapping("/category")
+	public List<CategoryDTO> getCategories() {
+		return expenseService.getCategories();
+	}
+
+	@GetMapping("/category/subcategory")
 	public List<CategoryWithSubcategoriesDTO> getCategoriesWithSubcategories() {
 		return expenseService.getCategoriesWithSubcategories();
 	}

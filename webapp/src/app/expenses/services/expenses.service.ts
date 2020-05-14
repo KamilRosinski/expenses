@@ -5,6 +5,7 @@ import {MonthOverview} from '../shared/month-overview';
 import {Month} from '../shared/month';
 import {CategoryWithSubcategories} from '../shared/category-with-subcategories';
 import {Transaction} from '../shared/transaction';
+import {Category} from '../shared/category';
 
 @Injectable({
     providedIn: 'root'
@@ -22,8 +23,12 @@ export class ExpensesService {
         return this.http.get<Month>(`/api/month/${id}`);
     }
 
+    getCategories(): Observable<Category[]> {
+        return this.http.get<Category[]>('/api/category');
+    }
+
     getCategoriesWithSubcategories(): Observable<CategoryWithSubcategories[]> {
-        return this.http.get<CategoryWithSubcategories[]>('/api/category');
+        return this.http.get<CategoryWithSubcategories[]>('/api/category/subcategory');
     }
 
     createTransaction(monthId: number, transaction: Transaction): Observable<Transaction> {
@@ -33,4 +38,5 @@ export class ExpensesService {
     createMonth(year: number, month: number): Observable<Month> {
         return this.http.post<Month>('/api/month', {year, month});
     }
+
 }

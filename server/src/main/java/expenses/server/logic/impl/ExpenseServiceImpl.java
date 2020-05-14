@@ -9,6 +9,7 @@ import expenses.server.persistence.repository.CategoryRepository;
 import expenses.server.persistence.repository.MonthRepository;
 import expenses.server.persistence.repository.PredictionRepository;
 import expenses.server.persistence.repository.TransactionRepository;
+import expenses.server.rest.dto.CategoryDTO;
 import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
@@ -60,6 +61,13 @@ public class ExpenseServiceImpl implements ExpenseService {
 		return monthRepository
 				.save(new MonthEntity(yearMonth.getYear(), yearMonth.getMonth()))
 				.mapToDto();
+	}
+
+	@Override
+	public List<CategoryDTO> getCategories() {
+		return categoryRepository.findAll().stream()
+				.map(CategoryEntity::mapToDto)
+				.collect(Collectors.toList());
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package expenses.server.logic;
 
+import expenses.server.rest.dto.CategoryDTO;
 import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
 import expenses.server.rest.dto.MonthDTO;
 import expenses.server.rest.dto.MonthOverviewDTO;
@@ -16,6 +17,8 @@ public interface ExpenseService {
 	MonthDTO getMonthById(Long id);
 
 	MonthDTO createMonth(YearMonthDTO yearMonth);
+
+	List<CategoryDTO> getCategories();
 
 	List<CategoryWithSubcategoriesDTO> getCategoriesWithSubcategories();
 
