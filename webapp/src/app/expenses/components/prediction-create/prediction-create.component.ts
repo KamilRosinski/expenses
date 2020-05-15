@@ -1,9 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Prediction} from '../../shared/prediction';
 import {ExpensesService} from '../../services/expenses.service';
 import {Observable} from 'rxjs';
 import {Category} from '../../shared/category';
+import {ExpensesValidators} from '../../validators/expenses.validators';
 
 @Component({
     selector: 'app-prediction-create',
@@ -25,6 +26,8 @@ export class PredictionCreateComponent implements OnInit {
     ngOnInit(): void {
         this.categories$ = this.expensesService.getCategories();
         this.form = this.formBuilder.group({
+            category: ['', [Validators.required]],
+            value: ['', [Validators.required, ExpensesValidators.moneyInput()]]
         });
     }
 
