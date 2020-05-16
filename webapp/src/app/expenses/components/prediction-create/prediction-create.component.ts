@@ -27,7 +27,7 @@ export class PredictionCreateComponent implements OnInit {
         this.categories$ = this.expensesService.getCategories();
         this.form = this.formBuilder.group({
             category: ['', [Validators.required]],
-            value: ['', [Validators.required, ExpensesValidators.moneyInput()]]
+            value: ['', [Validators.required, ExpensesValidators.moneyInput]]
         });
     }
 
