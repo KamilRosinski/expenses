@@ -4,14 +4,18 @@
         <select id="day-input" [formControlName]="'day'" [class.input-invalid]="(dayControl.touched || dayControl.dirty) && dayControl.invalid">
             <option *ngFor="let day of days" [ngValue]="day">{{day}}</option>
         </select>
-        <p class="validation-msg" *ngIf="(dayControl.touched || dayControl.dirty) && dayControl.errors?.required">Day must not be empty.</p>
+        <p class="validation-msg" *ngIf="(dayControl.touched || dayControl.dirty) && dayControl.errors?.required">
+            Day must not be empty.
+        </p>
     </div>
     <div>
         <label for="category-input">Category</label>
         <select id="category-input" [formControlName]="'category'" [class.input-invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
             <option *ngFor="let category of categories$ | async" [ngValue]="category">{{category.name}}</option>
         </select>
-        <p class="validation-msg" *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.required">Category must not be empty.</p>
+        <p class="validation-msg" *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.required">
+            Category must not be empty.
+        </p>
     </div>
     <div>
         <label for="subcategory-input">Subcategory</label>
@@ -27,8 +31,11 @@
     <div>
         <label for="value-input">Value</label>
         <input id="value-input" type="text" [formControlName]="'value'" [class.input-invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
+        <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.required">
+            Value must not be empty.
+        </p>
         <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.pattern">
-            Value {{valueControl.errors.pattern.actualValue}} does not match following pattern {{valueControl.errors.pattern.requiredPattern}}.
+            Value {{valueControl.errors.pattern.actualValue}} does not match the following pattern {{valueControl.errors.pattern.requiredPattern}}.
         </p>
     </div>
     <div>
