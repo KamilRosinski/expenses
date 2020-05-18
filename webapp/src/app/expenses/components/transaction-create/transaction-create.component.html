@@ -31,9 +31,6 @@
     <div>
         <label for="value-input">Value</label>
         <input id="value-input" type="text" [formControlName]="'value'" [class.input-invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
-        <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.required">
-            Value must not be empty.
-        </p>
         <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.pattern">
             Value {{valueControl.errors.pattern.actualValue}} does not match the following pattern {{valueControl.errors.pattern.requiredPattern}}.
         </p>

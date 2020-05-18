@@ -13,6 +13,8 @@ import {ExpensesValidators} from '../../validators/expenses.validators';
 })
 export class TransactionCreateComponent implements OnInit {
 
+    private static readonly MONEY_PATTERN: RegExp = /^[+-]?([0-9]*)[,.]?([0-9]{0,2})$/;
+
     form: FormGroup;
     categories$: Observable<CategoryWithSubcategories[]>;
 
@@ -45,14 +47,15 @@ export class TransactionCreateComponent implements OnInit {
                 private readonly formBuilder: FormBuilder) {
     }
 
+
     ngOnInit(): void {
         this.categories$ = this.expensesService.getCategoriesWithSubcategories();
         this.form = this.formBuilder.group({
             day: [null, [Validators.required]],
-            category: ['', [Validators.required]],
-            subcategory: ['', [Validators.required]],
+            category: [null, [Validators.required]],
+            subcategory: [null, [Validators.required]],
             description: [null, []],
-            value: [null, [Validators.required, ExpensesValidators.moneyInput]]
+            value: [null, [Validators.pattern(TransactionCreateComponent.MONEY_PATTERN)]]
         });
         this.subcategoryControl.disable();
         this.categoryControl.valueChanges.subscribe((value: CategoryWithSubcategories) => {
@@ -82,8 +85,13 @@ export class TransactionCreateComponent implements OnInit {
                 }
             },
             description: this.form.value.description,
-            value: +this.form.value.value.replace(',', '.') * 100
+            value: this.getValueFromForm()
         });
+    }
+
+    private getValueFromForm(): number {
+        const match: RegExpMatchArray = this.form.value.value.match(TransactionCreateComponent.MONEY_PATTERN);
+        return 100 * (match[1] ? + match[1] : 0) + (match[2] ? +match[2] : 0);
     }
 
 }
