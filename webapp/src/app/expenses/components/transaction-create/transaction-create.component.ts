@@ -91,7 +91,7 @@ export class TransactionCreateComponent implements OnInit {
 
     private getValueFromForm(): number {
         const match: RegExpMatchArray = this.form.value.value.match(TransactionCreateComponent.MONEY_PATTERN);
-        return 100 * (match[1] ? + match[1] : 0) + (match[2] ? +match[2] : 0);
+        return 100 * (match[1] ? +match[1] : 0) + (match[2] ? +match[2] : 0);
     }
 
 }
