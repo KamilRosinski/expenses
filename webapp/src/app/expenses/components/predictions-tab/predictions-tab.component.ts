@@ -20,6 +20,7 @@ export class PredictionsTabComponent {
     }
 
     addPrediction(prediction: Prediction): void {
+        console.log(prediction);
     }
 
 }

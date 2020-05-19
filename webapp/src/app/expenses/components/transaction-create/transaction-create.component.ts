@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {CategoryWithSubcategories} from '../../shared/category-with-subcategories';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Transaction} from '../../shared/transaction';
-import {ExpensesValidators} from '../../validators/expenses.validators';
 
 @Component({
     selector: 'app-transaction-create',
@@ -53,9 +52,9 @@ export class TransactionCreateComponent implements OnInit {
         this.form = this.formBuilder.group({
             day: [null, [Validators.required]],
             category: [null, [Validators.required]],
-            subcategory: [null, [Validators.required]],
+            subcategory: [null, [Validators.required], ],
             description: [null, []],
-            value: [null, [Validators.pattern(TransactionCreateComponent.MONEY_PATTERN)]]
+            value: [null, [Validators.required, Validators.pattern(TransactionCreateComponent.MONEY_PATTERN)]]
         });
         this.subcategoryControl.disable();
         this.categoryControl.valueChanges.subscribe((value: CategoryWithSubcategories) => {

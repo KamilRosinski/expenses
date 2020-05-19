@@ -22,7 +22,9 @@
         <select id="subcategory-input" [formControlName]="'subcategory'" [class.input-invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
             <option *ngFor="let subcategory of categoryControl.value?.subcategories" [ngValue]="subcategory">{{subcategory.name}}</option>
         </select>
-        <p class="validation-msg" *ngIf="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.errors?.required">Subcategory must not be empty.</p>
+        <p class="validation-msg" *ngIf="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.errors?.required">
+            Subcategory must not be empty.
+        </p>
     </div>
     <div>
         <label for="description-input">Description (optional)</label>
@@ -31,6 +33,9 @@
     <div>
         <label for="value-input">Value</label>
         <input id="value-input" type="text" [formControlName]="'value'" [class.input-invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
+        <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.required">
+            Value must not be empty.
+        </p>
         <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.pattern">
             Value {{valueControl.errors.pattern.actualValue}} does not match the following pattern {{valueControl.errors.pattern.requiredPattern}}.
         </p>
