@@ -5,6 +5,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {concatMap, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Transaction} from '../../shared/transaction';
+import {Prediction} from '../../shared/prediction';
 
 @Component({
     selector: 'app-month',
@@ -40,6 +41,12 @@ export class MonthComponent implements OnInit {
     createTransaction(transaction: Transaction): void {
         this.expensesService.createTransaction(this.month.id, transaction).subscribe(
             (transaction: Transaction) => this.month.transactions = [...this.month.transactions, transaction]
+        );
+    }
+
+    createPrediction(prediction: Prediction): void {
+        this.expensesService.createPrediction(this.month.id, prediction).subscribe(
+            (prediction: Prediction) => this.month.predictions = [...this.month.predictions, prediction]
         );
     }
 

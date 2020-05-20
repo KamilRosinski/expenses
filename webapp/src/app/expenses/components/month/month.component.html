@@ -13,6 +13,6 @@
     </div>
     <div class="tab-content"
          *ngIf="predictionsTab$ | async">
-        <app-predictions-tab [month]="month"></app-predictions-tab>
+        <app-predictions-tab (createPrediction)="createPrediction($event)" [month]="month"></app-predictions-tab>
     </div>
 </div>

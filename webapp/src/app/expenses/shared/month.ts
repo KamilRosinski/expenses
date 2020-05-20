@@ -7,5 +7,5 @@ export interface Month {
     readonly month: number;
     readonly length: number;
     transactions: Transaction[];
-    readonly predictions: Prediction[];
+    predictions: Prediction[];
 }

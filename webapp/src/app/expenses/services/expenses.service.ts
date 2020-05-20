@@ -6,6 +6,7 @@ import {Month} from '../shared/month';
 import {CategoryWithSubcategories} from '../shared/category-with-subcategories';
 import {Transaction} from '../shared/transaction';
 import {Category} from '../shared/category';
+import {Prediction} from '../shared/prediction';
 
 @Injectable({
     providedIn: 'root'
@@ -33,6 +34,10 @@ export class ExpensesService {
 
     createTransaction(monthId: number, transaction: Transaction): Observable<Transaction> {
         return this.http.post<Transaction>(`/api/month/${monthId}/transaction`, transaction);
+    }
+
+    createPrediction(monthId: number, prediction: Prediction): Observable<Prediction> {
+        return this.http.post<Prediction>(`/api/month/${monthId}/prediction`, prediction);
     }
 
     createMonth(year: number, month: number): Observable<Month> {
