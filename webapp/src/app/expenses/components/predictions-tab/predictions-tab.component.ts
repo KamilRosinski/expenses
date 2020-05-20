@@ -23,6 +23,7 @@ export class PredictionsTabComponent {
 
     addPrediction(prediction: Prediction): void {
         this.createPrediction.emit(prediction);
+        this.createFormVisible = false;
     }
 
 }
