@@ -4,6 +4,9 @@
         <select id="category-input" [formControlName]="'category'" [class.input-invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
             <option *ngFor="let category of categories$ | async" [ngValue]="category">{{category.name}}</option>
         </select>
+        <p class="validation-msg" *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.required">
+            Category must not be empty.
+        </p>
     </div>
     <div>
         <label for="value-input">Value</label>

@@ -52,11 +52,10 @@ export class TransactionCreateComponent implements OnInit {
         this.form = this.formBuilder.group({
             day: [null, [Validators.required]],
             category: [null, [Validators.required]],
-            subcategory: [null, [Validators.required], ],
+            subcategory: [{value: null, disabled: true}, [Validators.required]],
             description: [null, []],
             value: [null, [Validators.required, Validators.pattern(TransactionCreateComponent.MONEY_PATTERN)]]
         });
-        this.subcategoryControl.disable();
         this.categoryControl.valueChanges.subscribe((value: CategoryWithSubcategories) => {
             this.subcategoryControl.setValue(null);
             if (value) {

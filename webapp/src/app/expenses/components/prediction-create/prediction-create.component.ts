@@ -35,8 +35,8 @@ export class PredictionCreateComponent implements OnInit {
     ngOnInit(): void {
         this.categories$ = this.expensesService.getCategories();
         this.form = this.formBuilder.group({
-            category: ['', [Validators.required]],
-            value: ['', [Validators.required, Validators.pattern(PredictionCreateComponent.MONEY_PATTERN)]]
+            category: [null, [Validators.required]],
+            value: [null, [Validators.required, Validators.pattern(PredictionCreateComponent.MONEY_PATTERN)]]
         });
     }
 

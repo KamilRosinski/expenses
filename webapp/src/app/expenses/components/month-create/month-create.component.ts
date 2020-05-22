@@ -43,8 +43,8 @@ export class MonthCreateComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            month: ['', [Validators.required]],
-            year: ['', [Validators.required]]
+            month: [null, [Validators.required]],
+            year: [null, [Validators.required]]
         }, {
             validators: [this.createYearMonthValidator()]
         });
