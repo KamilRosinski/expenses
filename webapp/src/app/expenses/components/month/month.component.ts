@@ -15,8 +15,7 @@ import {Prediction} from '../../shared/prediction';
 export class MonthComponent implements OnInit {
 
     month: Month;
-    transactionsTab$: Observable<boolean>;
-    predictionsTab$: Observable<boolean>;
+    currentTab$: Observable<string>;
 
     constructor(private readonly expensesService: ExpensesService,
                 private readonly activatedRoute: ActivatedRoute) {
@@ -30,12 +29,9 @@ export class MonthComponent implements OnInit {
             (month: Month) => this.month = month
         );
 
-        const currentTab$: Observable<string> = this.activatedRoute.queryParamMap.pipe(
+        this.currentTab$ = this.activatedRoute.queryParamMap.pipe(
             map((params: ParamMap) => params.get('tab'))
         );
-
-        this.transactionsTab$ = currentTab$.pipe(map((currentTab: string) => currentTab === 'transactions'));
-        this.predictionsTab$ = currentTab$.pipe(map((currentTab: string) => currentTab === 'predictions'));
     }
 
     createTransaction(transaction: Transaction): void {
