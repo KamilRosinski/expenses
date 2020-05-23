@@ -17,7 +17,7 @@ export class PredictionRowComponent {
     get transactionsSum(): number {
         return this.transactions
             .map((transaction: Transaction) => transaction.value)
-            .reduce((result: number, value: number) => result + value);
+            .reduce((result: number, value: number) => result + value, 0);
     }
 
     toggleShowTransactions(): void {
