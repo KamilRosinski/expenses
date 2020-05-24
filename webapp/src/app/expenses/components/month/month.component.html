@@ -17,18 +17,14 @@
             Predictions
         </a>
     </div>
-    <div id="switch" [ngSwitch]="currentTab$ | async">
-        <div class="tab-content"
-             *ngSwitchCase="'transactions'">
-            <app-transactions-tab (createTransaction)="createTransaction($event)"
-                                  [month]="month">
-            </app-transactions-tab>
-        </div>
-        <div class="tab-content"
-             *ngSwitchCase="'predictions'">
-            <app-predictions-tab (createPrediction)="createPrediction($event)"
-                                 [month]="month">
-            </app-predictions-tab>
-        </div>
+    <div id="tab" [ngSwitch]="currentTab$ | async">
+        <app-transactions-tab *ngSwitchCase="'transactions'"
+                              (createTransaction)="createTransaction($event)"
+                              [month]="month">
+        </app-transactions-tab>
+        <app-predictions-tab *ngSwitchCase="'predictions'"
+                             (createPrediction)="createPrediction($event)"
+                             [month]="month">
+        </app-predictions-tab>
     </div>
 </div>
