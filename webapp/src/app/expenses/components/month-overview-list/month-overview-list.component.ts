@@ -22,4 +22,8 @@ export class MonthOverviewListComponent implements OnInit {
         );
     }
 
+    extractYearMonths(): {year: number, month: number}[] {
+        return this.monthOverviews.map((overview: MonthOverview) => ({year: overview.year, month: overview.month}));
+    }
+
 }

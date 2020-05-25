@@ -1,16 +1,23 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
         <label for="category-input">Category</label>
-        <select id="category-input" [formControlName]="'category'" [class.input-invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
+        <select id="category-input" [formControlName]="'category'"
+                [class.input-invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
             <option *ngFor="let category of categories$ | async" [ngValue]="category">{{category.name}}</option>
         </select>
-        <p class="validation-msg" *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.required">
+        <p class="validation-msg"
+           *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.required">
             Category must not be empty.
+        </p>
+        <p class="validation-msg"
+           *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.nonUnique">
+            Prediction for category {{categoryControl.errors.nonUnique.name}} already exists.
         </p>
     </div>
     <div>
         <label for="value-input">Value</label>
-        <input id="value-input" type="text" [formControlName]="'value'" [class.input-invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
+        <input id="value-input" type="text" [formControlName]="'value'"
+               [class.input-invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
         <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.required">
             Value must not be empty.
         </p>

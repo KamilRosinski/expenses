@@ -3,7 +3,6 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, 
 import {Router} from '@angular/router';
 import {ExpensesService} from '../../services/expenses.service';
 import {Month} from '../../shared/month';
-import {MonthOverview} from '../../shared/month-overview';
 
 @Component({
     selector: 'app-month-create',
@@ -15,11 +14,17 @@ export class MonthCreateComponent implements OnInit {
     form: FormGroup;
     availableMonths: string[];
     availableYears: string[];
-    existingMonths: number[];
 
-    @Input() set months(months: MonthOverview[]) {
-        this.existingMonths = months.map((month: MonthOverview) => this.yearMonthToNumber(month.year, month.month));
-    }
+    private readonly uniqueYearMonthValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+        const year: number = +control.value.year;
+        const month: number = +control.value.month;
+        return control.value && this.unavailableMonths.some((yearMonth: { year: number, month: number }) =>
+            yearMonth.year === year && yearMonth.month === month)
+            ? {nonUnique: {year, month}}
+            : null;
+    };
+
+    @Input() unavailableMonths: { year: number, month: number }[];
 
     @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
 
@@ -46,22 +51,8 @@ export class MonthCreateComponent implements OnInit {
             month: [null, [Validators.required]],
             year: [null, [Validators.required]]
         }, {
-            validators: [this.createYearMonthValidator()]
+            validators: [this.uniqueYearMonthValidator]
         });
-    }
-
-    private createYearMonthValidator(): ValidatorFn {
-        return (control: FormGroup): ValidationErrors | null => {
-            const year: number = +control.value.year;
-            const month: number = +control.value.month;
-            return this.existingMonths.includes(this.yearMonthToNumber(year, month))
-                ? {nonUnique: {year, month}}
-                : null;
-        };
-    }
-
-    private yearMonthToNumber(year: number, month: number): number {
-        return 12 * year + month;
     }
 
     onCancel(): void {

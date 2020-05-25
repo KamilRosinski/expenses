@@ -1,5 +1,13 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    ValidationErrors,
+    ValidatorFn,
+    Validators
+} from '@angular/forms';
 import {Prediction} from '../../shared/prediction';
 import {ExpensesService} from '../../services/expenses.service';
 import {Observable} from 'rxjs';
@@ -16,6 +24,13 @@ export class PredictionCreateComponent implements OnInit {
 
     form: FormGroup;
     categories$: Observable<Category[]>;
+
+    private readonly uniqueCategoryValidator: ValidatorFn = (control: FormControl): ValidationErrors | null =>
+        control.value && this.unavailableCategoryIds.includes(control.value.id)
+            ? {nonUnique: control.value}
+            : null;
+
+    @Input() unavailableCategoryIds: number[];
 
     @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
     @Output() submit: EventEmitter<Prediction> = new EventEmitter<Prediction>();
@@ -35,13 +50,13 @@ export class PredictionCreateComponent implements OnInit {
     ngOnInit(): void {
         this.categories$ = this.expensesService.getCategories();
         this.form = this.formBuilder.group({
-            category: [null, [Validators.required]],
+            category: [null, [Validators.required, this.uniqueCategoryValidator]],
             value: [null, [Validators.required, Validators.pattern(PredictionCreateComponent.MONEY_PATTERN)]]
         });
     }
 
     onCancel(): void {
-      this.cancel.emit();
+        this.cancel.emit();
     }
 
     onSubmit(): void {
