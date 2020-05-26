@@ -7,22 +7,30 @@
     </tr>
     <tr id="transactions" *ngIf="showTransactions">
         <td colspan="4">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Subcategory</th>
-                        <th>Description</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let transaction of transactions">
-                        <td>{{transaction.subcategory.name}}</td>
-                        <td>{{transaction.description}}</td>
-                        <td>{{transaction.value}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div *ngIf="transactions.length >= 0; then table else placeholder"></div>
+            <ng-template #table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subcategory</th>
+                            <th>Description</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transaction of transactions">
+                            <td>{{transaction.subcategory.name}}</td>
+                            <td>{{transaction.description}}</td>
+                            <td>{{transaction.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+            <ng-template #placeholder>
+                <div>
+                    No transactions
+                </div>
+            </ng-template>
         </td>
     </tr>
 </ng-container>
