@@ -25,9 +25,9 @@
                     </a>
                 </td>
                 <td>{{monthOverview.transactionCount}}</td>
-                <td>{{monthOverview.income}}</td>
-                <td>{{monthOverview.outcome}}</td>
-                <td>{{monthOverview.income + monthOverview.outcome}}</td>
+                <td>{{monthOverview.income | currencyPln}}</td>
+                <td>{{monthOverview.outcome | currencyPln}}</td>
+                <td>{{(monthOverview.income + monthOverview.outcome) | currencyPln}}</td>
             </tr>
         </tbody>
     </table>

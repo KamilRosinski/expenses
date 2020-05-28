@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, CurrencyPipe} from '@angular/common';
 
 import {ExpensesRoutingModule} from './expenses-routing.module';
 import {MonthOverviewListComponent} from './components/month-overview-list/month-overview-list.component';
@@ -14,6 +14,7 @@ import {PredictionsSortPipe} from './pipes/predictions-sort.pipe';
 import {MonthOverviewsSortPipe} from './pipes/month-overviews-sort.pipe';
 import {MonthCreateComponent} from './components/month-create/month-create.component';
 import {PredictionCreateComponent} from './components/prediction-create/prediction-create.component';
+import { CurrencyPlnPipe } from './pipes/currency-pln.pipe';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {PredictionCreateComponent} from './components/prediction-create/predicti
         PredictionsSortPipe,
         MonthOverviewsSortPipe,
         MonthCreateComponent,
-        PredictionCreateComponent
+        PredictionCreateComponent,
+        CurrencyPlnPipe
     ],
     imports: [
         CommonModule,
