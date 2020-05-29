@@ -1,8 +1,8 @@
 <ng-container>
      <tr>
         <td>{{prediction.category.name}}</td>
-        <td>{{prediction.value}}</td>
-        <td>{{transactionsSum}}</td>
+        <td>{{prediction.value | currencyPln}}</td>
+        <td>{{transactionsSum | currencyPln}}</td>
          <td><button (click)="toggleShowTransactions()">{{showTransactions ? 'hide details' : 'show details'}}</button></td>
     </tr>
     <tr id="transactions" *ngIf="showTransactions">
@@ -21,7 +21,7 @@
                         <tr *ngFor="let transaction of transactions">
                             <td>{{transaction.subcategory.name}}</td>
                             <td>{{transaction.description}}</td>
-                            <td>{{transaction.value}}</td>
+                            <td>{{transaction.value | currencyPln}}</td>
                         </tr>
                     </tbody>
                 </table>

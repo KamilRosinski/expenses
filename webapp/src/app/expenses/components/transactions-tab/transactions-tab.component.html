@@ -22,7 +22,7 @@
                 <td>{{transaction.subcategory.category.name}}</td>
                 <td>{{transaction.subcategory.name}}</td>
                 <td>{{transaction.description}}</td>
-                <td>{{transaction.value}}</td>
+                <td>{{transaction.value | currencyPln}}</td>
             </tr>
         </tbody>
     </table>
