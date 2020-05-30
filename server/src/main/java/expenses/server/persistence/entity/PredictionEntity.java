@@ -4,6 +4,7 @@ import expenses.server.rest.dto.PredictionDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +34,7 @@ public class PredictionEntity {
 	@JoinColumn(name = "MONTH_ID")
 	private MonthEntity month;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "CATEGORY_ID")
 	private CategoryEntity category;
 

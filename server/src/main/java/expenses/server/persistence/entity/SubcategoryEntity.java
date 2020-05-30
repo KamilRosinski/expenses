@@ -5,6 +5,7 @@ import expenses.server.rest.dto.SubcategoryWithCategoryDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class SubcategoryEntity {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "CATEGORY_ID")
 	private CategoryEntity category;
 

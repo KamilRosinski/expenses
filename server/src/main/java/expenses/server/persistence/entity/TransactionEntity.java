@@ -4,6 +4,7 @@ import expenses.server.rest.dto.TransactionDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,7 +39,7 @@ public class TransactionEntity {
 	@JoinColumn(name = "MONTH_ID")
 	private MonthEntity month;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "SUBCATEGORY_ID")
 	private SubcategoryEntity subcategory;
 
