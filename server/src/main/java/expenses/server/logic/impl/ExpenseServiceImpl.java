@@ -85,8 +85,13 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	@Override
 	public PredictionDTO createPrediction(final Long monthId, final PredictionDTO prediction) {
+
 		final MonthEntity month = monthRepository.getOne(monthId);
-		return predictionRepository.save(new PredictionEntity(prediction, month)).mapToDTO();
+		final CategoryEntity category = prediction.getCategory().getId() != null
+				? new CategoryEntity(prediction.getCategory())
+				: categoryRepository.save(new CategoryEntity(prediction.getCategory()));
+
+		return predictionRepository.save(new PredictionEntity(prediction, month, category)).mapToDTO();
 	}
 
 }
