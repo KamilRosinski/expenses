@@ -4,10 +4,12 @@ import expenses.server.logic.ExpenseService;
 import expenses.server.persistence.entity.CategoryEntity;
 import expenses.server.persistence.entity.MonthEntity;
 import expenses.server.persistence.entity.PredictionEntity;
+import expenses.server.persistence.entity.SubcategoryEntity;
 import expenses.server.persistence.entity.TransactionEntity;
 import expenses.server.persistence.repository.CategoryRepository;
 import expenses.server.persistence.repository.MonthRepository;
 import expenses.server.persistence.repository.PredictionRepository;
+import expenses.server.persistence.repository.SubcategoryRepository;
 import expenses.server.persistence.repository.TransactionRepository;
 import expenses.server.rest.dto.CategoryDTO;
 import expenses.server.rest.dto.CategoryWithSubcategoriesDTO;
@@ -33,6 +35,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 	private final TransactionRepository transactionRepository;
 	private final PredictionRepository predictionRepository;
 	private final CategoryRepository categoryRepository;
+	private final SubcategoryRepository subcategoryRepository;
 
 	@Override
 	public List<MonthOverviewDTO> getMonthOverviews() {
@@ -79,16 +82,29 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	@Override
 	public TransactionDTO createTransaction(final Long monthId, final TransactionDTO transaction) {
+
 		final MonthEntity month = monthRepository.getOne(monthId);
-		return transactionRepository.save(new TransactionEntity(transaction, month)).mapToDto();
+
+		final SubcategoryEntity subcategory;
+		if (transaction.getSubcategory().getId() != null) {
+			subcategory = subcategoryRepository.getOne(transaction.getSubcategory().getId());
+		} else {
+			final CategoryEntity category = transaction.getSubcategory().getCategory().getId() != null
+					? categoryRepository.getOne(transaction.getSubcategory().getCategory().getId())
+					: categoryRepository.save(new CategoryEntity(transaction.getSubcategory().getCategory()));
+			subcategory = subcategoryRepository.save(new SubcategoryEntity(transaction.getSubcategory(), category));
+		}
+
+		return transactionRepository.save(new TransactionEntity(transaction, month, subcategory)).mapToDto();
 	}
 
 	@Override
 	public PredictionDTO createPrediction(final Long monthId, final PredictionDTO prediction) {
 
 		final MonthEntity month = monthRepository.getOne(monthId);
+
 		final CategoryEntity category = prediction.getCategory().getId() != null
-				? new CategoryEntity(prediction.getCategory())
+				? categoryRepository.getOne(prediction.getCategory().getId())
 				: categoryRepository.save(new CategoryEntity(prediction.getCategory()));
 
 		return predictionRepository.save(new PredictionEntity(prediction, month, category)).mapToDTO();

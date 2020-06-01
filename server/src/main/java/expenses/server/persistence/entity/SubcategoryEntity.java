@@ -5,7 +5,6 @@ import expenses.server.rest.dto.SubcategoryWithCategoryDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,14 +29,14 @@ public class SubcategoryEntity {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "CATEGORY_ID")
 	private CategoryEntity category;
 
-	public SubcategoryEntity(final SubcategoryWithCategoryDTO dto) {
+	public SubcategoryEntity(final SubcategoryWithCategoryDTO dto, final CategoryEntity category) {
 		id = dto.getId();
 		name = dto.getName();
-		category = new CategoryEntity(dto.getCategory());
+		this.category = category;
 	}
 
 	public SubcategoryWithCategoryDTO mapToDtoWithCategory() {
