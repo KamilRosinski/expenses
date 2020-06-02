@@ -26,17 +26,17 @@ export class PredictionCreateComponent implements OnInit {
 
     private readonly uniquePredictionCategoryValidator: ValidatorFn = (control: FormControl): ValidationErrors | null =>
         control.value && this.unavailableCategoryIds.includes(control.value.id)
-            ? {nonUnique: control.value}
+            ? {nonUniqueCategory: control.value}
             : null;
 
-    private readonly uniqueCategoryNameValidator: ValidatorFn = (control: FormControl): ValidationErrors | null =>
+    private readonly uniqueCategoryValidator: ValidatorFn = (control: FormControl): ValidationErrors | null =>
         control.value && this.categories.some((category: Category) => category.name === control.value)
-            ? {nonUnique: control.value}
+            ? {nonUniqueCategory: control.value}
             : null;
 
     private readonly newCategoryNotEmptyValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
         control.value.category === 'new' && !control.value.newCategory
-            ? {emptyCategory: true}
+            ? {emptyNewCategory: true}
             : null;
 
     @Input() unavailableCategoryIds: number[];
@@ -66,7 +66,7 @@ export class PredictionCreateComponent implements OnInit {
         );
         this.form = this.formBuilder.group({
             category: [null, [Validators.required, this.uniquePredictionCategoryValidator]],
-            newCategory: [null, [this.uniqueCategoryNameValidator]],
+            newCategory: [null, [this.uniqueCategoryValidator]],
             value: [null, [Validators.required, Validators.pattern(PredictionCreateComponent.MONEY_PATTERN)]]
         }, {
             validators: [this.newCategoryNotEmptyValidator]
@@ -78,11 +78,14 @@ export class PredictionCreateComponent implements OnInit {
     }
 
     onSubmit(): void {
+
+        const category: Category = this.form.value.category === 'new'
+            ? {id: null, name: this.form.value.newCategory}
+            : this.form.value.category;
+
         this.submit.emit({
             id: null,
-            category: this.form.value.category === 'new'
-                ? {id: null, name: this.form.value.newCategory}
-                : this.form.value.category,
+            category,
             value: this.getValueFromForm()
         });
     }

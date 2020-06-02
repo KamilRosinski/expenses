@@ -11,23 +11,23 @@
             Category must not be empty.
         </p>
         <p class="validation-msg"
-           *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.nonUnique">
-            Prediction for category {{categoryControl.errors.nonUnique.name}} already exists.
+           *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.nonUniqueCategory">
+            Prediction for category {{categoryControl.errors.nonUniqueCategory.name}} already exists.
         </p>
     </div>
     <div *ngIf="categoryControl.value === 'new'">
         <label for="new-category-input">New category</label>
         <input id="new-category-input"
                type="text"
-               [class.input-invalid]="(newCategoryControl.touched || newCategoryControl.dirty) && newCategoryControl.invalid"
+               [class.input-invalid]="(newCategoryControl.touched || newCategoryControl.dirty) && (newCategoryControl.invalid || form.errors?.emptyNewCategory)"
                [formControlName]="'newCategory'">
         <p class="validation-msg"
-           *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && form.errors?.emptyCategory">
-            Category name must not be empty.
+           *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && newCategoryControl.errors?.nonUniqueCategory">
+            Category {{newCategoryControl.errors.nonUniqueCategory}} already exists.
         </p>
         <p class="validation-msg"
-           *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && newCategoryControl.errors?.nonUnique">
-            Category {{newCategoryControl.errors.nonUnique}} already exists.
+           *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && form.errors?.emptyNewCategory">
+            Category name must not be empty.
         </p>
     </div>
     <div>

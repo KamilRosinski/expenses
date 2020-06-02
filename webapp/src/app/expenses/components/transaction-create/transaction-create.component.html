@@ -11,18 +11,48 @@
     <div>
         <label for="category-input">Category</label>
         <select id="category-input" [formControlName]="'category'" [class.input-invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
-            <option *ngFor="let category of categories$ | async" [ngValue]="category">{{category.name}}</option>
+            <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+            <option [ngValue]="'new'">Create new</option>
         </select>
         <p class="validation-msg" *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.required">
             Category must not be empty.
+        </p>
+    </div>
+    <div *ngIf="categoryControl.value === 'new'">
+        <label for="new-category-input">New category</label>
+        <input id="new-category-input"
+               type="text"
+               [class.input-invalid]="(newCategoryControl.touched || newCategoryControl.dirty) && (newCategoryControl.invalid || form.errors?.emptyNewCategory)">
+        <p class="validation-msg"
+           *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && newCategoryControl.errors?.nonUniqueCategory">
+            Category {{newCategoryControl.errors.nonUniqueCategory}} already exists.
+        </p>
+        <p class="validation-msg"
+           *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && form.errors?.emptyNewCategory">
+            Category name must not be empty.
         </p>
     </div>
     <div>
         <label for="subcategory-input">Subcategory</label>
         <select id="subcategory-input" [formControlName]="'subcategory'" [class.input-invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
             <option *ngFor="let subcategory of categoryControl.value?.subcategories" [ngValue]="subcategory">{{subcategory.name}}</option>
+            <option [ngValue]="'new'">Create new</option>
         </select>
         <p class="validation-msg" *ngIf="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.errors?.required">
+            Subcategory must not be empty.
+        </p>
+    </div>
+    <div *ngIf="subcategoryControl.value === 'new'">
+        <label for="new-subcategory-input">New subcategory</label>
+        <input id="new-subcategory-input"
+               type="text"
+               [class.input-invalid]="(newSubcategoryControl.touched || newSubcategoryControl.dirty) && (form.errors?.nonUniqueSubcategory || form.errors?.emptyNewSubcategory)">
+        <p class="validation-msg"
+           *ngIf="(newSubcategoryControl.touched || newSubcategoryControl.dirty) && form.errors?.nonUniqueSubcategory">
+            Category {{form.errors.nonUniqueSubcategory}} already exists.
+        </p>
+        <p class="validation-msg"
+           *ngIf="(newSubcategoryControl.touched || newSubcategoryControl.dirty) && form.errors?.emptyNewSubcategory">
             Subcategory must not be empty.
         </p>
     </div>

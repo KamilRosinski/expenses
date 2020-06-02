@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
         <label for="month-input">Month</label>
-        <select id="month-input" [formControlName]="'month'" [class.input-invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUnique)">
+        <select id="month-input" [formControlName]="'month'" [class.input-invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUniqueCategory)">
             <option *ngFor="let month of availableMonths" [ngValue]="month">{{month}}</option>
         </select>
         <p class="validation-msg" *ngIf="(monthControl.touched || monthControl.dirty) && monthControl.errors?.required">
@@ -10,7 +10,7 @@
     </div>
     <div>
         <label for="year-input">Year</label>
-        <select id="year-input" [formControlName]="'year'" [class.input-invalid]="(yearControl.touched || yearControl.dirty) && (yearControl.invalid || form.errors?.nonUnique)">
+        <select id="year-input" [formControlName]="'year'" [class.input-invalid]="(yearControl.touched || yearControl.dirty) && (yearControl.invalid || form.errors?.nonUniqueCategory)">
             <option *ngFor="let year of availableYears" [ngValue]="year">{{year}}</option>
         </select>
         <p class="validation-msg" *ngIf="(yearControl.touched || yearControl.dirty) && yearControl.errors?.required">
@@ -19,8 +19,8 @@
     </div>
     <div>
         <p class="validation-msg"
-           *ngIf="form.errors?.nonUnique">
-            Month {{form.errors.nonUnique.year + '-' + form.errors.nonUnique.month | date: 'MM.yyyy'}} already exists.
+           *ngIf="form.errors?.nonUniqueCategory">
+            Month {{form.errors.nonUniqueCategory.year + '-' + form.errors.nonUniqueCategory.month | date: 'MM.yyyy'}} already exists.
         </p>
         <button type="button" (click)="onCancel()">Cancel</button>
         <button [disabled]="form.invalid">Create</button>

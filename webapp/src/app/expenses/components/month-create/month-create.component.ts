@@ -20,7 +20,7 @@ export class MonthCreateComponent implements OnInit {
         const month: number = +control.value.month;
         return control.value && this.unavailableMonths.some((yearMonth: { year: number, month: number }) =>
             yearMonth.year === year && yearMonth.month === month)
-            ? {nonUnique: {year, month}}
+            ? {nonUniqueCategory: {year, month}}
             : null;
     };
 
