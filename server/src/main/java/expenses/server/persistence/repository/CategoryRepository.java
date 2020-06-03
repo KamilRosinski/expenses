@@ -12,7 +12,7 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> 
 
 	@Query("SELECT DISTINCT category " +
 			"FROM CategoryEntity AS category " +
-			"JOIN FETCH category.subcategories " +
+			"LEFT JOIN FETCH category.subcategories " +
 			"ORDER BY category.name")
 	List<CategoryEntity> getAllCategories();
 
