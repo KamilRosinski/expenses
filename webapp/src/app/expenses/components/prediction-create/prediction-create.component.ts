@@ -81,7 +81,7 @@ export class PredictionCreateComponent implements OnInit {
 
         const category: Category = this.form.value.category === 'new'
             ? {id: null, name: this.form.value.newCategory}
-            : this.form.value.category;
+            : {id: this.form.value.category.id, name: this.form.value.category.name};
 
         this.submit.emit({
             id: null,

@@ -21,7 +21,7 @@ import {Category} from '../../shared/category';
 })
 export class TransactionCreateComponent implements OnInit {
 
-    private static readonly MONEY_PATTERN: RegExp = /^[+-]?([0-9]*)[,.]?([0-9]{0,2})$/;
+    private static readonly MONEY_PATTERN: RegExp = /^([+-]?[0-9]*)[,.]?([0-9]{0,2})$/;
 
     form: FormGroup;
     categories: CategoryWithSubcategories[];
@@ -36,10 +36,13 @@ export class TransactionCreateComponent implements OnInit {
             ? {nonUniqueSubcategory: control.value.newSubcategory}
             : null;
 
-    private readonly newCategoryNotEmptyValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
-        control.value.category === 'new' && !control.value.newCategory
+    private readonly newCategoryNotEmptyValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+        const result = control.value.category === 'new' && !control.value.newCategory
             ? {emptyNewCategory: true}
             : null;
+        return result;
+    }
+
 
     private readonly newSubcategoryNotEmptyValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
         control.value.subcategory === 'new' && !control.value.newSubcategory
@@ -93,8 +96,8 @@ export class TransactionCreateComponent implements OnInit {
             category: [null, [Validators.required]],
             newCategory: [null, [this.uniqueCategoryValidator]],
             subcategory: [{value: null, disabled: true}, [Validators.required]],
-            newSubcategory: [null],
-            description: [null],
+            newSubcategory: [null, []],
+            description: [null, []],
             value: [null, [Validators.required, Validators.pattern(TransactionCreateComponent.MONEY_PATTERN)]]
         }, {
             validators: [
@@ -121,11 +124,11 @@ export class TransactionCreateComponent implements OnInit {
 
         const category: Category = this.form.value.category === 'new'
             ? {id: null, name: this.form.value.newCategory}
-            : this.form.value.category;
+            : {id: this.form.value.category.id, name: this.form.value.category.name};
 
         const subcategory: Subcategory = this.form.value.subcategory === 'new'
             ? {id: null, name: this.form.value.newSubcategory}
-            : this.form.value.newSubcategory;
+            : {id: this.form.value.subcategory.id, name: this.form.value.subcategory.name};
 
         this.submit.emit({
             id: null,
@@ -140,8 +143,8 @@ export class TransactionCreateComponent implements OnInit {
     }
 
     private getValueFromForm(): number {
-        const match: RegExpMatchArray = this.form.value.value.match(TransactionCreateComponent.MONEY_PATTERN);
-        return 100 * (match[1] ? +match[1] : 0) + (match[2] ? +match[2] : 0);
+        const split: string[] = this.form.value.value.split(/[.,]/);
+        return 100 * +`${split[0] || '0'}.${split[1] || '0'}`;
     }
 
 }
