@@ -13,6 +13,7 @@ import {
 import {Transaction} from '../../shared/transaction';
 import {Subcategory} from '../../shared/subcategory';
 import {Category} from '../../shared/category';
+import {MoneyUtils} from '../../utils/money.utils';
 
 @Component({
     selector: 'app-transaction-create',
@@ -20,8 +21,6 @@ import {Category} from '../../shared/category';
     styleUrls: ['./transaction-create.component.scss']
 })
 export class TransactionCreateComponent implements OnInit {
-
-    private static readonly MONEY_PATTERN: RegExp = /^([+-]?[0-9]*)[,.]?([0-9]{0,2})$/;
 
     form: FormGroup;
     categories: CategoryWithSubcategories[];
@@ -98,7 +97,7 @@ export class TransactionCreateComponent implements OnInit {
             subcategory: [{value: null, disabled: true}, [Validators.required]],
             newSubcategory: [null, []],
             description: [null, []],
-            value: [null, [Validators.required, Validators.pattern(TransactionCreateComponent.MONEY_PATTERN)]]
+            value: [null, [Validators.required, Validators.pattern(MoneyUtils.MONEY_PATTERN)]]
         }, {
             validators: [
                 this.uniqueSubcategoryValidator,
@@ -138,13 +137,9 @@ export class TransactionCreateComponent implements OnInit {
                 category
             },
             description: this.form.value.description,
-            value: this.getValueFromForm()
+            value: MoneyUtils.convertMoneyToInt(this.form.value.value)
         });
     }
 
-    private getValueFromForm(): number {
-        const split: string[] = this.form.value.value.split(/[.,]/);
-        return 100 * +`${split[0] || '0'}.${split[1] || '0'}`;
-    }
 
 }

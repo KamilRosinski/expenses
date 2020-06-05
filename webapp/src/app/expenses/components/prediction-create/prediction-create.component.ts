@@ -11,6 +11,7 @@ import {
 import {Prediction} from '../../shared/prediction';
 import {ExpensesService} from '../../services/expenses.service';
 import {Category} from '../../shared/category';
+import {MoneyUtils} from '../../utils/money.utils';
 
 @Component({
     selector: 'app-prediction-create',
@@ -18,8 +19,6 @@ import {Category} from '../../shared/category';
     styleUrls: ['./prediction-create.component.scss']
 })
 export class PredictionCreateComponent implements OnInit {
-
-    private static readonly MONEY_PATTERN: RegExp = /^[+-]?([0-9]*)[,.]?([0-9]{0,2})$/;
 
     form: FormGroup;
     categories: Category[];
@@ -67,7 +66,7 @@ export class PredictionCreateComponent implements OnInit {
         this.form = this.formBuilder.group({
             category: [null, [Validators.required, this.uniquePredictionCategoryValidator]],
             newCategory: [null, [this.uniqueCategoryValidator]],
-            value: [null, [Validators.required, Validators.pattern(PredictionCreateComponent.MONEY_PATTERN)]]
+            value: [null, [Validators.required, Validators.pattern(MoneyUtils.MONEY_PATTERN)]]
         }, {
             validators: [this.newCategoryNotEmptyValidator]
         });
@@ -86,13 +85,8 @@ export class PredictionCreateComponent implements OnInit {
         this.submit.emit({
             id: null,
             category,
-            value: this.getValueFromForm()
+            value: MoneyUtils.convertMoneyToInt(this.form.value.value)
         });
-    }
-
-    private getValueFromForm(): number {
-        const match: RegExpMatchArray = this.form.value.value.match(PredictionCreateComponent.MONEY_PATTERN);
-        return 100 * (match[1] ? +match[1] : 0) + (match[2] ? +match[2] : 0);
     }
 
 }
