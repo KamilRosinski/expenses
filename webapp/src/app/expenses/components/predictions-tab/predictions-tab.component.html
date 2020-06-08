@@ -9,7 +9,8 @@
     <ng-template #hideForm>
         <button (click)="createFormVisible = true">Create new prediction</button>
     </ng-template>
-    <table *ngIf="month.predictions?.length > 0">
+    <table class="table-main"
+           *ngIf="month.predictions?.length > 0">
         <thead>
             <tr>
                 <th>Category</th>

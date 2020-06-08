@@ -6,7 +6,8 @@
     <ng-template #hideForm>
         <button (click)="createFormVisible = true">Create new month</button>
     </ng-template>
-    <table *ngIf="monthOverviews">
+    <table class="table-main"
+           *ngIf="monthOverviews">
         <thead>
             <tr>
                 <th>Month</th>

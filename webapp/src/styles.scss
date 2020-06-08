@@ -25,3 +25,29 @@ body {
 .input-invalid {
   border: 1px solid red;
 }
+
+.table-main {
+
+  margin: 0.5rem 1rem;
+  border-spacing: 0;
+
+  tbody tr {
+    transition: 250ms;
+    &:hover {
+      background-color: darkgray;
+      transition: 250ms;
+    }
+  }
+
+  td {
+    text-align: right;
+  }
+
+  td, th {
+    border: none;
+    padding: 0.2rem 0.2rem;
+    &:not(:last-child) {
+      padding-right: 0.5rem;
+    }
+  }
+}
