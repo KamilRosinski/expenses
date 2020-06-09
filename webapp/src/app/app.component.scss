@@ -1,0 +1,30 @@
+#app-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+  height: 100vh;
+  margin: 0 auto;
+
+  #app-header, #app-main {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0.5rem 0;
+
+    &:last-child {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  #app-header {
+    color: lightgray;
+    background-color: forestgreen;
+  }
+
+  #app-main {
+    flex-grow: 1;
+    color: forestgreen;
+    background-color: lightgray;
+  }
+
+}
+
