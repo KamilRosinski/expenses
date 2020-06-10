@@ -1,0 +1,11 @@
+#content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .table-main {
+    display: block;
+    overflow-y: auto;
+  }
+
+}

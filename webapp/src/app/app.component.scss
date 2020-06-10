@@ -17,12 +17,13 @@
 
   #app-header {
     color: lightgray;
-    background-color: forestgreen;
+    background-color: darkblue;
   }
 
   #app-main {
     flex-grow: 1;
-    color: forestgreen;
+    min-height: 0;
+    color: darkblue;
     background-color: lightgray;
   }
 
