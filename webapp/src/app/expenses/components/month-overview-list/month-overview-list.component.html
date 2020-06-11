@@ -5,7 +5,7 @@
         <app-month-create [unavailableMonths]="extractYearMonths()" (cancel)="createFormVisible = false;"></app-month-create>
     </ng-template>
     <ng-template #hideForm>
-        <button (click)="createFormVisible = true">Create new</button>
+        <button class="btn" (click)="createFormVisible = true">Create new</button>
     </ng-template>
     <table class="table-main"
            *ngIf="monthOverviews">
@@ -26,10 +26,10 @@
                         {{monthOverview.year + '-' + monthOverview.month | date: 'MM.yyyy'}}
                     </a>
                 </td>
-                <td>{{monthOverview.transactionCount}}</td>
-                <td>{{monthOverview.income | currencyPln}}</td>
-                <td>{{monthOverview.outcome | currencyPln}}</td>
-                <td>{{(monthOverview.income + monthOverview.outcome) | currencyPln}}</td>
+                <td class="number">{{monthOverview.transactionCount}}</td>
+                <td class="number">{{monthOverview.income | currencyPln}}</td>
+                <td class="number">{{monthOverview.outcome | currencyPln}}</td>
+                <td class="number">{{(monthOverview.income + monthOverview.outcome) | currencyPln}}</td>
             </tr>
         </tbody>
     </table>

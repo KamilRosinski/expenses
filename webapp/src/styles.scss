@@ -7,6 +7,38 @@
   box-sizing: border-box;
 }
 
+h2 {
+  margin-bottom: 0.5rem;
+}
+
+#app-main > *:not(router-outlet) {
+  display: block;
+  height: 100%;
+}
+
+.btn {
+  background-color: darkblue;
+  color: lightgray;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 250ms;
+
+  &:hover {
+    background-color: lighten(darkblue, 15);
+    transition: 250ms;
+  }
+
+  &:disabled {
+    background-color: darkgray;
+    cursor: not-allowed;
+    transition: 250ms;
+  }
+
+}
+
 .validation-msg {
   color: red;
   font-size: 0.8rem;
@@ -17,31 +49,44 @@
 }
 
 .table-main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  width: 100%;
 
-  border-spacing: 0;
+  tr {
+    width: 100%;
+    display: flex;
 
-  tbody tr {
-    transition: 250ms;
-    &:hover {
-      background-color: darkgray;
+    th, td {
+      flex: 1 0 0;
+    }
+  }
+
+  tbody {
+    flex-grow: 1;
+    min-height: 0;
+    overflow-y: auto;
+
+    tr {
       transition: 250ms;
+
+      &:hover {
+        background-color: darkgray;
+        transition: 250ms;
+      }
+
+      td, th {
+        padding: 0.2rem 0;
+        &:not(:last-child) {
+          padding-right: 0.5rem;
+        }
+      }
+
+      td.number {
+        text-align: right;
+      }
     }
   }
-
-  td {
-    text-align: right;
-  }
-
-  td, th {
-    border: none;
-    padding: 0.2rem 0.2rem;
-    &:not(:last-child) {
-      padding-right: 0.5rem;
-    }
-  }
-}
-
-#app-main > *:not(router-outlet) {
-  display: block;
-  height: 100%;
 }
