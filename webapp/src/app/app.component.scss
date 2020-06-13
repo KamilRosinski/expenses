@@ -1,3 +1,5 @@
+@import "src/palette";
+
 #app-content {
   display: flex;
   flex-direction: column;
@@ -16,15 +18,15 @@
   }
 
   #app-header {
-    color: lightgray;
-    background-color: darkblue;
+    color: $main-gray;
+    background-color: $main-blue;
   }
 
   #app-main {
     flex-grow: 1;
     min-height: 0;
-    color: darkblue;
-    background-color: lightgray;
+    color: $main-blue;
+    background-color: $main-gray;
   }
 
 }

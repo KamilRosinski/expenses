@@ -1,4 +1,4 @@
-@import "variables";
+@import "src/palette";
 
 * {
   padding: 0 0;
@@ -17,8 +17,8 @@ h2 {
 }
 
 .btn {
-  background-color: darkblue;
-  color: lightgray;
+  background-color: $main-blue;
+  color: $main-gray;
   border: none;
   border-radius: 0.25rem;
   padding: 0.25rem 1rem;
@@ -27,12 +27,12 @@ h2 {
   transition: 250ms;
 
   &:hover {
-    background-color: lighten(darkblue, 15);
+    background-color: $light-blue;
     transition: 250ms;
   }
 
   &:disabled {
-    background-color: darkgray;
+    background-color: $dark-gray;
     cursor: not-allowed;
     transition: 250ms;
   }
@@ -45,7 +45,7 @@ h2 {
 }
 
 .input-invalid {
-  border: 1px solid red;
+  border: 1px solid $red;
 }
 
 .table-main {
@@ -73,7 +73,7 @@ h2 {
       transition: 250ms;
 
       &:hover {
-        background-color: darkgray;
+        background-color: $dark-gray;
         transition: 250ms;
       }
 
