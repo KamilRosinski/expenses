@@ -16,27 +16,40 @@ h2 {
   height: 100%;
 }
 
-.btn {
-  background-color: $main-blue;
-  color: $main-gray;
-  border: none;
-  border-radius: 0.25rem;
-  padding: 0.25rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 250ms;
+.button {
 
-  &:hover {
-    background-color: $light-blue;
-    transition: 250ms;
+  &-primary {
+    background-color: $main-blue;
+    color: $main-gray;
+    &:hover {
+      background-color: $light-blue;
+      transition: 250ms;
+    }
   }
 
-  &:disabled {
+  &-secondary {
     background-color: $dark-gray;
-    cursor: not-allowed;
-    transition: 250ms;
+    color: $main-blue;
+    &:hover {
+      background-color: $light-gray;
+      transition: 250ms;
+    }
   }
 
+  &-primary, &-secondary {
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.25rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 250ms;
+    &:disabled {
+      color: $main-gray;
+      background-color: $dark-gray;
+      cursor: not-allowed;
+      transition: 250ms;
+    }
+  }
 }
 
 .validation-msg {
@@ -51,17 +64,24 @@ h2 {
 .table-main {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  border: 2px solid $dark-gray;
+  overflow: hidden;
+  border-radius: 0.5rem;
   min-height: 0;
   width: 100%;
 
   tr {
     width: 100%;
     display: flex;
+    padding: 0 0.25rem;
 
     th, td {
       flex: 1 0 0;
     }
+  }
+
+  thead {
+    background-color: $dark-gray;
   }
 
   tbody {
@@ -71,6 +91,10 @@ h2 {
 
     tr {
       transition: 250ms;
+
+      &:nth-child(odd) {
+        background-color: $light-gray;
+      }
 
       &:hover {
         background-color: $dark-gray;

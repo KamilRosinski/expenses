@@ -5,7 +5,7 @@
         <app-month-create [unavailableMonths]="extractYearMonths()" (cancel)="createFormVisible = false;"></app-month-create>
     </ng-template>
     <ng-template #hideForm>
-        <button class="btn" (click)="createFormVisible = true">Create new</button>
+        <button class="button-primary" (click)="createFormVisible = true">Create new</button>
     </ng-template>
     <table class="table-main"
            *ngIf="monthOverviews">
