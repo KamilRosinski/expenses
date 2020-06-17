@@ -8,7 +8,7 @@
 }
 
 h2 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 #app-main > *:not(router-outlet) {
@@ -39,6 +39,7 @@ h2 {
   &-primary, &-secondary {
     border: none;
     border-radius: 0.25rem;
+    min-width: 6rem;
     padding: 0.25rem 1rem;
     font-size: 1rem;
     cursor: pointer;
@@ -50,15 +51,6 @@ h2 {
       transition: 250ms;
     }
   }
-}
-
-.validation-msg {
-  color: red;
-  font-size: 0.8rem;
-}
-
-.input-invalid {
-  border: 1px solid $red;
 }
 
 .table-main {
@@ -111,6 +103,53 @@ h2 {
       td.number {
         text-align: right;
       }
+    }
+  }
+}
+
+.content-controls {
+  margin-bottom: 1rem;
+}
+
+.form {
+
+  .validation-msg {
+    color: $main-red;
+  }
+
+  &-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+
+    select {
+      background-color: white;
+      font-size: 0.8rem;
+      max-width: 10rem;
+      padding: 0.1rem 0.25rem;
+      color: $main-blue;
+      border: 1px solid transparent;
+      border-radius: 0.25rem;
+
+      option {
+        color: $main-blue;
+      }
+    }
+
+    input, select {
+      transition: 250ms;
+      &.input-invalid {
+        color: $main-red;
+        border-color: $main-red;
+        background-color: $light-red;
+        transition: 250ms;
+      }
+    }
+  }
+
+  &-controls {
+    button:not(:last-child) {
+      margin-right: 0.5rem;
     }
   }
 }

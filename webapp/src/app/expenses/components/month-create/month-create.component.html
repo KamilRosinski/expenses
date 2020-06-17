@@ -1,5 +1,8 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div>
+<h3>Create new month</h3>
+<form class="form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+    <div class="form-section">
         <label for="month-input">Month</label>
         <select id="month-input" [formControlName]="'month'" [class.input-invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUniqueCategory)">
             <option *ngFor="let month of availableMonths" [ngValue]="month">{{month}}</option>
@@ -8,7 +11,7 @@
             Month must not be empty.
         </p>
     </div>
-    <div>
+    <div class="form-section">
         <label for="year-input">Year</label>
         <select id="year-input" [formControlName]="'year'" [class.input-invalid]="(yearControl.touched || yearControl.dirty) && (yearControl.invalid || form.errors?.nonUniqueCategory)">
             <option *ngFor="let year of availableYears" [ngValue]="year">{{year}}</option>
@@ -17,7 +20,7 @@
             Year must not be empty.
         </p>
     </div>
-    <div>
+    <div class="form-controls">
         <p class="validation-msg"
            *ngIf="form.errors?.nonUniqueCategory">
             Month {{form.errors.nonUniqueCategory.year + '-' + form.errors.nonUniqueCategory.month | date: 'MM.yyyy'}} already exists.
