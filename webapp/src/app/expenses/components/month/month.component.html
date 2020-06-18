@@ -1,8 +1,5 @@
 <div *ngIf="month">
     <h1>{{month.year + '-' + month.month | date: 'MM.yyyy'}}</h1>
-    <div>
-        <a [routerLink]="'/expenses'">Back to months</a>
-    </div>
     <div class="tab-links">
         <a class="tab-link"
            [routerLink]=""

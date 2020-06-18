@@ -20,6 +20,8 @@
   #app-header {
     color: $main-gray;
     background-color: $main-blue;
+    display: flex;
+    align-items: center;
   }
 
   #app-main {
