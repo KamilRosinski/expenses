@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
+import {ModalDialogModule} from './modal-dialog/modal-dialog.module';
 
 @NgModule({
     declarations: [
@@ -12,7 +13,8 @@ import {HttpClientModule} from '@angular/common/http';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        ModalDialogModule
     ],
     bootstrap: [
         AppComponent

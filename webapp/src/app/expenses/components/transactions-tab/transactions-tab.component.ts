@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Month} from '../../shared/month';
 import {Transaction} from '../../shared/transaction';
+import {DialogService} from '../../../modal-dialog/services/dialog.service';
+import {DeleteTransactionDialogComponent} from '../delete-transaction-dialog/delete-transaction-dialog.component';
 
 @Component({
     selector: 'app-transactions-tab',
@@ -15,9 +17,15 @@ export class TransactionsTabComponent {
 
     createFormVisible: boolean = false;
 
+    constructor(private readonly dialogService: DialogService) {
+    }
+
     addTransaction(transaction: Transaction): void {
         this.createTransaction.emit(transaction);
         this.createFormVisible = false;
     }
 
+    delete(transaction: Transaction): void {
+        this.dialogService.open(DeleteTransactionDialogComponent, transaction);
+    }
 }

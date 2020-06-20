@@ -24,6 +24,7 @@
                 <td>{{transaction.subcategory.name}}</td>
                 <td>{{transaction.description}}</td>
                 <td>{{transaction.value | currencyPln}}</td>
+                <td (click)="delete(transaction)"><i class="material-icons">delete</i></td>
             </tr>
         </tbody>
     </table>
