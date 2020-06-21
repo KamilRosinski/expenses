@@ -5,10 +5,12 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ModalDialogModule} from './modal-dialog/modal-dialog.module';
+import {DeleteTransactionDialogComponent} from './expenses/components/delete-transaction-dialog/delete-transaction-dialog.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        DeleteTransactionDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -18,6 +20,9 @@ import {ModalDialogModule} from './modal-dialog/modal-dialog.module';
     ],
     bootstrap: [
         AppComponent
+    ],
+    entryComponents: [
+        DeleteTransactionDialogComponent
     ]
 })
 export class AppModule {

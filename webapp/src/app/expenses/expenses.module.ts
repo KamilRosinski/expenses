@@ -15,6 +15,7 @@ import {MonthOverviewsSortPipe} from './pipes/month-overviews-sort.pipe';
 import {MonthCreateComponent} from './components/month-create/month-create.component';
 import {PredictionCreateComponent} from './components/prediction-create/prediction-create.component';
 import {CurrencyPlnPipe} from './pipes/currency-pln.pipe';
+import {DeleteTransactionDialogComponent} from './components/delete-transaction-dialog/delete-transaction-dialog.component';
 
 
 @NgModule({
@@ -36,8 +37,6 @@ import {CurrencyPlnPipe} from './pipes/currency-pln.pipe';
         CommonModule,
         ExpensesRoutingModule,
         ReactiveFormsModule
-    ],
-    entryComponents: [
     ]
 })
 export class ExpensesModule {

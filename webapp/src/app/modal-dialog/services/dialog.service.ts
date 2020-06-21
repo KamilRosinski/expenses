@@ -24,10 +24,17 @@ export class DialogService {
 
   open(dialogComponent: Type<any>, data: any): ComponentRef<any> {
     const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);
-    this.componentRef = componentFactory.create(this.injector);
+    const injector: Injector = Injector.create({
+      parent: this.injector,
+      providers: [
+        {provide: 'DIALOG_DATA', useValue: data}
+      ]
+    });
+    this.componentRef = componentFactory.create(injector);
+    this.componentRef.instance.content = dialogComponent;
     this.applicationRef.attachView(this.componentRef.hostView);
     document.body.appendChild((this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0]);
-    return undefined;
+    return this.componentRef;
   }
 
   close(): void {
