@@ -1,3 +1,14 @@
-<p>Are you sure you want to delete?</p>
-<button>no</button>
-<button>yes</button>
+<div>
+    <p>Are you sure you want to delete the following transaction?</p>
+    <ul>
+        <li>Day: {{transaction.day}}</li>
+        <li>Category: {{transaction.subcategory.category.name}}</li>
+        <li>Subcategory: {{transaction.subcategory.name}}</li>
+        <li>Description: {{transaction.description}}</li>
+        <li>Value: {{transaction.value | currencyPln}}</li>
+    </ul>
+</div>
+<div>
+    <button (click)="cancel()">cancel</button>
+    <button (click)="delete()">delete</button>
+</div>

@@ -3,6 +3,7 @@ import {Month} from '../../shared/month';
 import {Transaction} from '../../shared/transaction';
 import {DialogService} from '../../../modal-dialog/services/dialog.service';
 import {DeleteTransactionDialogComponent} from '../delete-transaction-dialog/delete-transaction-dialog.component';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-transactions-tab',
@@ -26,6 +27,11 @@ export class TransactionsTabComponent {
     }
 
     delete(transaction: Transaction): void {
-        this.dialogService.open(DeleteTransactionDialogComponent, transaction);
+        const dialogSubscription: Subscription = this.dialogService.open(DeleteTransactionDialogComponent, transaction).closed.subscribe(
+            (value: boolean) => {
+                console.log(value ? 'delete' : 'cancel');
+                dialogSubscription.unsubscribe();
+            }
+        );
     }
 }

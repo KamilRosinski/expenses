@@ -1,5 +1,5 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {ExpensesService} from '../../services/expenses.service';
+import {Component} from '@angular/core';
+import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
 import {Transaction} from '../../shared/transaction';
 
 @Component({
@@ -9,12 +9,18 @@ import {Transaction} from '../../shared/transaction';
 })
 export class DeleteTransactionDialogComponent {
 
-  constructor(@Inject('DIALOG_DATA') public readonly transaction: Transaction,
-              private readonly expensesService: ExpensesService) {
-  }
+    readonly transaction: Transaction;
 
-    close(): void {
-        console.log('closing dialog');
+    constructor(private readonly dialogReference: DialogReference) {
+        this.transaction = dialogReference.data;
+    }
+
+    cancel(): void {
+        this.dialogReference.close(false);
+    }
+
+    delete(): void {
+        this.dialogReference.close(true);
     }
 
 }

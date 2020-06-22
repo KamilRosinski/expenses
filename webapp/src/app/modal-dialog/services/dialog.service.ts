@@ -1,45 +1,47 @@
 import {
-  ApplicationRef,
-  ComponentFactory,
-  ComponentFactoryResolver,
-  ComponentRef,
-  EmbeddedViewRef,
-  Injectable,
-  Injector,
-  Type
+    ApplicationRef,
+    ComponentFactory,
+    ComponentFactoryResolver,
+    ComponentRef,
+    EmbeddedViewRef,
+    Injectable,
+    Injector,
+    Type
 } from '@angular/core';
 import {DialogComponent} from '../components/dialog/dialog.component';
+import {DialogReference} from '../model/dialog-reference';
+import {Subscription} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DialogService {
 
-  private componentRef: ComponentRef<any>;
+    constructor(private readonly componentFactoryResolver: ComponentFactoryResolver,
+                private readonly injector: Injector,
+                private readonly applicationRef: ApplicationRef) {
+    }
 
-  constructor(private readonly componentFactoryResolver: ComponentFactoryResolver,
-              private readonly injector: Injector,
-              private readonly applicationRef: ApplicationRef) {
-  }
-
-  open(dialogComponent: Type<any>, data: any): ComponentRef<any> {
-    const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);
-    const injector: Injector = Injector.create({
-      parent: this.injector,
-      providers: [
-        {provide: 'DIALOG_DATA', useValue: data}
-      ]
-    });
-    this.componentRef = componentFactory.create(injector);
-    this.componentRef.instance.content = dialogComponent;
-    this.applicationRef.attachView(this.componentRef.hostView);
-    document.body.appendChild((this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0]);
-    return this.componentRef;
-  }
-
-  close(): void {
-    this.applicationRef.detachView(this.componentRef.hostView);
-    this.componentRef.destroy();
-  }
+    open(dialogComponent: Type<any>, data: any): DialogReference {
+        console.log(this.injector);
+        const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);
+        const dialogReference: DialogReference = new DialogReference(data);
+        const dialogRefSubscription: Subscription = dialogReference.closed.subscribe(() => {
+            this.applicationRef.detachView(componentRef.hostView);
+            componentRef.destroy();
+            dialogRefSubscription.unsubscribe();
+        });
+        const injector: Injector = Injector.create({
+            parent: this.injector,
+            providers: [
+                {provide: DialogReference, useValue: dialogReference}
+            ]
+        });
+        const componentRef: ComponentRef<any> = componentFactory.create(injector);
+        componentRef.instance.content = dialogComponent;
+        this.applicationRef.attachView(componentRef.hostView);
+        document.body.appendChild((componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0]);
+        return dialogReference;
+    }
 
 }

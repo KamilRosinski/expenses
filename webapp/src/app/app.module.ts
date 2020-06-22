@@ -4,25 +4,21 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import {ModalDialogModule} from './modal-dialog/modal-dialog.module';
-import {DeleteTransactionDialogComponent} from './expenses/components/delete-transaction-dialog/delete-transaction-dialog.component';
 
 @NgModule({
     declarations: [
-        AppComponent,
-        DeleteTransactionDialogComponent
+        AppComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        HttpClientModule,
-        ModalDialogModule
+        HttpClientModule
     ],
     bootstrap: [
         AppComponent
     ],
     entryComponents: [
-        DeleteTransactionDialogComponent
+
     ]
 })
 export class AppModule {

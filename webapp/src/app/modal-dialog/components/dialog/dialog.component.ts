@@ -5,7 +5,6 @@ import {
     ComponentFactory,
     ComponentFactoryResolver,
     ComponentRef,
-    EventEmitter,
     OnDestroy,
     Type,
     ViewChild
@@ -20,7 +19,6 @@ import {InsertionDirective} from '../../directives/insertion.directive';
 export class DialogComponent implements AfterViewInit, OnDestroy {
 
     content: Type<any>;
-    close: EventEmitter<any> = new EventEmitter<any>();
 
     @ViewChild(InsertionDirective, {static: true}) insertionPoint: InsertionDirective;
 
