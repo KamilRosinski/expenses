@@ -23,13 +23,11 @@ export class DialogService {
     }
 
     open(dialogComponent: Type<any>, data: any): DialogReference {
-        console.log(this.injector);
         const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);
         const dialogReference: DialogReference = new DialogReference(data);
-        const dialogRefSubscription: Subscription = dialogReference.closed.subscribe(() => {
+        dialogReference.closed.subscribe(() => {
             this.applicationRef.detachView(componentRef.hostView);
             componentRef.destroy();
-            dialogRefSubscription.unsubscribe();
         });
         const injector: Injector = Injector.create({
             parent: this.injector,

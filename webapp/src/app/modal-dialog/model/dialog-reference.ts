@@ -13,6 +13,7 @@ export class DialogReference {
 
     close(data?: any): void {
         this.closedSubject.next(data);
+        this.closedSubject.complete();
     }
 
 }
