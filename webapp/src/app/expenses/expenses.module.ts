@@ -40,9 +40,6 @@ import {ModalDialogModule} from '../modal-dialog/modal-dialog.module';
         ExpensesRoutingModule,
         ReactiveFormsModule,
         ModalDialogModule
-    ],
-    entryComponents: [
-        DeleteTransactionDialogComponent
     ]
 })
 export class ExpensesModule {
