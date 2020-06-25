@@ -36,6 +36,10 @@ export class ExpensesService {
         return this.http.post<Transaction>(`/api/month/${monthId}/transaction`, transaction);
     }
 
+    deleteTransaction(transactionId: number): Observable<void> {
+        return this.http.delete<void>(`/api/transaction/${transactionId}`);
+    }
+
     createPrediction(monthId: number, prediction: Prediction): Observable<Prediction> {
         return this.http.post<Prediction>(`/api/month/${monthId}/prediction`, prediction);
     }

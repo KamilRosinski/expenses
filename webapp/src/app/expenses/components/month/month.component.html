@@ -17,6 +17,7 @@
     <div id="tab" [ngSwitch]="currentTab$ | async">
         <app-transactions-tab *ngSwitchCase="'transactions'"
                               (createTransaction)="createTransaction($event)"
+                              (deleteTransaction)="deleteTransaction($event)"
                               [month]="month">
         </app-transactions-tab>
         <app-predictions-tab *ngSwitchCase="'predictions'"

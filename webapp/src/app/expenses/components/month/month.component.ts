@@ -40,6 +40,12 @@ export class MonthComponent implements OnInit {
         );
     }
 
+    deleteTransaction(transactionId: number): void {
+        this.expensesService.deleteTransaction(transactionId).subscribe(() => {
+            this.month.transactions = this.month.transactions.filter((transaction: Transaction) => transaction.id !== transactionId);
+        });
+    }
+
     createPrediction(prediction: Prediction): void {
         this.expensesService.createPrediction(this.month.id, prediction).subscribe(
             (prediction: Prediction) => this.month.predictions = [...this.month.predictions, prediction]

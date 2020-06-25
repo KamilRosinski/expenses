@@ -3,7 +3,7 @@ import {Month} from '../../shared/month';
 import {Transaction} from '../../shared/transaction';
 import {DialogService} from '../../../modal-dialog/services/dialog.service';
 import {DeleteTransactionDialogComponent} from '../delete-transaction-dialog/delete-transaction-dialog.component';
-import {Subscription} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'app-transactions-tab',
@@ -15,6 +15,7 @@ export class TransactionsTabComponent {
     @Input() month: Month;
 
     @Output() createTransaction: EventEmitter<Transaction> = new EventEmitter<Transaction>();
+    @Output() deleteTransaction: EventEmitter<number> = new EventEmitter<number>();
 
     createFormVisible: boolean = false;
 
@@ -27,11 +28,11 @@ export class TransactionsTabComponent {
     }
 
     delete(transaction: Transaction): void {
-        const dialogSubscription: Subscription = this.dialogService.open(DeleteTransactionDialogComponent, transaction).closed.subscribe(
-            (value: boolean) => {
-                console.log(value ? 'delete' : 'cancel');
-                dialogSubscription.unsubscribe();
-            }
+        this.dialogService.open(DeleteTransactionDialogComponent, transaction).closed.pipe(
+            filter(Boolean)
+        ).subscribe(
+            () => this.deleteTransaction.emit(transaction.id)
         );
     }
+
 }
