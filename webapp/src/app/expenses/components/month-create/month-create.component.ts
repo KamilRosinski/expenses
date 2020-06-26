@@ -1,5 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    ValidationErrors,
+    ValidatorFn,
+    Validators
+} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ExpensesService} from '../../services/expenses.service';
 import {Month} from '../../shared/month';
@@ -28,12 +36,12 @@ export class MonthCreateComponent implements OnInit {
 
     @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
 
-    get yearControl(): AbstractControl {
-        return this.form.get('year');
+    get yearControl(): FormControl {
+        return this.form.get('year') as FormControl;
     }
 
-    get monthControl(): AbstractControl {
-        return this.form.get('month');
+    get monthControl(): FormControl {
+        return this.form.get('month') as FormControl;
     }
 
     constructor(private readonly formBuilder: FormBuilder,

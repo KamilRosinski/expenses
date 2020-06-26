@@ -4,7 +4,7 @@
       (ngSubmit)="onSubmit()">
     <div class="form-section">
         <label for="month-input">Month</label>
-        <select id="month-input" [formControlName]="'month'" [class.input-invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUniqueCategory)">
+        <select id="month-input" [formControl]="monthControl" [class.input-invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUniqueCategory)">
             <option *ngFor="let month of availableMonths" [ngValue]="month">{{month}}</option>
         </select>
         <p class="validation-msg" *ngIf="(monthControl.touched || monthControl.dirty) && monthControl.errors?.required">
@@ -13,7 +13,7 @@
     </div>
     <div class="form-section">
         <label for="year-input">Year</label>
-        <select id="year-input" [formControlName]="'year'" [class.input-invalid]="(yearControl.touched || yearControl.dirty) && (yearControl.invalid || form.errors?.nonUniqueCategory)">
+        <select id="year-input" [formControl]="yearControl" [class.input-invalid]="(yearControl.touched || yearControl.dirty) && (yearControl.invalid || form.errors?.nonUniqueCategory)">
             <option *ngFor="let year of availableYears" [ngValue]="year">{{year}}</option>
         </select>
         <p class="validation-msg" *ngIf="(yearControl.touched || yearControl.dirty) && yearControl.errors?.required">
