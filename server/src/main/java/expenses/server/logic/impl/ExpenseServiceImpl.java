@@ -99,6 +99,11 @@ public class ExpenseServiceImpl implements ExpenseService {
 	}
 
 	@Override
+	public void deleteTransaction(final Long transactionId) {
+		transactionRepository.deleteById(transactionId);
+	}
+
+	@Override
 	public PredictionDTO createPrediction(final Long monthId, final PredictionDTO prediction) {
 
 		final MonthEntity month = monthRepository.getOne(monthId);

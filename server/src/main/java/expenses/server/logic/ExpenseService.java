@@ -26,4 +26,5 @@ public interface ExpenseService {
 
 	PredictionDTO createPrediction(Long monthId, PredictionDTO prediction);
 
+	void deleteTransaction(Long transactionId);
 }

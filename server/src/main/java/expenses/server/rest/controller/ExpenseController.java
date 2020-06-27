@@ -9,6 +9,7 @@ import expenses.server.rest.dto.PredictionDTO;
 import expenses.server.rest.dto.TransactionDTO;
 import expenses.server.rest.dto.YearMonthDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,11 @@ public class ExpenseController {
 	@PostMapping("/month/{monthId}/transaction")
 	public TransactionDTO createTransaction(@PathVariable final Long monthId, @RequestBody final TransactionDTO transaction) {
 		return expenseService.createTransaction(monthId, transaction);
+	}
+
+	@DeleteMapping("/transaction/{transactionId}")
+	public void deleteTransaction(@PathVariable final Long transactionId) {
+		expenseService.deleteTransaction(transactionId);
 	}
 
 	@PostMapping("/month/{monthId}/prediction")
