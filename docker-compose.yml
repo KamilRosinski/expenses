@@ -5,6 +5,8 @@ services:
   server:
     build: server
     container_name: expenses-server
+    env_file:
+      - server/datasource.env
 
   webapp:
     build: webapp
