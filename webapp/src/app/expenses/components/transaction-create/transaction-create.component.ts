@@ -35,13 +35,10 @@ export class TransactionCreateComponent implements OnInit {
             ? {nonUniqueSubcategory: control.value.newSubcategory}
             : null;
 
-    private readonly newCategoryNotEmptyValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
-        const result = control.value.category === 'new' && !control.value.newCategory
+    private readonly newCategoryNotEmptyValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
+        control.value.category === 'new' && !control.value.newCategory
             ? {emptyNewCategory: true}
             : null;
-        return result;
-    }
-
 
     private readonly newSubcategoryNotEmptyValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
         control.value.subcategory === 'new' && !control.value.newSubcategory
@@ -57,28 +54,32 @@ export class TransactionCreateComponent implements OnInit {
         return Array.from(Array(this.monthLength).keys()).map((day: number) => day + 1);
     }
 
-    get dayControl(): AbstractControl {
-        return this.form.get('day');
+    get dayControl(): FormControl {
+        return this.form.get('day') as FormControl;
     }
 
-    get categoryControl(): AbstractControl {
-        return this.form.get('category');
+    get categoryControl(): FormControl {
+        return this.form.get('category') as FormControl;
     }
 
-    get newCategoryControl(): AbstractControl {
-        return this.form.get('newCategory');
+    get newCategoryControl(): FormControl {
+        return this.form.get('newCategory') as FormControl;
     }
 
-    get subcategoryControl(): AbstractControl {
-        return this.form.get('subcategory');
+    get subcategoryControl(): FormControl {
+        return this.form.get('subcategory') as FormControl;
     }
 
-    get newSubcategoryControl(): AbstractControl {
-        return this.form.get('newSubcategory');
+    get newSubcategoryControl(): FormControl {
+        return this.form.get('newSubcategory') as FormControl;
     }
 
-    get valueControl(): AbstractControl {
-        return this.form.get('value');
+    get descriptionControl(): FormControl {
+        return this.form.get('description') as FormControl;
+    }
+
+    get valueControl(): FormControl {
+        return this.form.get('value') as FormControl;
     }
 
     constructor(private readonly expensesService: ExpensesService,

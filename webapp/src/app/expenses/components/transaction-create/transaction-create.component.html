@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
         <label for="day-input">Day</label>
-        <select id="day-input" [formControlName]="'day'" [class.input-invalid]="(dayControl.touched || dayControl.dirty) && dayControl.invalid">
+        <select id="day-input" [formControl]="dayControl" [class.input-invalid]="(dayControl.touched || dayControl.dirty) && dayControl.invalid">
             <option *ngFor="let day of days" [ngValue]="day">{{day}}</option>
         </select>
         <p class="validation-msg" *ngIf="(dayControl.touched || dayControl.dirty) && dayControl.errors?.required">
@@ -10,7 +10,7 @@
     </div>
     <div>
         <label for="category-input">Category</label>
-        <select id="category-input" [formControlName]="'category'" [class.input-invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
+        <select id="category-input" [formControl]="categoryControl" [class.input-invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
             <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
             <option [ngValue]="'new'">Create new</option>
         </select>
@@ -22,6 +22,7 @@
         <label for="new-category-input">New category</label>
         <input id="new-category-input"
                type="text"
+               [formControl]="newCategoryControl"
                [class.input-invalid]="(newCategoryControl.touched || newCategoryControl.dirty) && (newCategoryControl.invalid || form.errors?.emptyNewCategory)">
         <p class="validation-msg"
            *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && newCategoryControl.errors?.nonUniqueCategory">
@@ -34,7 +35,7 @@
     </div>
     <div>
         <label for="subcategory-input">Subcategory</label>
-        <select id="subcategory-input" [formControlName]="'subcategory'" [class.input-invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
+        <select id="subcategory-input" [formControl]="subcategoryControl" [class.input-invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
             <option *ngFor="let subcategory of categoryControl.value?.subcategories" [ngValue]="subcategory">{{subcategory.name}}</option>
             <option [ngValue]="'new'">Create new</option>
         </select>
@@ -46,6 +47,7 @@
         <label for="new-subcategory-input">New subcategory</label>
         <input id="new-subcategory-input"
                type="text"
+               [formControl]="newSubcategoryControl"
                [class.input-invalid]="(newSubcategoryControl.touched || newSubcategoryControl.dirty) && (form.errors?.nonUniqueSubcategory || form.errors?.emptyNewSubcategory)">
         <p class="validation-msg"
            *ngIf="(newSubcategoryControl.touched || newSubcategoryControl.dirty) && form.errors?.nonUniqueSubcategory">
@@ -58,11 +60,11 @@
     </div>
     <div>
         <label for="description-input">Description (optional)</label>
-        <input id="description-input" type="text" [formControlName]="'description'">
+        <input id="description-input" type="text" [formControl]="descriptionControl">
     </div>
     <div>
         <label for="value-input">Value</label>
-        <input id="value-input" type="text" [formControlName]="'value'" [class.input-invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
+        <input id="value-input" type="text" [formControl]="valueControl" [class.input-invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
         <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.required">
             Value must not be empty.
         </p>
