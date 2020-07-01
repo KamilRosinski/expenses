@@ -9,8 +9,7 @@
             <button class="button-primary" (click)="createFormVisible = true">Create new</button>
         </ng-template>
     </div>
-    <table class="table-main"
-           *ngIf="monthOverviews">
+    <table class="table-main">
         <thead>
             <tr>
                 <th>Month</th>
@@ -21,18 +20,26 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let monthOverview of monthOverviews | monthOverviewsSort">
-                <td>
-                    <a [routerLink]="['month', monthOverview.id]"
-                       [queryParams]="{tab: 'transactions'}">
-                        {{monthOverview.year + '-' + monthOverview.month | date: 'MM.yyyy'}}
-                    </a>
-                </td>
-                <td class="number">{{monthOverview.transactionCount}}</td>
-                <td class="number">{{monthOverview.income | currencyPln}}</td>
-                <td class="number">{{monthOverview.outcome | currencyPln}}</td>
-                <td class="number">{{(monthOverview.income + monthOverview.outcome) | currencyPln}}</td>
-            </tr>
+            <div *ngIf="monthOverviews.length; then monthList else emptyPlaceholder"></div>
+            <ng-template #monthList>
+                <tr *ngFor="let monthOverview of monthOverviews | monthOverviewsSort">
+                    <td>
+                        <a [routerLink]="['month', monthOverview.id]"
+                           [queryParams]="{tab: 'transactions'}">
+                            {{monthOverview.year + '-' + monthOverview.month | date: 'MM.yyyy'}}
+                        </a>
+                    </td>
+                    <td class="number">{{monthOverview.transactionCount}}</td>
+                    <td class="number">{{monthOverview.income | currencyPln}}</td>
+                    <td class="number">{{monthOverview.outcome | currencyPln}}</td>
+                    <td class="number">{{(monthOverview.income + monthOverview.outcome) | currencyPln}}</td>
+                </tr>
+            </ng-template>
+            <ng-template #emptyPlaceholder>
+                <tr>
+                    <td id="empty-placeholder">No months to show.</td>
+                </tr>
+            </ng-template>
         </tbody>
     </table>
 </div>
