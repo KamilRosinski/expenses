@@ -10,9 +10,6 @@ import { InsertionDirective } from './directives/insertion.directive';
     ],
     imports: [
         CommonModule
-    ],
-    entryComponents: [
-        DialogComponent
     ]
 })
 export class ModalDialogModule {
