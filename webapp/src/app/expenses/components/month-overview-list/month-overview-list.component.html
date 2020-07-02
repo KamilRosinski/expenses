@@ -1,14 +1,6 @@
 <div id="content">
     <h2>Months</h2>
-    <div class="content-controls">
-        <div *ngIf="createFormVisible; then showForm else hideForm"></div>
-        <ng-template #showForm>
-            <app-month-create [unavailableMonths]="extractYearMonths()" (cancel)="createFormVisible = false;"></app-month-create>
-        </ng-template>
-        <ng-template #hideForm>
-            <button class="button-primary" (click)="createFormVisible = true">Create new</button>
-        </ng-template>
-    </div>
+    <button id="create-btn" class="button-primary" (click)="createMonth()">Create new</button>
     <table class="table-main">
         <thead>
             <tr>

@@ -1,16 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {
-    AbstractControl,
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    ValidationErrors,
-    ValidatorFn,
-    Validators
-} from '@angular/forms';
-import {Router} from '@angular/router';
-import {ExpensesService} from '../../services/expenses.service';
-import {Month} from '../../shared/month';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
+import {MonthOverview} from '../../shared/month-overview';
 
 @Component({
     selector: 'app-month-create',
@@ -23,18 +14,16 @@ export class MonthCreateComponent implements OnInit {
     availableMonths: string[];
     availableYears: string[];
 
+    private unavailableMonths: MonthOverview[];
+
     private readonly uniqueYearMonthValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
         const year: number = +control.value.year;
         const month: number = +control.value.month;
-        return control.value && this.unavailableMonths.some((yearMonth: { year: number, month: number }) =>
-            yearMonth.year === year && yearMonth.month === month)
-            ? {nonUniqueCategory: {year, month}}
+        return control.value && this.unavailableMonths.some((monthOverview: MonthOverview) =>
+            monthOverview.year === year && monthOverview.month === month)
+            ? {nonUniqueMonth: {year, month}}
             : null;
     };
-
-    @Input() unavailableMonths: { year: number, month: number }[];
-
-    @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
 
     get yearControl(): FormControl {
         return this.form.get('year') as FormControl;
@@ -44,9 +33,8 @@ export class MonthCreateComponent implements OnInit {
         return this.form.get('month') as FormControl;
     }
 
-    constructor(private readonly formBuilder: FormBuilder,
-                private readonly expensesService: ExpensesService,
-                private readonly router: Router) {
+    constructor(private readonly dialogReference: DialogReference,
+                private readonly formBuilder: FormBuilder) {
 
         this.availableMonths = Array.from(Array(12).keys()).map((i: number) => `${i + 1}`);
 
@@ -55,6 +43,7 @@ export class MonthCreateComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.unavailableMonths = this.dialogReference.data;
         this.form = this.formBuilder.group({
             month: [null, [Validators.required]],
             year: [null, [Validators.required]]
@@ -64,18 +53,13 @@ export class MonthCreateComponent implements OnInit {
     }
 
     onCancel(): void {
-        this.cancel.emit();
+        this.dialogReference.close();
     }
 
     onSubmit(): void {
-        const year: number = +this.form.value.year;
-        const month: number = +this.form.value.month;
-        this.expensesService.createMonth(year, month).subscribe((month: Month) => {
-            this.router.navigate(['expenses', 'month', month.id], {
-                queryParams: {
-                    tab: 'transactions'
-                }
-            }).then();
+        this.dialogReference.close({
+            year: +this.form.value.year,
+            month: +this.form.value.month
         });
     }
 

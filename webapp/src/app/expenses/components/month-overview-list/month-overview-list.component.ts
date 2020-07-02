@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ExpensesService} from '../../services/expenses.service';
 import {MonthOverview} from '../../shared/month-overview';
+import {DialogService} from '../../../modal-dialog/services/dialog.service';
+import {MonthCreateComponent} from '../month-create/month-create.component';
+import {concatMap, filter} from 'rxjs/operators';
+import {Month} from '../../shared/month';
+import {YearMonth} from '../../shared/year-month';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-month-overview-list',
@@ -11,9 +17,9 @@ export class MonthOverviewListComponent implements OnInit {
 
     monthOverviews: MonthOverview[] = [];
 
-    createFormVisible: boolean = false;
-
-    constructor(private readonly expensesService: ExpensesService) {
+    constructor(private readonly expensesService: ExpensesService,
+                private readonly dialogService: DialogService,
+                private readonly router: Router) {
     }
 
     ngOnInit(): void {
@@ -22,8 +28,15 @@ export class MonthOverviewListComponent implements OnInit {
         );
     }
 
-    extractYearMonths(): {year: number, month: number}[] {
-        return this.monthOverviews.map((overview: MonthOverview) => ({year: overview.year, month: overview.month}));
+    createMonth(): void {
+        this.dialogService.open(MonthCreateComponent, this.monthOverviews).closed.pipe(
+            filter(Boolean),
+            concatMap((yearMonth: YearMonth) => this.expensesService.createMonth(yearMonth))
+        ).subscribe(
+            (month: Month) => this.router.navigate(
+                ['expenses', 'month', month.id],
+                {queryParams: {tab: 'transactions'}}
+            ).then());
     }
 
 }
