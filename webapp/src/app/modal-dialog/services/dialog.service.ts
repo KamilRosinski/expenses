@@ -10,10 +10,10 @@ import {
 } from '@angular/core';
 import {DialogComponent} from '../components/dialog/dialog.component';
 import {DialogReference} from '../model/dialog-reference';
-import {Subscription} from 'rxjs';
+import {ModalDialogModule} from '../modal-dialog.module';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: ModalDialogModule
 })
 export class DialogService {
 
