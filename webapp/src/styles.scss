@@ -18,39 +18,33 @@ h2 {
 
 .button {
 
-  &-primary {
-    background-color: $main-blue;
-    color: $main-gray;
-    &:hover {
-      background-color: $light-blue;
-      transition: 250ms;
-    }
-  }
-
-  &-secondary {
-    background-color: $dark-gray;
-    color: $main-blue;
-    &:hover {
-      background-color: $light-gray;
-      transition: 250ms;
-    }
-  }
-
   &-primary, &-secondary {
-    border: none;
+    border: solid 1px $main-blue;
     border-radius: 0.25rem;
     min-width: 6rem;
     padding: 0.25rem 1rem;
     font-size: 1rem;
     cursor: pointer;
     transition: 250ms;
+  }
+
+  &-primary {
+    background-color: $main-blue;
+    color: $main-gray;
     &:disabled {
       color: $main-gray;
       background-color: $dark-gray;
+      border-color: $dark-gray;
       cursor: not-allowed;
       transition: 250ms;
     }
   }
+
+  &-secondary {
+    background-color: transparent;
+    color: $main-blue;
+  }
+
 }
 
 .table-main {
