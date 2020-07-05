@@ -1,37 +1,37 @@
 <div id="content">
     <h2>Months</h2>
     <button id="create-btn" class="button-primary" (click)="createMonth()">Create new</button>
-    <table class="table-main">
-        <thead>
-            <tr>
-                <th>Month</th>
-                <th>Number of transactions</th>
-                <th>Income</th>
-                <th>Outcome</th>
-                <th>Balance</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="table">
+        <div class="thead">
+            <div class="tr">
+                <div class="th">Month</div>
+                <div class="th">Number of transactions</div>
+                <div class="th">Income</div>
+                <div class="th">Outcome</div>
+                <div class="th">Balance</div>
+            </div>
+        </div>
+        <div class="tbody">
             <div *ngIf="monthOverviews.length; then monthList else emptyPlaceholder"></div>
             <ng-template #monthList>
-                <tr *ngFor="let monthOverview of monthOverviews | monthOverviewsSort">
-                    <td>
+                <div class="tr" *ngFor="let monthOverview of monthOverviews | monthOverviewsSort">
+                    <div class="td">
                         <a [routerLink]="['month', monthOverview.id]"
                            [queryParams]="{tab: 'transactions'}">
                             {{monthOverview.year + '-' + monthOverview.month | date: 'MM.yyyy'}}
                         </a>
-                    </td>
-                    <td class="number">{{monthOverview.transactionCount}}</td>
-                    <td class="number">{{monthOverview.income | currencyPln}}</td>
-                    <td class="number">{{monthOverview.outcome | currencyPln}}</td>
-                    <td class="number">{{(monthOverview.income + monthOverview.outcome) | currencyPln}}</td>
-                </tr>
+                    </div>
+                    <div class="td">{{monthOverview.transactionCount}}</div>
+                    <div class="td">{{monthOverview.income | currencyPln}}</div>
+                    <div class="td">{{monthOverview.outcome | currencyPln}}</div>
+                    <div class="td">{{(monthOverview.income + monthOverview.outcome) | currencyPln}}</div>
+                </div>
             </ng-template>
             <ng-template #emptyPlaceholder>
-                <tr>
-                    <td id="empty-placeholder">No months to show.</td>
-                </tr>
+                <div class="tr">
+                    <div id="empty-placeholder" class="td">No months to show.</div>
+                </div>
             </ng-template>
-        </tbody>
-    </table>
+        </div>
+    </div>
 </div>

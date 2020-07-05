@@ -47,63 +47,47 @@ h2 {
 
 }
 
-.table-main {
+.table {
   display: flex;
   flex-direction: column;
-  border: 2px solid $dark-gray;
-  overflow: hidden;
-  border-radius: 0.5rem;
-  min-height: 0;
   width: 100%;
+  min-height: 0;
+  border: 2px solid $dark-gray;
+  border-radius: 0.5rem;
+  overflow: hidden;
 
-  tr {
-    width: 100%;
-    display: flex;
+  .thead, .tbody {
     padding: 0 0.25rem;
-
-    th, td {
-      flex: 1 0 0;
-    }
   }
 
-  thead {
+  .thead {
     background-color: $dark-gray;
   }
 
-  tbody {
-    flex-grow: 1;
+  .tbody {
     min-height: 0;
     overflow-y: auto;
+  }
 
-    tr {
+  .tr {
+    display: flex;
+    padding: 0.2rem 0;
+    transition: 250ms;
+
+    &:not(:last-child) {
+      border-bottom: 2px solid $dark-gray;
+    }
+
+    &:hover {
+      background-color: $light-gray;
       transition: 250ms;
-
-      &:nth-child(odd) {
-        background-color: $light-gray;
-      }
-
-      &:hover {
-        background-color: $dark-gray;
-        transition: 250ms;
-      }
-
-      td, th {
-        padding: 0.2rem 0;
-        &:not(:last-child) {
-          padding-right: 0.5rem;
-        }
-      }
-
-      td.number {
-        text-align: right;
-      }
-
-      #empty-placeholder {
-        text-align: center;
-        padding: 0.5rem;
-      }
     }
   }
+
+  .td, .th {
+    flex: 1 1 0;
+  }
+
 }
 
 .content-controls {
