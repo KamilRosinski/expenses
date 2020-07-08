@@ -98,39 +98,52 @@ h2 {
 
   .validation-msg {
     color: $main-red;
+    font-size: 0.8rem;
+  }
+
+  &-title {
+    color: $main-blue;
+    margin-bottom: 1rem;
   }
 
   &-section {
     display: flex;
     flex-direction: column;
-    margin-bottom: 0.5rem;
-
-    select {
-      background-color: white;
-      font-size: 0.8rem;
-      max-width: 10rem;
-      padding: 0.1rem 0.25rem;
-      color: $main-blue;
-      border: 1px solid transparent;
-      border-radius: 0.25rem;
-
-      option {
-        color: $main-blue;
-      }
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
     }
 
-    input, select {
+    label {
+      color: $main-blue;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.1rem 0.5rem;
+      color: $main-blue;
+      font-size: 1rem;
+      border: 1px solid $main-blue;
+      border-radius: 0.5rem;
       transition: 250ms;
+
       &.input-invalid {
         color: $main-red;
         border-color: $main-red;
         background-color: $light-red;
         transition: 250ms;
       }
+
+
+      option {
+        color: $main-blue;
+      }
     }
   }
 
   &-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
     button:not(:last-child) {
       margin-right: 0.5rem;
     }
