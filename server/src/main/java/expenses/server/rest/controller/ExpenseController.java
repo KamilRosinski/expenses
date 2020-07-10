@@ -51,6 +51,11 @@ public class ExpenseController {
 		return expenseService.createPrediction(monthId, prediction);
 	}
 
+	@DeleteMapping("/prediction/{predictionId}")
+	public void deletePrediction(@PathVariable final Long predictionId) {
+		expenseService.deletePrediction(predictionId);
+	}
+
 	@GetMapping("/category")
 	public List<CategoryDTO> getCategories() {
 		return expenseService.getCategories();

@@ -115,4 +115,9 @@ public class ExpenseServiceImpl implements ExpenseService {
 		return predictionRepository.save(new PredictionEntity(prediction, month, category)).mapToDTO();
 	}
 
+	@Override
+	public void deletePrediction(final Long predictionId) {
+		predictionRepository.deleteById(predictionId);
+	}
+
 }
