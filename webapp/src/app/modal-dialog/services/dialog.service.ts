@@ -23,7 +23,7 @@ export class DialogService {
     }
 
     open(dialogComponent: Type<any>, data: any): DialogReference {
-        const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);
+        const componentFactory: ComponentFactory<DialogComponent> = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);
         const dialogReference: DialogReference = new DialogReference(data);
         dialogReference.closed.subscribe(() => {
             this.applicationRef.detachView(componentRef.hostView);
@@ -35,10 +35,10 @@ export class DialogService {
                 {provide: DialogReference, useValue: dialogReference}
             ]
         });
-        const componentRef: ComponentRef<any> = componentFactory.create(injector);
+        const componentRef: ComponentRef<DialogComponent> = componentFactory.create(injector);
         componentRef.instance.content = dialogComponent;
         this.applicationRef.attachView(componentRef.hostView);
-        document.body.appendChild((componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0]);
+        document.body.appendChild((componentRef.hostView as EmbeddedViewRef<DialogComponent>).rootNodes[0]);
         return dialogReference;
     }
 
