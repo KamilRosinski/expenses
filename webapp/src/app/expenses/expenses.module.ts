@@ -17,6 +17,7 @@ import {PredictionCreateComponent} from './components/prediction-create/predicti
 import {CurrencyPlnPipe} from './pipes/currency-pln.pipe';
 import {DeleteTransactionDialogComponent} from './components/delete-transaction-dialog/delete-transaction-dialog.component';
 import {ModalDialogModule} from '../modal-dialog/modal-dialog.module';
+import {NotificationsModule} from '../notifications/notifications.module';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {ModalDialogModule} from '../modal-dialog/modal-dialog.module';
         CommonModule,
         ExpensesRoutingModule,
         ReactiveFormsModule,
-        ModalDialogModule
+        ModalDialogModule,
+        NotificationsModule
     ]
 })
 export class ExpensesModule {

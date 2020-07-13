@@ -1,0 +1,48 @@
+@import "src/palette";
+
+#notification {
+  padding: 0.5rem;
+  border: 1px solid $dark-gray;
+  border-radius: 0.5rem;
+  background-color: $light-gray;
+  display: flex;
+  width: min(500px, 90vw);
+
+  #content-pane {
+    #timestamp {
+      border-bottom: 1px solid $dark-gray;
+    }
+  }
+
+  #actions-pane {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.5rem;
+
+    #close-button {
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      border-radius: calc(1.75rem / 2);
+      width: 1.75rem;
+      height: 1.75rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 250ms;
+
+      &:hover {
+        background-color: $main-gray;
+        transition: 250ms;
+      }
+
+      .material-icons {
+        color: $dark-gray;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+}

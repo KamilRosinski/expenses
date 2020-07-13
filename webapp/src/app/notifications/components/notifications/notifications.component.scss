@@ -1,0 +1,15 @@
+#notifications {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translate(-50%, 0);
+
+  .notification {
+    display: block;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+}
