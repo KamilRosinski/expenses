@@ -1,8 +1,5 @@
-export class Notification {
+export interface Notification {
 
-    readonly timestamp: number = Date.now();
-
-    constructor(public readonly message: string) {
-    }
+    readonly message: string;
 
 }

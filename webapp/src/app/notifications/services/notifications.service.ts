@@ -9,7 +9,6 @@ import {
     OnDestroy
 } from '@angular/core';
 import {NotificationsComponent} from '../components/notifications/notifications.component';
-import {Notification} from '../model/notification';
 
 @Injectable({
     providedIn: 'root'
@@ -31,6 +30,10 @@ export class NotificationsService implements OnDestroy {
     ngOnDestroy(): void {
         this.applicationRef.detachView(this.notificationsRef.hostView);
         this.notificationsRef.destroy();
+    }
+
+    show(message: string): void {
+        this.notificationsRef.instance.notifications.push({message});
     }
 
 }

@@ -7,11 +7,10 @@
   background-color: $light-gray;
   display: flex;
   width: min(500px, 90vw);
+  align-items: center;
 
-  #content-pane {
-    #timestamp {
-      border-bottom: 1px solid $dark-gray;
-    }
+  #message {
+    flex: 1 1 0;
   }
 
   #actions-pane {

@@ -1,7 +1,6 @@
 <div id="notification">
-    <div id="content-pane">
-        <p id="timestamp">{{notification.timestamp | date: 'yyyy.MM.dd HH:mm:ss.SSS'}}</p>
-        <p id="message">{{notification.message}}</p>
+    <div id="message">
+        {{notification.message}}
     </div>
     <div id="actions-pane">
         <button id="close-button" (click)="closeNotification()"><i class="material-icons">clear</i></button>
