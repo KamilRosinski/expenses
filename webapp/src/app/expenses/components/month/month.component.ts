@@ -58,11 +58,11 @@ export class MonthComponent implements OnInit {
     }
 
     createTransaction(): void {
-        this.dialogService.open(TransactionCreateComponent).closed.pipe(
+        this.dialogService.open(TransactionCreateComponent, this.month.length).closed.pipe(
             filter(Boolean),
             concatMap((transaction: Transaction) => this.expensesService.createTransaction(this.month.id, transaction))
         ).subscribe({
-            next: (transaction: Transaction) => this.month.transactions.push(transaction),
+            next: (transaction: Transaction) => this.month.transactions = [...this.month.transactions, transaction],
             error: (error: HttpErrorResponse) => this.notificationsService.show(`Failed to create transaction. Following error occurred: ${error.message}.`)
         });
     }
@@ -73,7 +73,7 @@ export class MonthComponent implements OnInit {
             filter(Boolean),
             concatMap((prediction: Prediction) => this.expensesService.createPrediction(this.month.id, prediction))
         ).subscribe({
-            next: (prediction: Prediction) => this.month.predictions.push(prediction),
+            next: (prediction: Prediction) => this.month.predictions = [...this.month.predictions, prediction],
             error: (error: HttpErrorResponse) => this.notificationsService.show(`Failed to create prediction. Following error occurred: ${error.message}.`)
         });
     }

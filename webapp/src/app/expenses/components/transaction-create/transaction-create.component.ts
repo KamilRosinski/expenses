@@ -19,6 +19,7 @@ export class TransactionCreateComponent implements OnInit {
 
     form: FormGroup;
     categories: CategoryWithSubcategories[];
+    monthLength: number;
 
     private readonly uniqueCategoryValidator: ValidatorFn = (control: FormControl): ValidationErrors | null =>
         control.value && this.categories.some((category: CategoryWithSubcategories) => category.name === control.value)
@@ -39,8 +40,6 @@ export class TransactionCreateComponent implements OnInit {
         control.value.subcategory === 'new' && !control.value.newSubcategory
             ? {emptyNewSubcategory: true}
             : null;
-
-    @Input() monthLength: number;
 
     get days(): number[] {
         return Array.from(Array(this.monthLength).keys()).map((day: number) => day + 1);
@@ -109,6 +108,7 @@ export class TransactionCreateComponent implements OnInit {
                 this.subcategoryControl.disable();
             }
         });
+        this.monthLength = this.dialogReference.data;
     }
 
     cancel(): void {
