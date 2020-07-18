@@ -1,27 +1,28 @@
 <div *ngIf="month">
     <h1>{{month.year + '-' + month.month | date: 'MM.yyyy'}}</h1>
+    <div>
+        <button (click)="create()">Create new</button>
+    </div>
     <div class="tab-links">
         <a class="tab-link"
            [routerLink]=""
-           [queryParams]="{tab: 'transactions'}"
-           [class.active]="(currentTab$ | async) === 'transactions'">
+           [queryParams]="{tab: TRANSACTIONS_TAB}"
+           [class.active]="currentTab === TRANSACTIONS_TAB">
             Transactions
         </a>
         <a class="tab-link"
            [routerLink]=""
-           [queryParams]="{tab: 'predictions'}"
-           [class.active]="(currentTab$ | async) === 'predictions'">
+           [queryParams]="{tab: PREDICTIONS_TAB}"
+           [class.active]="currentTab === PREDICTIONS_TAB">
             Predictions
         </a>
     </div>
-    <div id="tab" [ngSwitch]="currentTab$ | async">
-        <app-transactions-tab *ngSwitchCase="'transactions'"
-                              (createTransaction)="createTransaction($event)"
+    <div id="tab" [ngSwitch]="currentTab">
+        <app-transactions-tab *ngSwitchCase="TRANSACTIONS_TAB"
                               (deleteTransaction)="deleteTransaction($event)"
                               [month]="month">
         </app-transactions-tab>
-        <app-predictions-tab *ngSwitchCase="'predictions'"
-                             (createPrediction)="createPrediction($event)"
+        <app-predictions-tab *ngSwitchCase="PREDICTIONS_TAB"
                              [month]="month">
         </app-predictions-tab>
     </div>

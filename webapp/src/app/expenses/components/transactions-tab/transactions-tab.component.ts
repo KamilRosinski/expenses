@@ -4,6 +4,8 @@ import {Transaction} from '../../shared/transaction';
 import {DialogService} from '../../../modal-dialog/services/dialog.service';
 import {DeleteTransactionDialogComponent} from '../delete-transaction-dialog/delete-transaction-dialog.component';
 import {filter} from 'rxjs/operators';
+import {NotificationsService} from '../../../notifications/services/notifications.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
     selector: 'app-transactions-tab',
@@ -14,17 +16,9 @@ export class TransactionsTabComponent {
 
     @Input() month: Month;
 
-    @Output() createTransaction: EventEmitter<Transaction> = new EventEmitter<Transaction>();
     @Output() deleteTransaction: EventEmitter<number> = new EventEmitter<number>();
 
-    createFormVisible: boolean = false;
-
     constructor(private readonly dialogService: DialogService) {
-    }
-
-    addTransaction(transaction: Transaction): void {
-        this.createTransaction.emit(transaction);
-        this.createFormVisible = false;
     }
 
     delete(transaction: Transaction): void {

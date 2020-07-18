@@ -22,7 +22,7 @@ export class DialogService {
                 private readonly applicationRef: ApplicationRef) {
     }
 
-    open(dialogComponent: Type<any>, data: any): DialogReference {
+    open(dialogComponent: Type<any>, data?: any): DialogReference {
         const componentFactory: ComponentFactory<DialogComponent> = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);
         const dialogReference: DialogReference = new DialogReference(data);
         dialogReference.closed.subscribe(() => {

@@ -1,19 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ExpensesService} from '../../services/expenses.service';
 import {CategoryWithSubcategories} from '../../shared/category-with-subcategories';
-import {
-    AbstractControl,
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    ValidationErrors,
-    ValidatorFn,
-    Validators
-} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {Transaction} from '../../shared/transaction';
 import {Subcategory} from '../../shared/subcategory';
 import {Category} from '../../shared/category';
 import {MoneyUtils} from '../../utils/money.utils';
+import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
+import {NotificationsService} from '../../../notifications/services/notifications.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
     selector: 'app-transaction-create',
@@ -47,9 +42,6 @@ export class TransactionCreateComponent implements OnInit {
 
     @Input() monthLength: number;
 
-    @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
-    @Output() submit: EventEmitter<Transaction> = new EventEmitter<Transaction>();
-
     get days(): number[] {
         return Array.from(Array(this.monthLength).keys()).map((day: number) => day + 1);
     }
@@ -82,15 +74,18 @@ export class TransactionCreateComponent implements OnInit {
         return this.form.get('value') as FormControl;
     }
 
-    constructor(private readonly expensesService: ExpensesService,
-                private readonly formBuilder: FormBuilder) {
+    constructor(private readonly dialogReference: DialogReference,
+                private readonly expensesService: ExpensesService,
+                private readonly formBuilder: FormBuilder,
+                private readonly notificationsService: NotificationsService) {
     }
 
 
     ngOnInit(): void {
-        this.expensesService.getCategoriesWithSubcategories().subscribe(
-            (categories: CategoryWithSubcategories[]) => this.categories = categories
-        );
+        this.expensesService.getCategoriesWithSubcategories().subscribe({
+            next: (categories: CategoryWithSubcategories[]) => this.categories = categories,
+            error: (error: HttpErrorResponse) => this.notificationsService.show(`Failed to load categories. Following error occurred: ${error.message}.`)
+        });
         this.form = this.formBuilder.group({
             day: [null, [Validators.required]],
             category: [null, [Validators.required]],
@@ -116,21 +111,21 @@ export class TransactionCreateComponent implements OnInit {
         });
     }
 
-    onCancel(): void {
-        this.cancel.emit();
+    cancel(): void {
+        this.dialogReference.close();
     }
 
-    onSubmit(): void {
+    submit(): void {
 
         const category: Category = this.form.value.category === 'new'
             ? {id: null, name: this.form.value.newCategory}
-            : {id: this.form.value.category.id, name: this.form.value.category.name};
+            : this.form.value.category;
 
         const subcategory: Subcategory = this.form.value.subcategory === 'new'
             ? {id: null, name: this.form.value.newSubcategory}
-            : {id: this.form.value.subcategory.id, name: this.form.value.subcategory.name};
+            : this.form.value.subcategory;
 
-        this.submit.emit({
+        const transaction: Transaction = {
             id: null,
             day: this.form.value.day,
             subcategory: {
@@ -139,7 +134,9 @@ export class TransactionCreateComponent implements OnInit {
             },
             description: this.form.value.description,
             value: MoneyUtils.convertMoneyToInt(this.form.value.value)
-        });
+        };
+
+        this.dialogReference.close(transaction);
     }
 
 

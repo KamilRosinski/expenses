@@ -52,11 +52,11 @@ export class MonthCreateComponent implements OnInit {
         });
     }
 
-    onCancel(): void {
+    cancel(): void {
         this.dialogReference.close();
     }
 
-    onSubmit(): void {
+    submit(): void {
         this.dialogReference.close({
             year: +this.form.value.year,
             month: +this.form.value.month

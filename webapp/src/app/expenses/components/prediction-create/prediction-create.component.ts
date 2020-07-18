@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
@@ -12,6 +12,10 @@ import {Prediction} from '../../shared/prediction';
 import {ExpensesService} from '../../services/expenses.service';
 import {Category} from '../../shared/category';
 import {MoneyUtils} from '../../utils/money.utils';
+import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
+import {map} from 'rxjs/operators';
+import {NotificationsService} from '../../../notifications/services/notifications.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
     selector: 'app-prediction-create',
@@ -23,11 +27,6 @@ export class PredictionCreateComponent implements OnInit {
     form: FormGroup;
     categories: Category[];
 
-    private readonly uniquePredictionCategoryValidator: ValidatorFn = (control: FormControl): ValidationErrors | null =>
-        control.value && this.unavailableCategoryIds.includes(control.value.id)
-            ? {nonUniqueCategory: control.value}
-            : null;
-
     private readonly uniqueCategoryValidator: ValidatorFn = (control: FormControl): ValidationErrors | null =>
         control.value && this.categories.some((category: Category) => category.name === control.value)
             ? {nonUniqueCategory: control.value}
@@ -37,11 +36,6 @@ export class PredictionCreateComponent implements OnInit {
         control.value.category === 'new' && !control.value.newCategory
             ? {emptyNewCategory: true}
             : null;
-
-    @Input() unavailableCategoryIds: number[];
-
-    @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
-    @Output() submit: EventEmitter<Prediction> = new EventEmitter<Prediction>();
 
     get categoryControl(): AbstractControl {
         return this.form.get('category');
@@ -55,16 +49,24 @@ export class PredictionCreateComponent implements OnInit {
         return this.form.get('value');
     }
 
-    constructor(private readonly expensesService: ExpensesService,
-                private readonly formBuilder: FormBuilder) {
+    constructor(private readonly dialogReference: DialogReference,
+                private readonly expensesService: ExpensesService,
+                private readonly formBuilder: FormBuilder,
+                private readonly notificationsService: NotificationsService) {
     }
 
     ngOnInit(): void {
-        this.expensesService.getCategories().subscribe(
-            (categories: Category[]) => this.categories = categories
-        );
+        this.expensesService.getCategories().pipe(
+            map((categories: Category[]) => {
+                const unavailableCategoryIds: number[] = this.dialogReference.data;
+                return categories.filter((category: Category) => !unavailableCategoryIds.includes(category.id));
+            })
+        ).subscribe({
+            next: (categories: Category[]) => this.categories = categories,
+            error: (error: HttpErrorResponse) => this.notificationsService.show(`Failed to load categories. Following error occurred: ${error.message}.`)
+        });
         this.form = this.formBuilder.group({
-            category: [null, [Validators.required, this.uniquePredictionCategoryValidator]],
+            category: [null, [Validators.required]],
             newCategory: [null, [this.uniqueCategoryValidator]],
             value: [null, [Validators.required, Validators.pattern(MoneyUtils.MONEY_PATTERN)]]
         }, {
@@ -72,21 +74,23 @@ export class PredictionCreateComponent implements OnInit {
         });
     }
 
-    onCancel(): void {
-        this.cancel.emit();
+    cancel(): void {
+        this.dialogReference.close();
     }
 
-    onSubmit(): void {
+    submit(): void {
 
         const category: Category = this.form.value.category === 'new'
             ? {id: null, name: this.form.value.newCategory}
-            : {id: this.form.value.category.id, name: this.form.value.category.name};
+            : this.form.value.category;
 
-        this.submit.emit({
+        const prediction: Prediction = {
             id: null,
             category,
             value: MoneyUtils.convertMoneyToInt(this.form.value.value)
-        });
+        }
+
+        this.dialogReference.close(prediction);
     }
 
 }
