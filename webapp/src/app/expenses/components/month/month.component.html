@@ -1,7 +1,7 @@
 <div *ngIf="month">
     <h1>{{month.year + '-' + month.month | date: 'MM.yyyy'}}</h1>
     <div>
-        <button (click)="create()">Create new</button>
+        <button class="button-primary" (click)="create()">Create new</button>
     </div>
     <div class="tab-links">
         <a class="tab-link"
