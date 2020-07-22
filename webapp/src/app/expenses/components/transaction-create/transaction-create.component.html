@@ -72,8 +72,8 @@
             Value {{valueControl.errors.pattern.actualValue}} does not match the following pattern {{valueControl.errors.pattern.requiredPattern}}.
         </p>
     </div>
-    <div>
-        <button type="button" (click)="cancel()">Cancel</button>
-        <button [disabled]="form.invalid">Create</button>
+    <div class="form-control">
+        <button class="button-secondary" type="button" (click)="cancel()">Cancel</button>
+        <button class="button-primary" [disabled]="form.invalid">Create</button>
     </div>
 </form>
