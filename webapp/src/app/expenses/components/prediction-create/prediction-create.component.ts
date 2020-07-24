@@ -18,7 +18,6 @@ import {NotificationsService} from '../../../notifications/services/notification
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-    selector: 'app-prediction-create',
     templateUrl: './prediction-create.component.html',
     styleUrls: ['./prediction-create.component.scss']
 })

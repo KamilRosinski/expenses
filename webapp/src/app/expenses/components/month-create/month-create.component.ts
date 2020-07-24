@@ -4,7 +4,6 @@ import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
 import {MonthOverview} from '../../shared/month-overview';
 
 @Component({
-    selector: 'app-month-create',
     templateUrl: './month-create.component.html',
     styleUrls: ['./month-create.component.scss']
 })

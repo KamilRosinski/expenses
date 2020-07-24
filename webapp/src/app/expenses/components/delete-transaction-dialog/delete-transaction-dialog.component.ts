@@ -3,7 +3,6 @@ import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
 import {Transaction} from '../../shared/transaction';
 
 @Component({
-    selector: 'app-delete-transaction-dialog',
     templateUrl: './delete-transaction-dialog.component.html',
     styleUrls: ['./delete-transaction-dialog.component.scss']
 })

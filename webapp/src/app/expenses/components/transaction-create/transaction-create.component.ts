@@ -11,7 +11,6 @@ import {NotificationsService} from '../../../notifications/services/notification
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-    selector: 'app-transaction-create',
     templateUrl: './transaction-create.component.html',
     styleUrls: ['./transaction-create.component.scss']
 })

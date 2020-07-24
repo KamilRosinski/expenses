@@ -12,7 +12,6 @@ import {
 import {InsertionDirective} from '../../directives/insertion.directive';
 
 @Component({
-    selector: 'app-dialog',
     templateUrl: './dialog.component.html',
     styleUrls: ['./dialog.component.scss']
 })

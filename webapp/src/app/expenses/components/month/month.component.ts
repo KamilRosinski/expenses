@@ -12,7 +12,6 @@ import {TransactionCreateComponent} from '../transaction-create/transaction-crea
 import {PredictionCreateComponent} from '../prediction-create/prediction-create.component';
 
 @Component({
-    selector: 'app-month',
     templateUrl: './month.component.html',
     styleUrls: ['./month.component.scss']
 })

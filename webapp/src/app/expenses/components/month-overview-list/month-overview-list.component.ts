@@ -11,7 +11,6 @@ import {NotificationsService} from '../../../notifications/services/notification
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-    selector: 'app-month-overview-list',
     templateUrl: './month-overview-list.component.html',
     styleUrls: ['./month-overview-list.component.scss']
 })
