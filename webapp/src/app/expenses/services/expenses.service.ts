@@ -8,9 +8,10 @@ import {Transaction} from '../shared/transaction';
 import {Category} from '../shared/category';
 import {Prediction} from '../shared/prediction';
 import {YearMonth} from '../shared/year-month';
+import {ExpensesModule} from '../expenses.module';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: ExpensesModule
 })
 export class ExpensesService {
 
