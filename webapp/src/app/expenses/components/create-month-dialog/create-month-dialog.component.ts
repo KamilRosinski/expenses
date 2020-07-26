@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
-import {MonthOverview} from '../../shared/month-overview';
+import {MonthOverview} from '../../model/month-overview';
 
 @Component({
-    templateUrl: './month-create.component.html',
-    styleUrls: ['./month-create.component.scss']
+    templateUrl: './create-month-dialog.component.html',
+    styleUrls: ['./create-month-dialog.component.scss']
 })
-export class MonthCreateComponent implements OnInit {
+export class CreateMonthDialogComponent implements OnInit {
 
     form: FormGroup;
     availableMonths: string[];

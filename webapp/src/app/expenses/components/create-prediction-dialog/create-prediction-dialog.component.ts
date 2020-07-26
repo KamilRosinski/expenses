@@ -8,9 +8,9 @@ import {
     ValidatorFn,
     Validators
 } from '@angular/forms';
-import {Prediction} from '../../shared/prediction';
+import {Prediction} from '../../model/prediction';
 import {ExpensesService} from '../../services/expenses.service';
-import {Category} from '../../shared/category';
+import {Category} from '../../model/category';
 import {MoneyUtils} from '../../utils/money.utils';
 import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
 import {map} from 'rxjs/operators';
@@ -18,10 +18,10 @@ import {NotificationsService} from '../../../notifications/services/notification
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-    templateUrl: './prediction-create.component.html',
-    styleUrls: ['./prediction-create.component.scss']
+    templateUrl: './create-prediction-dialog.component.html',
+    styleUrls: ['./create-prediction-dialog.component.scss']
 })
-export class PredictionCreateComponent implements OnInit {
+export class CreatePredictionDialogComponent implements OnInit {
 
     form: FormGroup;
     categories: Category[];

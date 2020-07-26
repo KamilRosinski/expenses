@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Transaction} from '../shared/transaction';
+import {Transaction} from '../model/transaction';
 
 @Pipe({
   name: 'transactionsSort'

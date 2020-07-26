@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Transaction} from '../shared/transaction';
-import {MonthOverview} from '../shared/month-overview';
+import {Transaction} from '../model/transaction';
+import {MonthOverview} from '../model/month-overview';
 
 @Pipe({
   name: 'monthOverviewsSort'

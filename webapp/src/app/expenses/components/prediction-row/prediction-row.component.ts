@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Prediction} from '../../shared/prediction';
-import {Transaction} from '../../shared/transaction';
+import {Prediction} from '../../model/prediction';
+import {Transaction} from '../../model/transaction';
 
 @Component({
     selector: 'tbody[app-prediction-row]',

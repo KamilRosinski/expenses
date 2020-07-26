@@ -1,20 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {ExpensesService} from '../../services/expenses.service';
-import {MonthOverview} from '../../shared/month-overview';
+import {MonthOverview} from '../../model/month-overview';
 import {DialogService} from '../../../modal-dialog/services/dialog.service';
-import {MonthCreateComponent} from '../month-create/month-create.component';
+import {CreateMonthDialogComponent} from '../create-month-dialog/create-month-dialog.component';
 import {concatMap, filter} from 'rxjs/operators';
-import {Month} from '../../shared/month';
-import {YearMonth} from '../../shared/year-month';
+import {Month} from '../../model/month';
+import {YearMonth} from '../../model/year-month';
 import {Router} from '@angular/router';
 import {NotificationsService} from '../../../notifications/services/notifications.service';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-    templateUrl: './month-overview-list.component.html',
-    styleUrls: ['./month-overview-list.component.scss']
+    templateUrl: './months.component.html',
+    styleUrls: ['./months.component.scss']
 })
-export class MonthOverviewListComponent implements OnInit {
+export class MonthsComponent implements OnInit {
 
     monthOverviews: MonthOverview[] = [];
 
@@ -32,7 +32,7 @@ export class MonthOverviewListComponent implements OnInit {
     }
 
     createMonth(): void {
-        this.dialogService.open(MonthCreateComponent, this.monthOverviews).closed.pipe(
+        this.dialogService.open(CreateMonthDialogComponent, this.monthOverviews).closed.pipe(
             filter(Boolean),
             concatMap((yearMonth: YearMonth) => this.expensesService.createMonth(yearMonth))
         ).subscribe({

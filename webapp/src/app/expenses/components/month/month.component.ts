@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ExpensesService} from '../../services/expenses.service';
-import {Month} from '../../shared/month';
+import {Month} from '../../model/month';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {concatMap, filter, map} from 'rxjs/operators';
-import {Transaction} from '../../shared/transaction';
-import {Prediction} from '../../shared/prediction';
+import {Transaction} from '../../model/transaction';
+import {Prediction} from '../../model/prediction';
 import {NotificationsService} from '../../../notifications/services/notifications.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {DialogService} from '../../../modal-dialog/services/dialog.service';
-import {TransactionCreateComponent} from '../transaction-create/transaction-create.component';
-import {PredictionCreateComponent} from '../prediction-create/prediction-create.component';
+import {CreateTransactionDialogComponent} from '../create-transaction-dialog/create-transaction-dialog.component';
+import {CreatePredictionDialogComponent} from '../create-prediction-dialog/create-prediction-dialog.component';
 
 @Component({
     templateUrl: './month.component.html',
@@ -57,7 +57,7 @@ export class MonthComponent implements OnInit {
     }
 
     createTransaction(): void {
-        this.dialogService.open(TransactionCreateComponent, this.month.length).closed.pipe(
+        this.dialogService.open(CreateTransactionDialogComponent, this.month.length).closed.pipe(
             filter(Boolean),
             concatMap((transaction: Transaction) => this.expensesService.createTransaction(this.month.id, transaction))
         ).subscribe({
@@ -68,7 +68,7 @@ export class MonthComponent implements OnInit {
 
     createPrediction(): void {
         const unavailableCategoryIds: number[] = this.month.predictions.map((prediction: Prediction) => prediction.category.id);
-        this.dialogService.open(PredictionCreateComponent, unavailableCategoryIds).closed.pipe(
+        this.dialogService.open(CreatePredictionDialogComponent, unavailableCategoryIds).closed.pipe(
             filter(Boolean),
             concatMap((prediction: Prediction) => this.expensesService.createPrediction(this.month.id, prediction))
         ).subscribe({

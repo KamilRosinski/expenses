@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Month} from '../../shared/month';
-import {Transaction} from '../../shared/transaction';
+import {Month} from '../../model/month';
+import {Transaction} from '../../model/transaction';
 import {DialogService} from '../../../modal-dialog/services/dialog.service';
 import {DeleteTransactionDialogComponent} from '../delete-transaction-dialog/delete-transaction-dialog.component';
 import {filter} from 'rxjs/operators';

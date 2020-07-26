@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Month} from '../../shared/month';
-import {Transaction} from '../../shared/transaction';
-import {Prediction} from '../../shared/prediction';
-import {Category} from '../../shared/category';
+import {Month} from '../../model/month';
+import {Transaction} from '../../model/transaction';
+import {Prediction} from '../../model/prediction';
+import {Category} from '../../model/category';
 
 @Component({
     selector: 'app-predictions-tab',

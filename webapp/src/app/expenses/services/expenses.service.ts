@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {MonthOverview} from '../shared/month-overview';
-import {Month} from '../shared/month';
-import {CategoryWithSubcategories} from '../shared/category-with-subcategories';
-import {Transaction} from '../shared/transaction';
-import {Category} from '../shared/category';
-import {Prediction} from '../shared/prediction';
-import {YearMonth} from '../shared/year-month';
+import {MonthOverview} from '../model/month-overview';
+import {Month} from '../model/month';
+import {CategoryWithSubcategories} from '../model/category-with-subcategories';
+import {Transaction} from '../model/transaction';
+import {Category} from '../model/category';
+import {Prediction} from '../model/prediction';
+import {YearMonth} from '../model/year-month';
 
 @Injectable({
     providedIn: 'root'

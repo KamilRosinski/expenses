@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Prediction} from '../shared/prediction';
+import {Prediction} from '../model/prediction';
 
 @Pipe({
   name: 'predictionsSort'

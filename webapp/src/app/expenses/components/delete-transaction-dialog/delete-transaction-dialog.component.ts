@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
-import {Transaction} from '../../shared/transaction';
+import {Transaction} from '../../model/transaction';
 
 @Component({
     templateUrl: './delete-transaction-dialog.component.html',

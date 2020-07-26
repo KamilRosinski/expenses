@@ -1,20 +1,20 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ExpensesService} from '../../services/expenses.service';
-import {CategoryWithSubcategories} from '../../shared/category-with-subcategories';
+import {CategoryWithSubcategories} from '../../model/category-with-subcategories';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {Transaction} from '../../shared/transaction';
-import {Subcategory} from '../../shared/subcategory';
-import {Category} from '../../shared/category';
+import {Transaction} from '../../model/transaction';
+import {Subcategory} from '../../model/subcategory';
+import {Category} from '../../model/category';
 import {MoneyUtils} from '../../utils/money.utils';
 import {DialogReference} from '../../../modal-dialog/model/dialog-reference';
 import {NotificationsService} from '../../../notifications/services/notifications.service';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-    templateUrl: './transaction-create.component.html',
-    styleUrls: ['./transaction-create.component.scss']
+    templateUrl: './create-transaction-dialog.component.html',
+    styleUrls: ['./create-transaction-dialog.component.scss']
 })
-export class TransactionCreateComponent implements OnInit {
+export class CreateTransactionDialogComponent implements OnInit {
 
     form: FormGroup;
     categories: CategoryWithSubcategories[];
