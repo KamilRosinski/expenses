@@ -126,7 +126,7 @@ h2 {
       color: $main-blue;
     }
 
-    select {
+    select, input {
       width: 100%;
       padding: 0.1rem 0.5rem;
       color: $main-blue;
@@ -141,7 +141,6 @@ h2 {
         background-color: $light-red;
         transition: 250ms;
       }
-
 
       option {
         color: $main-blue;

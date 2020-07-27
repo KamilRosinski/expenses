@@ -1,5 +1,8 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-    <div>
+<h2 class="form-title">Create new transaction</h2>
+<form class="form"
+      [formGroup]="form"
+      (ngSubmit)="submit()">
+    <div class="form-section">
         <label for="day-input">Day</label>
         <select id="day-input" [formControl]="dayControl" [class.input-invalid]="(dayControl.touched || dayControl.dirty) && dayControl.invalid">
             <option *ngFor="let day of days" [ngValue]="day">{{day}}</option>
@@ -8,7 +11,7 @@
             Day must not be empty.
         </p>
     </div>
-    <div>
+    <div class="form-section">
         <label for="category-input">Category</label>
         <select id="category-input" [formControl]="categoryControl" [class.input-invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
             <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
@@ -18,7 +21,8 @@
             Category must not be empty.
         </p>
     </div>
-    <div *ngIf="categoryControl.value === 'new'">
+    <div class="form-section"
+         *ngIf="categoryControl.value === 'new'">
         <label for="new-category-input">New category</label>
         <input id="new-category-input"
                type="text"
@@ -33,7 +37,7 @@
             Category name must not be empty.
         </p>
     </div>
-    <div>
+    <div class="form-section">
         <label for="subcategory-input">Subcategory</label>
         <select id="subcategory-input" [formControl]="subcategoryControl" [class.input-invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
             <option *ngFor="let subcategory of categoryControl.value?.subcategories" [ngValue]="subcategory">{{subcategory.name}}</option>
@@ -43,7 +47,8 @@
             Subcategory must not be empty.
         </p>
     </div>
-    <div *ngIf="subcategoryControl.value === 'new'">
+    <div class="form-section"
+         *ngIf="subcategoryControl.value === 'new'">
         <label for="new-subcategory-input">New subcategory</label>
         <input id="new-subcategory-input"
                type="text"
@@ -58,11 +63,11 @@
             Subcategory must not be empty.
         </p>
     </div>
-    <div>
+    <div class="form-section">
         <label for="description-input">Description (optional)</label>
         <input id="description-input" type="text" [formControl]="descriptionControl">
     </div>
-    <div>
+    <div class="form-section">
         <label for="value-input">Value</label>
         <input id="value-input" type="text" [formControl]="valueControl" [class.input-invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
         <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.required">
@@ -72,7 +77,7 @@
             Value {{valueControl.errors.pattern.actualValue}} does not match the following pattern {{valueControl.errors.pattern.requiredPattern}}.
         </p>
     </div>
-    <div class="form-control">
+    <div class="form-controls">
         <button class="button-secondary" type="button" (click)="cancel()">Cancel</button>
         <button class="button-primary" [disabled]="form.invalid">Create</button>
     </div>
