@@ -1,5 +1,5 @@
-<h2 class="form-title">Delete transaction</h2>
-<div class="form-section">
+<h2 class="dialog-title">Delete transaction</h2>
+<div class="dialog-content">
     <p>Are you sure you want to delete the following transaction?</p>
     <ul>
         <li>Day: {{transaction.day}}</li>
@@ -9,7 +9,7 @@
         <li>Value: {{transaction.value | currencyPln}}</li>
     </ul>
 </div>
-<div class="form-controls">
+<div class="dialog-controls">
     <button (click)="cancel()">cancel</button>
     <button (click)="delete()">delete</button>
 </div>
