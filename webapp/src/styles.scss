@@ -110,11 +110,6 @@ h2 {
     font-size: 0.8rem;
   }
 
-  &-title {
-    color: $main-blue;
-    margin-bottom: 1rem;
-  }
-
   &-section {
     display: flex;
     flex-direction: column;
@@ -148,6 +143,15 @@ h2 {
     }
   }
 
+}
+
+.dialog {
+
+  &-title {
+    color: $main-blue;
+    margin-bottom: 1rem;
+  }
+
   &-controls {
     display: flex;
     justify-content: flex-end;
@@ -156,4 +160,5 @@ h2 {
       margin-right: 0.5rem;
     }
   }
+
 }

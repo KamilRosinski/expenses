@@ -1,4 +1,4 @@
-<h2 class="form-title">Create new transaction</h2>
+<h2 class="dialog-title">Create new transaction</h2>
 <form class="form"
       [formGroup]="form"
       (ngSubmit)="submit()">
@@ -77,7 +77,7 @@
             Value {{valueControl.errors.pattern.actualValue}} does not match the following pattern {{valueControl.errors.pattern.requiredPattern}}.
         </p>
     </div>
-    <div class="form-controls">
+    <div class="dialog-controls">
         <button class="button-secondary" type="button" (click)="cancel()">Cancel</button>
         <button class="button-primary" [disabled]="form.invalid">Create</button>
     </div>
