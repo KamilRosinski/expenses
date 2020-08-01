@@ -3,19 +3,19 @@
       [formGroup]="form"
       (ngSubmit)="submit()">
     <div class="form-section">
-        <label for="month-input">Month</label>
         <select id="month-input" [formControl]="monthControl" [class.input-invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUniqueMonth)">
             <option *ngFor="let month of availableMonths" [ngValue]="month">{{month}}</option>
         </select>
+        <label for="month-input">Month</label>
         <p class="validation-msg" *ngIf="(monthControl.touched || monthControl.dirty) && monthControl.errors?.required">
             Month must not be empty.
         </p>
     </div>
     <div class="form-section">
-        <label for="year-input">Year</label>
         <select id="year-input" [formControl]="yearControl" [class.input-invalid]="(yearControl.touched || yearControl.dirty) && (yearControl.invalid || form.errors?.nonUniqueMonth)">
             <option *ngFor="let year of availableYears" [ngValue]="year">{{year}}</option>
         </select>
+        <label for="year-input">Year</label>
         <p class="validation-msg" *ngIf="(yearControl.touched || yearControl.dirty) && yearControl.errors?.required">
             Year must not be empty.
         </p>

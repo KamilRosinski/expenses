@@ -3,12 +3,12 @@
       [formGroup]="form"
       (ngSubmit)="submit()">
     <div class="form-section">
-        <label for="category-input">Category</label>
         <select id="category-input" [formControlName]="'category'"
                 [class.input-invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
             <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
             <option [ngValue]="'new'">Create new</option>
         </select>
+        <label for="category-input">Category</label>
         <p class="validation-msg"
            *ngIf="(categoryControl.touched || categoryControl.dirty) && categoryControl.errors?.required">
             Category must not be empty.
@@ -16,11 +16,11 @@
     </div>
     <div class="form-section"
          *ngIf="categoryControl.value === 'new'">
-        <label for="new-category-input">New category</label>
         <input id="new-category-input"
                type="text"
                [class.input-invalid]="(newCategoryControl.touched || newCategoryControl.dirty) && (newCategoryControl.invalid || form.errors?.emptyNewCategory)"
                [formControlName]="'newCategory'">
+        <label for="new-category-input">New category</label>
         <p class="validation-msg"
            *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && newCategoryControl.errors?.nonUniqueCategory">
             Category {{newCategoryControl.errors.nonUniqueCategory}} already exists.
@@ -31,9 +31,9 @@
         </p>
     </div>
     <div class="form-section">
-        <label for="value-input">Value</label>
         <input id="value-input" type="text" [formControlName]="'value'"
                [class.input-invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
+        <label for="value-input">Value</label>
         <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.required">
             Value must not be empty.
         </p>
