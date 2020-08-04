@@ -37,7 +37,7 @@
             Category name must not be empty.
         </p>
     </div>
-    <div class="form-section">
+    <frm-input class="form-section">
         <select id="subcategory-input" [formControl]="subcategoryControl" [class.input-invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
             <option *ngFor="let subcategory of categoryControl.value?.subcategories" [ngValue]="subcategory">{{subcategory.name}}</option>
             <option [ngValue]="'new'">Create new</option>
@@ -46,7 +46,7 @@
         <p class="validation-msg" *ngIf="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.errors?.required">
             Subcategory must not be empty.
         </p>
-    </div>
+    </frm-input>
     <div class="form-section"
          *ngIf="subcategoryControl.value === 'new'">
         <input id="new-subcategory-input"

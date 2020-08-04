@@ -18,6 +18,7 @@ import {CurrencyPlnPipe} from './pipes/currency-pln.pipe';
 import {DeleteTransactionDialogComponent} from './components/delete-transaction-dialog/delete-transaction-dialog.component';
 import {ModalDialogModule} from '../modal-dialog/modal-dialog.module';
 import {NotificationsModule} from '../notifications/notifications.module';
+import {FormsModule} from '../forms/forms.module';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {NotificationsModule} from '../notifications/notifications.module';
         ExpensesRoutingModule,
         ReactiveFormsModule,
         ModalDialogModule,
-        NotificationsModule
+        NotificationsModule,
+        FormsModule
     ]
 })
 export class ExpensesModule {

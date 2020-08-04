@@ -1,19 +1,19 @@
 import {NgModule} from '@angular/core';
 import {InputComponent} from './components/input/input.component';
-import {DisabledInputDirective} from './directives/disabled-input.directive';
+import {InputRefDirective} from './directives/input-ref.directive';
 import {CommonModule} from '@angular/common';
 
 @NgModule({
     declarations: [
         InputComponent,
-        DisabledInputDirective
+        InputRefDirective
     ],
     imports: [
         CommonModule
     ],
     exports: [
         InputComponent,
-        DisabledInputDirective
+        InputRefDirective
     ]
 })
 export class FormsModule {
