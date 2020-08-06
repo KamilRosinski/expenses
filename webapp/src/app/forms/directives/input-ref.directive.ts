@@ -1,21 +1,25 @@
-import {Directive, ElementRef} from '@angular/core';
-import {AbstractControl} from '@angular/forms';
+import {Directive} from '@angular/core';
+import {FormControl, NgControl} from '@angular/forms';
 
 @Directive({
-    selector: 'select'
+    selector: 'select, input'
 })
 export class InputRefDirective {
 
-    constructor(private readonly elementRef: ElementRef<AbstractControl>) {
+    constructor(private readonly control: NgControl) {
+    }
+
+    set disabled(disabled: boolean) {
+        const formControl: FormControl = this.control.control as FormControl
+        if (disabled) {
+            formControl.disable();
+        } else {
+            formControl.enable();
+        }
     }
 
     get disabled(): boolean {
-        return this.elementRef.nativeElement.disabled;
-    }
-
-    get invalid(): boolean {
-        console.log(this.elementRef.nativeElement);
-        return this.elementRef.nativeElement.invalid;
+        return this.control.control.disabled;
     }
 
 }

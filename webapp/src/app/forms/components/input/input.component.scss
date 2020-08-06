@@ -1,0 +1,13 @@
+@import "src/palette";
+
+.input {
+
+  &-disabled ::ng-deep label {
+    color: $dark-gray;
+  }
+
+  &-invalid ::ng-deep label {
+    color: $main-red;
+  }
+
+}
