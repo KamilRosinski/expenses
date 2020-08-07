@@ -99,7 +99,14 @@ export class CreateTransactionDialogComponent implements OnInit {
                 this.newSubcategoryNotEmptyValidator
             ]
         });
-        this.categoryControl.valueChanges.subscribe(() => this.subcategoryControl.setValue(null));
+        this.categoryControl.valueChanges.subscribe((category: CategoryWithSubcategories) => {
+            this.subcategoryControl.setValue(null);
+            if (category) {
+                this.subcategoryControl.enable();
+            } else {
+                this.categoryControl.disable();
+            }
+        });
         this.monthLength = this.dialogReference.data;
     }
 

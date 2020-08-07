@@ -103,54 +103,13 @@ h2 {
   margin-bottom: 1rem;
 }
 
-.form {
+.form-section {
+  display: flex;
+  flex-direction: column;
 
-  .validation-msg {
-    color: $main-red;
-    font-size: 0.8rem;
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
   }
-
-  &-section {
-    display: flex;
-    flex-direction: column;
-    &:not(:last-child) {
-      margin-bottom: 0.5rem;
-    }
-
-    label {
-      color: $main-blue;
-      transition: 250ms;
-    }
-
-    select, input {
-      width: 100%;
-      padding: 0.1rem 0.5rem;
-      color: $main-blue;
-      font-size: 1rem;
-      border: 1px solid $main-blue;
-      border-radius: 0.5rem;
-      transition: 250ms;
-
-      &.input-invalid {
-        color: $main-red;
-        border-color: $main-red;
-        background-color: $light-red;
-        transition: 250ms;
-      }
-
-      &:disabled {
-        background-color: transparent;
-        color: $main-gray;
-        border-color: $dark-gray;
-        transition: 250ms;
-      }
-
-      option {
-        color: $main-blue;
-      }
-    }
-  }
-
 }
 
 .dialog {

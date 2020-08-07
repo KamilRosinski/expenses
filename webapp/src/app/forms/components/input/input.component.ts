@@ -13,12 +13,6 @@ export class InputComponent {
 
     @Input() invalid: boolean = false;
 
-    @Input() set disabled(disabled: boolean) {
-        console.log(`${disabled} => ${disabled === undefined || disabled}`);
-        console.log(this.inputRef);
-        this.inputRef.disabled = disabled === undefined || disabled;
-    }
-
     get disabled(): boolean {
         return this.inputRef.disabled;
     }

@@ -1,13 +1,51 @@
 @import "src/palette";
 
-.input {
+::ng-deep label {
+  color: $main-blue;
+  transition: 250ms;
+}
 
-  &-disabled ::ng-deep label {
+::ng-deep input, ::ng-deep select {
+  width: 100%;
+  padding: 0.1rem 0.5rem;
+  color: $main-blue;
+  font-size: 1rem;
+  border: 1px solid $main-blue;
+  border-radius: 0.5rem;
+  transition: 250ms;
+}
+
+::ng-deep option {
+  color: $main-blue;
+}
+
+.input-disabled {
+  ::ng-deep label {
     color: $dark-gray;
   }
 
-  &-invalid ::ng-deep label {
+  ::ng-deep input, ::ng-deep select {
+    background-color: transparent;
+    color: $main-gray;
+    border-color: $dark-gray;
+    transition: 250ms;
+  }
+}
+
+.input-invalid {
+  ::ng-deep label {
     color: $main-red;
   }
 
+  ::ng-deep input, ::ng-deep select {
+    color: $main-red;
+    border-color: $main-red;
+    background-color: $light-red;
+    transition: 250ms;
+  }
+}
+
+::ng-deep .validation-msg {
+  color: $main-red;
+  font-size: 0.8rem;
 }

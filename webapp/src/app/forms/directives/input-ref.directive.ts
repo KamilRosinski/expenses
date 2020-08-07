@@ -6,20 +6,11 @@ import {FormControl, NgControl} from '@angular/forms';
 })
 export class InputRefDirective {
 
-    constructor(private readonly control: NgControl) {
-    }
-
-    set disabled(disabled: boolean) {
-        const formControl: FormControl = this.control.control as FormControl
-        if (disabled) {
-            formControl.disable();
-        } else {
-            formControl.enable();
-        }
+    constructor(private readonly ngControl: NgControl) {
     }
 
     get disabled(): boolean {
-        return this.control.control.disabled;
+        return this.ngControl.disabled;
     }
 
 }

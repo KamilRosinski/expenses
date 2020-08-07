@@ -38,8 +38,7 @@
         </p>
     </frm-input>
     <frm-input class="form-section"
-               [invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid"
-               [disabled]="!categoryControl.value">
+               [invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
         <label for="subcategory-input">Subcategory</label>
         <select id="subcategory-input" [formControl]="subcategoryControl">
             <option *ngFor="let subcategory of categoryControl.value?.subcategories" [ngValue]="subcategory">{{subcategory.name}}</option>
