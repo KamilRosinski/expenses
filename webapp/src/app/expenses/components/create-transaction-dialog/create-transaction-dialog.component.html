@@ -2,7 +2,7 @@
 <form class="form"
       [formGroup]="form"
       (ngSubmit)="submit()">
-    <frm-input class="form-section" [invalid]="(dayControl.touched || dayControl.dirty) && dayControl.invalid">
+    <frm-input [invalid]="(dayControl.touched || dayControl.dirty) && dayControl.invalid">
         <label for="day-input">Day</label>
         <select id="day-input" [formControl]="dayControl">
             <option *ngFor="let day of days" [ngValue]="day">{{day}}</option>
@@ -11,7 +11,7 @@
             Day must not be empty.
         </p>
     </frm-input>
-    <frm-input class="form-section" [invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
+    <frm-input [invalid]="(categoryControl.touched || categoryControl.dirty) && categoryControl.invalid">
         <label for="category-input">Category</label>
         <select id="category-input" [formControl]="categoryControl">
             <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
@@ -21,23 +21,23 @@
             Category must not be empty.
         </p>
     </frm-input>
-    <frm-input class="form-section"
+    <frm-input
                *ngIf="categoryControl.value === 'new'"
-               [invalid]="(newCategoryControl.touched || newCategoryControl.dirty) && (newCategoryControl.invalid || form.errors?.emptyNewCategory)">
+               [invalid]="(newCategoryControl.touched || newCategoryControl.dirty) && (form.errors?.nonUniqueCategory || form.errors?.emptyNewCategory)">
         <label for="new-category-input">New category</label>
         <input id="new-category-input"
                type="text"
                [formControl]="newCategoryControl">
         <p class="validation-msg"
-           *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && newCategoryControl.errors?.nonUniqueCategory">
-            Category {{newCategoryControl.errors.nonUniqueCategory}} already exists.
+           *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && form.errors?.nonUniqueCategory">
+            Category {{form.errors.nonUniqueCategory}} already exists.
         </p>
         <p class="validation-msg"
            *ngIf="(newCategoryControl.touched || newCategoryControl.dirty) && form.errors?.emptyNewCategory">
             Category name must not be empty.
         </p>
     </frm-input>
-    <frm-input class="form-section"
+    <frm-input
                [invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
         <label for="subcategory-input">Subcategory</label>
         <select id="subcategory-input" [formControl]="subcategoryControl">
@@ -48,8 +48,7 @@
             Subcategory must not be empty.
         </p>
     </frm-input>
-    <frm-input class="form-section"
-               *ngIf="subcategoryControl.value === 'new'"
+    <frm-input *ngIf="subcategoryControl.value === 'new'"
                [invalid]="(newSubcategoryControl.touched || newSubcategoryControl.dirty) && (form.errors?.nonUniqueSubcategory || form.errors?.emptyNewSubcategory)">
         <label for="new-subcategory-input">New subcategory</label>
         <input id="new-subcategory-input"
@@ -64,11 +63,11 @@
             Subcategory must not be empty.
         </p>
     </frm-input>
-    <frm-input class="form-section">
+    <frm-input>
         <label for="description-input">Description (optional)</label>
         <input id="description-input" type="text" [formControl]="descriptionControl">
     </frm-input>
-    <frm-input class="form-section" [invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
+    <frm-input [invalid]="(valueControl.touched || valueControl.dirty) && valueControl.invalid">
         <label for="value-input">Value</label>
         <input id="value-input" type="text" [formControl]="valueControl">
         <p class="validation-msg" *ngIf="(valueControl.touched || valueControl.dirty) && valueControl.errors?.required">

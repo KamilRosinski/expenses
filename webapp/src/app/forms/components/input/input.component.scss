@@ -1,5 +1,13 @@
 @import "src/palette";
 
+:host {
+  display: block;
+
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+}
+
 ::ng-deep label {
   color: $main-blue;
   transition: 250ms;

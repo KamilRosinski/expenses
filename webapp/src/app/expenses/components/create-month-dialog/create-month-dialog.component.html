@@ -2,30 +2,28 @@
 <form class="form"
       [formGroup]="form"
       (ngSubmit)="submit()">
-    <frm-input class="form-section">
+    <frm-input [invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUniqueMonth)">
         <label for="month-input">Month</label>
-        <select id="month-input" [formControl]="monthControl" [class.input-invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUniqueMonth)">
+        <select id="month-input" [formControl]="monthControl">
             <option *ngFor="let month of availableMonths" [ngValue]="month">{{month}}</option>
         </select>
         <p class="validation-msg" *ngIf="(monthControl.touched || monthControl.dirty) && monthControl.errors?.required">
             Month must not be empty.
         </p>
     </frm-input>
-    <frm-input class="form-section">
+    <frm-input [invalid]="(yearControl.touched || yearControl.dirty) && (yearControl.invalid || form.errors?.nonUniqueMonth)">
         <label for="year-input">Year</label>
-        <select id="year-input" [formControl]="yearControl" [class.input-invalid]="(yearControl.touched || yearControl.dirty) && (yearControl.invalid || form.errors?.nonUniqueMonth)">
+        <select id="year-input" [formControl]="yearControl">
             <option *ngFor="let year of availableYears" [ngValue]="year">{{year}}</option>
         </select>
         <p class="validation-msg" *ngIf="(yearControl.touched || yearControl.dirty) && yearControl.errors?.required">
             Year must not be empty.
         </p>
-    </frm-input>
-    <div class="form-section">
         <p class="validation-msg"
            *ngIf="form.errors?.nonUniqueMonth">
             Month {{form.errors.nonUniqueMonth.year + '-' + form.errors.nonUniqueMonth.month | date: 'MM.yyyy'}} already exists.
         </p>
-    </div>
+    </frm-input>
     <div class="dialog-controls">
         <button class="button-secondary" type="button" (click)="cancel()">Cancel</button>
         <button class="button-primary" [disabled]="form.invalid">Create</button>
