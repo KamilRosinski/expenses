@@ -20,15 +20,17 @@ export class CreateTransactionDialogComponent implements OnInit {
     categories: CategoryWithSubcategories[];
     monthLength: number;
 
-    private readonly uniqueCategoryValidator: ValidatorFn = (control: FormControl): ValidationErrors | null =>
-        control.value && this.categories.some((category: CategoryWithSubcategories) => category.name === control.value)
-            ? {nonUniqueCategory: control.value}
+    private readonly uniqueCategoryValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
+        control.value.category === 'new' && control.value.newCategory && this.categories.some((category: CategoryWithSubcategories) => category.name === control.value.newCategory)
+            ? {nonUniqueCategory: control.value.newCategory}
             : null;
 
-    private readonly uniqueSubcategoryValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
-        control.value.newSubcategory && control.value.category !== 'new' && control.value.category.subcategories.includes((subcategory: Subcategory) => subcategory.name === control.value.newSubcategory)
+    private readonly uniqueSubcategoryValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+        const result: ValidationErrors | null = control.value.subcategory === 'new' && control.value.newSubcategory && control.value.category.subcategories.some((subcategory: Subcategory) => subcategory.name === control.value.newSubcategory)
             ? {nonUniqueSubcategory: control.value.newSubcategory}
             : null;
+        return result;
+    }
 
     private readonly newCategoryNotEmptyValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null =>
         control.value.category === 'new' && !control.value.newCategory
@@ -87,13 +89,14 @@ export class CreateTransactionDialogComponent implements OnInit {
         this.form = this.formBuilder.group({
             day: [null, [Validators.required]],
             category: [null, [Validators.required]],
-            newCategory: [null, [this.uniqueCategoryValidator]],
+            newCategory: [null],
             subcategory: [{value: null, disabled: true}, [Validators.required]],
-            newSubcategory: [null, []],
-            description: [null, []],
+            newSubcategory: [null],
+            description: [null],
             value: [null, [Validators.required, Validators.pattern(MoneyUtils.MONEY_PATTERN)]]
         }, {
             validators: [
+                this.uniqueCategoryValidator,
                 this.uniqueSubcategoryValidator,
                 this.newCategoryNotEmptyValidator,
                 this.newSubcategoryNotEmptyValidator
