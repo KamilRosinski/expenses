@@ -1,7 +1,7 @@
 <h2 class="dialog-title">Create new month</h2>
-<form class="form"
+<frm-form class="form"
       [formGroup]="form"
-      (ngSubmit)="submit()">
+      (submit)="submit()">
     <frm-input [invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUniqueMonth)">
         <label for="month-input">Month</label>
         <select id="month-input" [formControl]="monthControl">
@@ -28,4 +28,4 @@
         <button class="button-secondary" type="button" (click)="cancel()">Cancel</button>
         <button class="button-primary" [disabled]="form.invalid">Create</button>
     </div>
-</form>
+</frm-form>
