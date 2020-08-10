@@ -1,5 +1,5 @@
 #form {
-  display: block;
+  display: flex;
   flex-direction: column;
 
   & ::ng-deep > *:not(:last-child) {
