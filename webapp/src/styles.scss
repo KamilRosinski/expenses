@@ -102,21 +102,3 @@ h2 {
 .content-controls {
   margin-bottom: 1rem;
 }
-
-.dialog {
-
-  &-title {
-    color: $main-blue;
-    margin-bottom: 1rem;
-  }
-
-  &-controls {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1rem;
-    button:not(:last-child) {
-      margin-right: 0.5rem;
-    }
-  }
-
-}
