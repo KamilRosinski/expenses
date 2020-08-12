@@ -1,7 +1,6 @@
 <h2 class="dialog-title">Create new month</h2>
-<frm-form class="form"
-      [formGroup]="form"
-      (submit)="submit()">
+<frm-form [formGroup]="form"
+          (submit)="submit()">
     <frm-input [invalid]="(monthControl.touched || monthControl.dirty) && (monthControl.invalid || form.errors?.nonUniqueMonth)">
         <label for="month-input">Month</label>
         <select id="month-input" [formControl]="monthControl">
