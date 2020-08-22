@@ -20,8 +20,7 @@
             Category must not be empty.
         </p>
     </frm-input>
-    <frm-input
-               *ngIf="categoryControl.value === 'new'"
+    <frm-input *ngIf="categoryControl.value === 'new'"
                [invalid]="(newCategoryControl.touched || newCategoryControl.dirty) && (form.errors?.nonUniqueCategory || form.errors?.emptyNewCategory)">
         <label for="new-category-input">New category</label>
         <input id="new-category-input"
@@ -36,8 +35,7 @@
             Category name must not be empty.
         </p>
     </frm-input>
-    <frm-input
-               [invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
+    <frm-input [invalid]="(subcategoryControl.touched || subcategoryControl.dirty) && subcategoryControl.invalid">
         <label for="subcategory-input">Subcategory</label>
         <select id="subcategory-input" [formControl]="subcategoryControl">
             <option *ngFor="let subcategory of categoryControl.value?.subcategories" [ngValue]="subcategory">{{subcategory.name}}</option>
